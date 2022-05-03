@@ -11,6 +11,8 @@ class AdminController extends Controller
     //
     public function loginAdmin()
     {
+
+//        dd(bcrypt('admin'));
         if(auth()->check()){
             return redirect()->to('home');
         }

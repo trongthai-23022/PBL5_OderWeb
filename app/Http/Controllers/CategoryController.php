@@ -45,7 +45,7 @@ class CategoryController extends Controller
     public function edit($id){
         $category = $this->category->find($id);
         $htmlCategoryOptions = $this->getAllCategories($category->parent_id);
-        return view('admin.category.update', [
+        return view('admin.category.edit', [
             'category' => $category,
             'htmlOption' => $htmlCategoryOptions
         ]);
