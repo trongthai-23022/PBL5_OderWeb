@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Components\MenuRecursive;
+use App\Components\Recursive;
 use App\Models\Category;
 use App\Models\Menu;
 use Illuminate\Http\Request;
@@ -65,7 +66,7 @@ class MenuController extends Controller
     private function getAllMenus($parentId): string
     {
         $data = $this->menu->all();
-        $recursion = new MenuRecursive($data);
-        return  $recursion->menuRecursion($parentId);
+        $recursion = new Recursive($data);
+        return  $recursion->categoryRecursion($parentId);
     }
 }

@@ -41,7 +41,7 @@
                                 <tr>
                                     <th scope="row">{{$products->perPage()*($products->currentPage()-1)+$i}}</th>
                                     <td>{{$product->name}}</td>
-                                    <td>{{$product->price}}</td>
+                                    <td>{{number_format($product->price)}}</td>
                                     <td><img class="product-main-image"
                                              src="{{isset($product->main_image_name)?
                                                 $product->main_image_path: url('https://cdn3.vectorstock.com/i/1000x1000/35/52/placeholder-rgb-color-icon-vector-32173552.jpg')
@@ -49,10 +49,10 @@
                                              alt="{{isset($product->main_image_name)?
                                                 $product->main_image_name: 'no-image'
                                                 }}"></td>
-                                    <td>{{$product->category->name}}</td>
+                                    <td>{{optional($product->category)->name}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Edit</a>
-                                        <a href="" class="btn btn-danger"><i class="fa fa-trash mr-2"></i>Delete</a>
+                                        <a href="{{route('products.edit',['id'=>$product->id])}}" class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Edit</a>
+                                        <a href="{{route('products.delete',['id'=>$product->id])}}" class="btn btn-danger"><i class="fa fa-trash mr-2"></i>Delete</a>
                                     </td>
                                 </tr>
                                 @php

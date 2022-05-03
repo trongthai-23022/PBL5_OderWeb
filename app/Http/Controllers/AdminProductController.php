@@ -104,23 +104,18 @@ class AdminProductController extends Controller
 
     public function edit($id)
     {
-        $category = $this->category->find($id);
-        $htmlCategoryOptions = $this->getAllCategories($category->parent_id);
-        return view('admin.category.update', [
-            'category' => $category,
-            'htmlOption' => $htmlCategoryOptions
+        $product = $this->product->find($id);
+        $htmlOption = $this->getAllCategories($product->category_id);
+        return view('admin.product.edit', [
+            'htmlOption'=> $htmlOption,
+            'product'=>$product
         ]);
-
     }
 
     public function update($id, Request $request)
     {
-        $this->category->find($id)->update([
-            'name' => $request->name,
-            'parent_id' => $request->parent_id,
-            'slug' => Str::slug($request->slug)
-        ]);
-        return redirect()->route('categories.index');
+
+        return redirect()->route('products.index');
 
     }
 
