@@ -6,7 +6,7 @@
 
 
 @section('custom_css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('admins/product/add/add.css')}}" rel="stylesheet"/>
 @endsection
 
@@ -14,13 +14,27 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @include('partials.content-header', ['name'=>'Product', 'key'=>'Add'])
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
         <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9 rounded- bg-white px-3 mb-3">
                             @csrf
+
                             <div class="form-group">
                                 <label>Product name</label>
                                 <input type="text"
@@ -73,17 +87,18 @@
                                 </select>
                             </div>
 
-
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="form-group ">
-                                <label>Product Description</label>
-                                <textarea id="tinymce-editor" name="description" class="form-control"
-                                          rows="3"></textarea>
+                            <div>
+                                <div class="form-group ">
+                                    <label>Product Description</label>
+                                    <textarea id="tinymce-editor" name="description" class="form-control"
+                                              rows="3"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+
                         </div>
+
+
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
@@ -97,6 +112,7 @@
 @section('custom_js')
     <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
     <script src="{{asset('admins/product/add/add.js')}}"></script>
-    <script src="https://cdn.tiny.cloud/1/hs0hspk14k2y30j7kqjieanll961v60zcy71z7m80zwbcnd4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/hs0hspk14k2y30j7kqjieanll961v60zcy71z7m80zwbcnd4/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
 
 @endsection

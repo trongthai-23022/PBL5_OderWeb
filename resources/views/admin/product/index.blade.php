@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{asset('admins/product/index/index.css')}}">
 @endsection
 @section('custom_js')
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
     <script src="{{asset('admins/product/index/index.js')}}"></script>
 @endsection
 
@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('products.create') }}" class="btn btn-success float-right m-2">Add</a>
+                        <a href="{{ route('products.create') }}" class="btn btn-success float-left m-2 text-uppercase">Add new product</a>
                     </div>
                     <div class="col-md-12">
                         <table class="table">
@@ -44,7 +44,8 @@
                             @endphp
                             @foreach($products as $product)
                                 <tr>
-                                    <th scope="row">{{$products->perPage()*($products->currentPage()-1)+$i}}</th>
+{{--                                    {{$products->perPage()*($products->currentPage()-1)+$i}}--}}
+                                    <th scope="row">{{$product->id}}</th>
                                     <td>{{$product->name}}</td>
                                     <td>{{number_format($product->price)}}</td>
                                     <td><img class="product-main-image"
