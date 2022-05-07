@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Components\Recursive;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
 use App\Models\ProductTag;
 use App\Models\Tag;
 use App\Traits\StorageImageTraits;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -22,13 +24,15 @@ class AdminProductController extends Controller
     private $product;
     private $tag;
     private $productTag;
+    private $productImage;
 
-    public function __construct(Category $category, Product $product, Tag $tag, ProductTag $productTag)
+    public function __construct(Category $category, Product $product, Tag $tag, ProductTag $productTag, ProductImage $productImage)
     {
         $this->category = $category;
         $this->product = $product;
         $this->tag = $tag;
         $this->productTag = $productTag;
+        $this->productImage = $productImage;
     }
 
     //
@@ -95,7 +99,7 @@ class AdminProductController extends Controller
                 $newProduct->tags()->attach($tagIds);
             }
             DB::commit();
-            return redirect()->route('admin.products.index');
+            return redirect()->route('products.create');
         } catch (\Exception $exception) {
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
@@ -112,17 +116,79 @@ class AdminProductController extends Controller
         ]);
     }
 
-    public function update($id, Request $request)
+    public function update($id, Request $req)
     {
+        try {
+            DB::beginTransaction();
+            //base product data
+            $dataProductCreate = [
+                'name' => $req->name,
+                'price' => $req->price,
+                'user_id' => auth()->id(),
+                'description' => $req->description,
+                'category_id' => $req->category_id,
+                'amount' => 69
+            ];
+            //product main image data
+            if ($req->hasFile('product_image')) {
+                $image_file = $req->product_image;
+                $product_image_info = $this->getUploadedImageInfo($image_file, 'product');
+                if (!empty($product_image_info)) {
+                    $dataProductCreate['main_image_path'] = $product_image_info['file_path'];
+                    $dataProductCreate['main_image_name'] = $product_image_info['file_name'];
+                }
+            }
+            // update product
+            $updateProduct = $this->product->find($id);
+            $res = $updateProduct->update($dataProductCreate); // return boolean
 
-        return redirect()->route('products.index');
+            //update detail image to product_images
+            if ($req->hasFile('product_images')) {
+                $this->productImage->where('product_id', $id)->delete();
+                foreach ($req->product_images as $product_image) {
+                    $detail_image_info = $this->getUploadedImageInfo($product_image, 'product');
+                    $updateProduct->detailImages()->create([
+                        'image_path' => $detail_image_info['file_path'],
+                        'image_name' => $detail_image_info['file_name'],
+                    ]);
+                }
+            }
+            //insert tags
+            $tagIds = [];
+            if (!empty($req->tags)) {
+                foreach ($req->tags as $tag) {
+                    $tagInstance = $this->tag->firstOrCreate([
+                        'name' => $tag
+                    ]);
+                    $tagIds[] = $tagInstance->id;
+                }
+                $updateProduct->tags()->sync($tagIds); // add new tag to tags_table, and update product_tags
+            }
+            DB::commit();
+            return redirect()->route('products.index');
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
+        }
 
     }
 
     public function delete($id)
     {
-        $this->category->find($id)->delete();
-        return redirect()->route('categories.index');
+        try {
+            $this->product->find($id)->delete();
+            return \response()->json([
+                'code' => 200,
+                'message'=> 'success'
+            ],200);
+
+        } catch (\Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
+            return \response()->json([
+                'code' => 500,
+                'message'=> 'fail'
+            ],500);
+        }
     }
 
 

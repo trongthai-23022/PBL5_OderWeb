@@ -6,6 +6,11 @@
 @section('custom_css')
     <link rel="stylesheet" href="{{asset('admins/product/index/index.css')}}">
 @endsection
+@section('custom_js')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="{{asset('admins/product/index/index.js')}}"></script>
+@endsection
+
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -51,8 +56,11 @@
                                                 }}"></td>
                                     <td>{{optional($product->category)->name}}</td>
                                     <td>
-                                        <a href="{{route('products.edit',['id'=>$product->id])}}" class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Edit</a>
-                                        <a href="{{route('products.delete',['id'=>$product->id])}}" class="btn btn-danger"><i class="fa fa-trash mr-2"></i>Delete</a>
+                                        <a href="{{route('products.edit',['id'=>$product->id])}}"
+                                           class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Edit</a>
+                                        <a href="" class="btn btn-danger action_delete"
+                                           data-url="{{route('products.delete',['id'=>$product->id])}}">
+                                            <i class="fa fa-trash mr-2"></i>Delete</a>
                                     </td>
                                 </tr>
                                 @php
