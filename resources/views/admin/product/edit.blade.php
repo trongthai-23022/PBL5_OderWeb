@@ -6,7 +6,7 @@
 
 
 @section('custom_css')
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('admins/product/edit/edit.css')}}" rel="stylesheet"/>
 @endsection
 
@@ -14,14 +14,27 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @include('partials.content-header', ['name'=>'Product', 'key'=>'Edit'])
+        <div class="row justify-content-center">
+            <div class="col-md-9">
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        </div>
         <form action="{{route('products.update',['id'=>$product->id])}}" method="post" enctype="multipart/form-data">
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9 rounded bg-white px-3 mb-3">
                             @csrf
-                            <div class="form-group">
+                            <div class="form-group mt-2">
                                 <label>Product name</label>
                                 <input type="text"
                                        class="form-control"
@@ -48,11 +61,11 @@
                                        placeholder="Chooses a file"
                                        name="product_image"
                                 >
-                                <div class="col-md-12">
-                                    <div class="row">
+
+                                    <div class="col">
                                         <img class="product-main-image" src="{{$product->main_image_path}}" alt="{{$product->main_image_name}}">
                                     </div>
-                                </div>
+
                             </div>
 
                             <div class="form-group">
@@ -63,10 +76,10 @@
                                        placeholder="Chooses a file"
                                        name="product_images[]"
                                 >
-                                <div class="col-md-12">
+                                <div class="col">
                                     <div class="row">
                                         @foreach($product->detailImages as $img)
-                                            <div class="col-md-6">
+                                            <div class="col-4">
                                                 <img class="product-detail-image" src="{{$img->image_path}}" alt="{{$img->image_name}}">
                                             </div>
                                         @endforeach
@@ -93,18 +106,18 @@
                                 </select>
 
                             </div>
-
-
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="form-group ">
-                                <label>Product Description</label>
-                                <textarea id="tinymce-editor" name="description" class="form-control"
-                                          rows="3">{{$product->description}}</textarea>
+                            <div class="">
+                                <div class="form-group ">
+                                    <label>Product Description</label>
+                                    <textarea id="tinymce-editor" name="description" class="form-control"
+                                              rows="3">{{$product->description}}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success">Submit</button>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+
                         </div>
+
+
                     </div>
                     <!-- /.row -->
                 </div><!-- /.container-fluid -->
