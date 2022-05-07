@@ -87,7 +87,7 @@
                                 <label>Enter tags</label>
                                 <select name="tags[]" class="form-control tags_select2" multiple="multiple">
                                     @foreach($product->tags as $tag)
-                                        <option selected value="{{$tag->id}} ">{{$tag->name}}</option>
+                                        <option selected value="{{$tag->name}} ">{{$tag->name}}</option>
                                     @endforeach
 
                                 </select>
