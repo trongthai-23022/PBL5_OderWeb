@@ -11,3 +11,5 @@
    ### - Run command: php artisan migrate
    ### - Run command: php artisan storage:link
   ## Step3: Run command: php artisan serve -> http://127.0.0.1:8000/home
+    
+# After pull, plz run command: 'php artisan migrate' to update database
