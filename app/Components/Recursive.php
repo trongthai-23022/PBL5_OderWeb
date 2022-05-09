@@ -10,7 +10,7 @@ class Recursive{
         $this->htmlSelect = '';
     }
 
-    public function categoryRecursion($parent_id,$id = 0, $text = ''){
+    public function selectRecursion($parent_id,$id = 0, $text = ''){
         foreach ($this->data as $value){
             if($value['parent_id'] == $id){
                 if(!empty($parent_id) && $parent_id == $value['id']){
@@ -19,7 +19,7 @@ class Recursive{
                 else{
                     $this->htmlSelect .= "<option value='". $value['id'] . "'>" . $text . $value['name'] . "</option>";
                 }
-                $this->categoryRecursion($parent_id,$value['id'], $text. '--');
+                $this->selectRecursion($parent_id,$value['id'], $text. '--');
             }
         }
         return $this->htmlSelect;

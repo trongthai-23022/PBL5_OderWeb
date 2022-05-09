@@ -21,7 +21,7 @@
                             <div class="form-group">
                                 <label>Ten danh muc</label>
                                 <input type="text"
-                                       class="form-control"
+                                       class="form-control "
                                        placeholder="nhap ten danh muc"
                                        name="name"
                                 >

@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
 use App\Models\Tag;
+use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTraits;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ use phpDocumentor\Reflection\Types\This;
 
 class AdminProductController extends Controller
 {
-    use StorageImageTraits;
+    use StorageImageTraits, DeleteModelTrait;
 
     private $category;
     private $product;
@@ -40,7 +41,7 @@ class AdminProductController extends Controller
     //
     public function index()
     {
-        $productsList =  $this->product->latest()->paginate(5);
+        $productsList =  $this->product->latest()->paginate(config('constants.pagination_records'));
         return view('admin.product.index',['products'=>$productsList]);
     }
 
@@ -159,12 +160,14 @@ class AdminProductController extends Controller
             $tagIds = [];
             if (!empty($req->tags)) {
                 foreach ($req->tags as $tag) {
+                    // Retrieve flight by name or create it if it doesn't exist...
                     $tagInstance = $this->tag->firstOrCreate([
                         'name' => $tag
                     ]);
                     $tagIds[] = $tagInstance->id;
                 }
-                $updateProduct->tags()->sync($tagIds); // add new tag to tags_table, and update product_tags
+                //  update product_tag
+                $updateProduct->tags()->sync($tagIds);
             }
             DB::commit();
             return redirect()->route('products.index');
@@ -177,20 +180,7 @@ class AdminProductController extends Controller
 
     public function delete($id)
     {
-        try {
-            $this->product->find($id)->delete();
-            return \response()->json([
-                'code' => 200,
-                'message'=> 'success'
-            ],200);
-
-        } catch (\Exception $exception) {
-            Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
-            return \response()->json([
-                'code' => 500,
-                'message'=> 'fail'
-            ],500);
-        }
+       return $this->deleteModelTrait($id, $this->product);
     }
 
 
