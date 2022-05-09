@@ -20,7 +20,7 @@ class CategoryController extends Controller
 
      public function index(){
          return view('admin.category.index', [
-             'categories' => $this->category->latest()->paginate(5)
+             'categories' => $this->category->latest()->paginate(config('constants.pagination_records'))
          ]);
      }
 
@@ -72,6 +72,6 @@ class CategoryController extends Controller
     {
         $data = $this->category->all();
         $recursion = new Recursive($data);
-        return  $recursion->categoryRecursion($parentId);
+        return  $recursion->selectRecursion($parentId);
     }
 }

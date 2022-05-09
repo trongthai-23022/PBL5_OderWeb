@@ -1,0 +1,2 @@
+primary-color: #6667AB
+error-color: #CF6679

@@ -1,0 +1,11 @@
+img.product-main-image{
+    height: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+}
+
+img.product-detail-image{
+    height: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+}

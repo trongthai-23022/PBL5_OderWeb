@@ -20,7 +20,7 @@ class MenuController extends Controller
     //
     public function  index(){
         return view('admin.menu.index', [
-            'menus' => $this->menu->paginate(5)
+            'menus' => $this->menu->paginate(config('constants.pagination_records'))
         ]);
     }
 
