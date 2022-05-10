@@ -189,6 +189,6 @@ class AdminProductController extends Controller
     {
         $data = $this->category->all();
         $recursion = new Recursive($data);
-        return $recursion->categoryRecursion($parentId);
+        return $recursion->selectRecursion($parentId);
     }
 }
