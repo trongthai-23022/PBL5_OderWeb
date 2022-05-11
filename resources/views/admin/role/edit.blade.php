@@ -6,7 +6,7 @@
 
 @section('custom_css')
     <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('admins/role/add/add.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admins/permission/edit/edit.css')}}" rel="stylesheet"/>
 @endsection
 
 @section('custom_js')

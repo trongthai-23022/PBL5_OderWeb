@@ -12,38 +12,6 @@ Route::get('/home', function () {
 });
 
 Route::prefix('admin')->group(function () {
-    //categories
-    Route::prefix('categories')->group(function () {
-        Route::get('/', [
-            'as' => 'categories.index',
-            'uses' => 'CategoryController@index'
-        ]);
-        //show create a new category form
-        Route::get('/create', [
-            'as' => 'categories.create',
-            'uses' => 'CategoryController@create'
-        ]);
-        // add category to db
-        Route::post('/store', [
-            'as' => 'categories.store',
-            'uses' => 'CategoryController@store'
-        ]);
-        //button edit to show update form
-        Route::get('/edit/{id}', [
-            'as' => 'categories.edit',
-            'uses' => 'CategoryController@edit'
-        ]);
-        // submit to update
-        Route::post('/update/{id}', [
-            'as' => 'categories.update',
-            'uses' => 'CategoryController@update'
-        ]);
-        Route::get('/delete/{id}', [
-            'as' => 'categories.delete',
-            'uses' => 'CategoryController@delete'
-        ]);
-
-    });
 
     //menus
     Route::prefix('menus')->group(function () {
@@ -174,9 +142,17 @@ Route::prefix('admin')->group(function () {
             'as' => 'permissions.create',
             'uses' => 'AdminPermissionController@create'
         ]);
+        Route::get('/create-manual', [
+            'as' => 'permissions.create-manual',
+            'uses' => 'AdminPermissionController@create_manual'
+        ]);
         Route::post('/store', [
             'as' => 'permissions.store',
             'uses' => 'AdminPermissionController@store'
+        ]);
+        Route::post('/store-manual', [
+            'as' => 'permissions.store-manual',
+            'uses' => 'AdminPermissionController@store_manual'
         ]);
         //button edit to show update form
         Route::get('/edit/{id}', [

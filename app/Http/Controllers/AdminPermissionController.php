@@ -9,6 +9,7 @@ use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Http\RedirectResponse;
 
 class AdminPermissionController extends Controller
 {
@@ -28,7 +29,7 @@ class AdminPermissionController extends Controller
         ]);
     }
 
-    public function store(Request $req): \Illuminate\Http\RedirectResponse
+    public function store_manual(Request $req):RedirectResponse
     {
         DB::table('permissions')->insert(
             [
@@ -38,12 +39,47 @@ class AdminPermissionController extends Controller
                 'key_code' => $req->key_code
             ]
         );
+        return redirect()->route('permissions.create-manual');
+    }
+    public function store(Request $req): RedirectResponse
+    {
+        $module = $req->module; //category.danh_muc
+        $exploded = explode(".", $module);
+        $moduleKey = $exploded[0]; //category
+        $moduleValue = $exploded[1]; //danh_muc
+        $module_display_name = str_replace('_', ' ', $moduleValue); //danh muc
+        $parentPermission = Permission::firstOrCreate([
+                'name' => $moduleKey,
+                'parent_id' => 0,
+                'display_name' => $module_display_name,
+                'key_code' =>$moduleKey
+        ]);
+        foreach ($req->actions as $action) {
+            $exploded = explode(".", $action);
+            $action_name =  $exploded[0];
+            $action_display_name = $exploded[1];
+            if(str_contains($action_display_name, '_')){
+                $action_display_name = str_replace('_', ' ', $exploded[1]); //danh muc
+            }
+            Permission::firstOrCreate([
+                    'name' => $action_name. ' ' .$moduleKey,
+                    'parent_id' => $parentPermission->id,
+                    'display_name' => $action_display_name.' ' .$module_display_name,
+                    'key_code' => $moduleKey . '_' .$action_name
+            ]);
+        }
         return redirect()->route('permissions.create');
     }
 
     public function create(){
-        $htmlCategoryOptions = $this->getAllCategories($parentId = '');
+        $modules = config('permissions.modules');
         return view('admin.permission.create', [
+            'modules' => $modules
+        ]);
+    }
+    public function create_manual(){
+        $htmlCategoryOptions = $this->getAllCategories($parentId = '');
+        return view('admin.permission.create-manual', [
             'htmlOption' => $htmlCategoryOptions
         ]);
     }

@@ -1,11 +1,7 @@
-img.product-main-image{
-    height: 150px;
-    object-fit: cover;
-    margin-top: 10px;
+.card-header{
+    background-color: #6667AB;
 }
-
-img.product-detail-image{
-    height: 150px;
-    object-fit: cover;
-    margin-top: 10px;
+input[type='checkbox']{
+    transform: scale(1.2);
+    margin-right: 5px;
 }
