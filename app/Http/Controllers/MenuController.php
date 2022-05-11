@@ -67,6 +67,6 @@ class MenuController extends Controller
     {
         $data = $this->menu->all();
         $recursion = new Recursive($data);
-        return  $recursion->categoryRecursion($parentId);
+        return  $recursion->selectRecursion($parentId);
     }
 }

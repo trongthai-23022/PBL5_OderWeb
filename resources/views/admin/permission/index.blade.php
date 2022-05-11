@@ -24,7 +24,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('permissions.create') }}" class="btn btn-success float-left m-2 text-uppercase" >Add new permission</a>
+                        <div class="col-6">
+                            <a href="{{ route('permissions.create') }}" class="btn btn-success float-left m-2 text-uppercase" >Add new permission</a>
+                        </div>
+                        <div class="col-6">
+                        <a href="{{ route('permissions.create-manual') }}" class="btn btn-success float-left m-2 text-uppercase" >Add new permission manually</a>
+                        </div>
                     </div>
                     <div class="col-md-12">
                         <table class="table">
@@ -38,9 +43,10 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php($i = 0)
                                 @foreach($permissions as $permission)
                                     <tr>
-                                        <th scope="row">{{$permission->id}}</th>
+                                        <th scope="row">{{config('constants.pagination_records')*($permissions->currentPage()-1) + $i}}</th>
                                         <td>{{$permission->name}}</td>
                                         <td>{{$permission->display_name}}</td>
                                         <td>{{$permission->key_code}}</td>
@@ -52,6 +58,7 @@
                                                class="btn btn-danger action_delete"><i class="fa fa-trash mr-2 "></i>Delete</a>
                                         </td>
                                     </tr>
+                                    @php($i++)
                                 @endforeach
                             </tbody>
                         </table>

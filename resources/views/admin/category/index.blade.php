@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 
 @section('title')
@@ -18,7 +17,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('categories.create') }}" class="btn btn-success float-left m-2 text-uppercase" >Add new category</a>
+                        @can('category-add')
+                        <a href="{{ route('categories.create') }}"
+                           class="btn btn-success float-left m-2 text-uppercase">Add new category</a>
+                        @endcan
                     </div>
                     <div class="col-md-12">
                         <table class="table">
@@ -30,16 +32,22 @@
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($categories as $category)
-                                    <tr>
-                                        <th scope="row">{{$category->id}}</th>
-                                        <td>{{$category->name}}</td>
-                                        <td>
-                                            <a href="{{route('categories.edit', ['id' => $category->id])}}" class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Edit</a>
-                                            <a href="{{route('categories.delete', ['id' => $category->id])}}" class="btn btn-danger"><i class="fa fa-trash mr-2"></i>Delete</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                            @foreach($categories as $category)
+                                <tr>
+                                    <th scope="row">{{$category->id}}</th>
+                                    <td>{{$category->name}}</td>
+                                    <td>
+                                        @can('category-edit')
+                                            <a href="{{route('categories.edit', ['id' => $category->id])}}"
+                                               class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Edit</a>
+                                        @endcan
+                                        @can('category-delete')
+                                            <a href="{{route('categories.delete', ['id' => $category->id])}}"
+                                               class="btn btn-danger"><i class="fa fa-trash mr-2"></i>Delete</a>
+                                        @endcan
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
