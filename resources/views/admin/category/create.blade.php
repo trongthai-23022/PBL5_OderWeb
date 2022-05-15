@@ -4,6 +4,15 @@
 @section('title')
     <title>Trang chu</title>
 @endsection
+@section('custom_css')
+    <link rel="stylesheet" href="{{asset('admins/category/add/add.css')}}">
+@endsection
+
+@section('custom_js')
+    <script src="{{asset('admins/common.js')}}"></script>
+@endsection
+
+
 
 @section('content')
 
@@ -16,24 +25,41 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-6">
+                        @if(session('success'))
+                            <div class="alert alert-success response_message ">
+                                {{session('success')}}
+                            </div>
+
+                        @elseif(session('failure'))
+                            <div class="alert alert-danger response_message ">
+                                {{session('failure')}}
+                            </div>
+                        @endif
                         <form action="{{route('categories.store')}}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label>Ten danh muc</label>
                                 <input type="text"
-                                       class="form-control "
+                                       class="form-control @error('name') is-invalid @enderror"
                                        placeholder="nhap ten danh muc"
                                        name="name"
+                                       value="{{old('name')}}"
                                 >
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                                 <div class="form-group">
                                     <label>Chon danh muc cha</label>
-                                    <select class="form-control"
+                                    <select class="form-control @error('parent_id') is-invalid @enderror"
                                             name="parent_id">
                                         <option value="0">Chon danh muc cha</option>
                                         {!! $htmlOption !!}
                                     </select>
+                                    @error('parent_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

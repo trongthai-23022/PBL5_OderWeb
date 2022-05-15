@@ -13,6 +13,7 @@ use App\Models\Tag;
 use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTraits;
 use http\Env\Response;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -102,9 +103,12 @@ class AdminProductController extends Controller
                 $newProduct->tags()->attach($tagIds);
             }
             DB::commit();
-            return redirect()->route('products.create');
+            $resMessage = 'Thêm thành công!';
+            return redirect()->route('products.create')->with('success', $resMessage);
         } catch (\Exception $exception) {
             DB::rollBack();
+            $resMessage = 'Thêm thất bại!';
+            return redirect()->route('products.create')->with('success', $resMessage);
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
         }
     }
@@ -119,7 +123,7 @@ class AdminProductController extends Controller
         ]);
     }
 
-    public function update($id, ProductUpdateRequest $req)
+    public function update($id, ProductUpdateRequest $req):RedirectResponse
     {
         try {
             DB::beginTransaction();
@@ -170,9 +174,12 @@ class AdminProductController extends Controller
                 $updateProduct->tags()->sync($tagIds);
             }
             DB::commit();
-            return redirect()->route('products.index');
+            $resMessage = 'Sửa thành công!';
+            return redirect()->route('products.index')->with('success', $resMessage);
         } catch (\Exception $exception) {
+            $resMessage = 'Sửa thành công!';
             DB::rollBack();
+            return redirect()->route('products.index')->with('failure', $resMessage);
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
         }
 
