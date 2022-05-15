@@ -5,6 +5,10 @@
     <title>Trang chu</title>
 @endsection
 
+@section('custom_css')
+    <link rel="stylesheet" href="{{asset('admins/category/edit/edit.css')}}">
+@endsection
+
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -21,19 +25,25 @@
                             <div class="form-group">
                                 <label>Ten danh muc</label>
                                 <input type="text"
-                                       class="form-control"
+                                       class="form-control @error('name') is-invalid @enderror"
                                        placeholder="nhap ten danh muc"
                                        name="name"
                                        value="{{$category->name}}"
                                 >
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
                                 <div class="form-group">
                                     <label>Chon danh muc cha</label>
-                                    <select class="form-control"
+                                    <select class="form-control @error('parent_id') is-invalid @enderror"
                                             name="parent_id">
                                         <option value="0">Chon danh muc cha</option>
                                         {!! $htmlOption !!}
                                     </select>
+                                    @error('parent_id')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>

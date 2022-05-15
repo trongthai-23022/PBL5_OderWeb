@@ -27,7 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         //
         GateAndPolicyAccess::setGateAndPolicyAccess();
-
+        GateAndPolicyAccess::setGateAndPolicyAccess();
     }
 
 }

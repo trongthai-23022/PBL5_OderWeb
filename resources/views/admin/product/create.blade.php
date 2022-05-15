@@ -15,6 +15,7 @@
     <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
     <script src="https://cdn.tiny.cloud/1/hs0hspk14k2y30j7kqjieanll961v60zcy71z7m80zwbcnd4/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
+    <script src="{{asset('admins/common.js')}}"></script>
 
 @endsection
 
@@ -22,6 +23,20 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         @include('partials.content-header', ['name'=>'Product', 'key'=>'Add'])
+        <div class="row justify-content-center">
+            <div class="col-md-9 rounded">
+                @if(session('success'))
+                    <div class="alert alert-success response_message ">
+                        {{session('success')}}
+                    </div>
+
+                @elseif(session('failure'))
+                    <div class="alert alert-danger response_message ">
+                        {{session('failure')}}
+                    </div>
+                @endif
+            </div>
+        </div>
         <form action="{{route('products.store')}}" method="post" enctype="multipart/form-data">
             <!-- Main content -->
             <div class="content">

@@ -24,7 +24,7 @@ class ProductAddRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'bail|required|unique:products|max:255',
+            'name' => 'bail|required|unique:products,deleted_at,NULL|max:255',
             'price' => 'required|numeric',
             'category_id' => 'required',
             'description' => 'required',

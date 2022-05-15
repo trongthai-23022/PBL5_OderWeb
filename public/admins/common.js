@@ -1,3 +1,11 @@
+$(function () {
+    setTimeout(function(){
+        $(".response_message").remove();
+    },2000);
+
+    $(document).on('click', '.action_delete', actionDelete);
+});
+
 function actionDelete(event) {
     event.preventDefault();
     let urlRequest = $(this).data('url')
@@ -42,7 +50,3 @@ function actionDelete(event) {
     })
 }
 
-$(function () {
-    $(document).on('click', '.action_delete', actionDelete)
-
-});

@@ -4,13 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 
 
-Route::get('/admin', 'AdminController@loginAdmin');
-Route::post('/admin', 'AdminController@postLoginAdmin');
-
 Route::get('/home', function () {
     return view('home');
 });
+Route::get('/', function () {
+    return view('home');
+});
 
+Route::get('/admin-login', 'AdminController@loginAdmin');
+Route::post('/admin-login', 'AdminController@postLoginAdmin');
+Route::get('/logout', 'AdminController@logout')->name('admin.logout');
 Route::prefix('admin')->group(function () {
 
     //menus
@@ -40,36 +43,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/delete/{id}', [
             'as' => 'menus.delete',
             'uses' => 'MenuController@delete'
-        ]);
-    });
-
-    //products
-    Route::prefix('products')->group(function () {
-        Route::get('/', [
-            'as' => 'products.index',
-            'uses' => 'AdminProductController@index'
-        ]);
-        Route::get('/create', [
-            'as' => 'products.create',
-            'uses' => 'AdminProductController@create'
-        ]);
-        Route::post('/store', [
-            'as' => 'products.store',
-            'uses' => 'AdminProductController@store'
-        ]);
-        //button edit to show update form
-        Route::get('/edit/{id}', [
-            'as' => 'products.edit',
-            'uses' => 'AdminProductController@edit'
-        ]);
-        // submit to update
-        Route::post('/update/{id}', [
-            'as' => 'products.update',
-            'uses' => 'AdminProductController@update'
-        ]);
-        Route::get('/delete/{id}', [
-            'as' => 'products.delete',
-            'uses' => 'AdminProductController@delete'
         ]);
     });
 

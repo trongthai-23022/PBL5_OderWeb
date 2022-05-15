@@ -16,7 +16,7 @@ class AdminController extends Controller
         if(auth()->check()){
             return redirect()->to('home');
         }
-        return view('login');
+        return view('admin-login');
     }
 
     public function postLoginAdmin(Request $request)
@@ -31,5 +31,14 @@ class AdminController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
+    }
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('admin-login');
     }
 }
