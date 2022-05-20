@@ -13,3 +13,5 @@
   ## Step3: Run command: php artisan serve -> http://127.0.0.1:8000/home
     
 # After pull, plz run command: 'php artisan migrate' to update database
+    
+# If u want refresh all database: artisan migrate:refresh --seed (if seeder database not working: php artisan db:seed --class=UserSeeder) => 1 available user: admin@gmail.com, password: admin (route: admin-login)
