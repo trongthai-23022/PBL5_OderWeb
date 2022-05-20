@@ -253,7 +253,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .right-top-bar a:hover {
-  color: #6c7ae0;
+  color: #fdfdff;
 }
 
 
@@ -272,10 +272,11 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 .wrap-menu-desktop {
   position: fixed;
   z-index: 1100;
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: #6667AB;
   width: 100%;
   height: 84px;
-  top: 40px;
+  /* top: 40px; */
   left: 0px; 
 
   -webkit-transition: height 0.3s, background-color 0.3s;
@@ -309,7 +310,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   display: -ms-flexbox;
   display: flex;
   align-items: center;
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: #6667AB;
 }
 
 
@@ -440,7 +442,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*---------------------------------------------*/
 .main-menu > li:hover > a {
   text-decoration: none;
-  color: #6c7ae0;
+  color: #ffffff;
 }
 
 .main-menu > li:hover > .sub-menu {
@@ -615,7 +617,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 .fix-menu-desktop .wrap-menu-desktop {
   height: 70px;
-  background-color: rgba(255,255,255,1);
+  background-color: #6667AB;
   box-shadow: 0 0px 3px 0px rgba(0,0,0,0.2);
   -moz-box-shadow: 0 0px 3px 0px rgba(0,0,0,0.2);
   -webkit-box-shadow: 0 0px 3px 0px rgba(0,0,0,0.2);

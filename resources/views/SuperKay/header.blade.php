@@ -1,8 +1,11 @@
-<header>
+ {{-- {{dd($menus)}} --}}
+ <header>
     <!-- Header desktop -->
-    <div class="container-menu-desktop">
+    <div class="container-menu-desktop ">
+
+       
         <!-- Topbar -->
-        <div class="top-bar">
+        {{-- <div class="top-bar">
             <div class="content-topbar flex-sb-m h-full container">
                 <div class="left-top-bar">
                     Free shipping for standard order over $100
@@ -26,29 +29,32 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <div class="wrap-menu-desktop">
-            <nav class="limiter-menu-desktop container">
+            <nav class="limiter-menu-desktop container ">
 
                 <!-- Logo desktop -->
-                <a href="#" class="logo">
-                    <img src="template/images/icons/logo-01.png" alt="IMG-LOGO">
+                <a href="#" class="logo name">
+                   Supper Kay <img src="template/images/icons/Supper-Kay-logo.png" alt="IMG-LOGO">
                 </a>
 
                 <!-- Menu desktop -->
-                <div class="menu-desktop">
+                <div class="menu-desktop ">
                     <ul class="main-menu">
-                        <li class="active-menu">
+                        <li class="active-menu"><a href="/">Trang chủ</a></li>
+
+                        {!!\App\Helpers\Helper::menus($menus) !!}
+                        {{-- <li >
                             <a href="index.html">Home</a>
                             <ul class="sub-menu">
                                 <li><a href="index.html">Homepage 1</a></li>
                                 <li><a href="home-02.html">Homepage 2</a></li>
                                 <li><a href="home-03.html">Homepage 3</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
 
-                        <li>
+                        {{-- <li>
                             <a href="product.html">Shop</a>
                         </li>
 
@@ -58,14 +64,14 @@
 
                         <li>
                             <a href="blog.html">Blog</a>
+                        </li> --}}
+
+                        <li>
+                            <a href="about.html">Chi tiết</a>
                         </li>
 
                         <li>
-                            <a href="about.html">About</a>
-                        </li>
-
-                        <li>
-                            <a href="contact.html">Contact</a>
+                            <a  href="contact.html">Liên hệ</a>
                         </li>
                     </ul>
                 </div>

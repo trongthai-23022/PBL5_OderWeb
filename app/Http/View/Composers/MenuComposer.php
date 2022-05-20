@@ -1,9 +1,8 @@
 <?php
  
-namespace App\View\Composers;
- 
-use App\Repositories\UserRepository;
+namespace App\Http\View\Composers;
 use Illuminate\View\View;
+use App\Models\Menu;
  
 class MenuComposer
 {
@@ -28,6 +27,7 @@ class MenuComposer
 
     public function compose(View $view)
     {
-       return Menu::where('');
+        $menus =  Menu::select('id','name','parent_id')->orderByDesc('id')->get();
+        $view->with('menus', $menus);
     }
 }
