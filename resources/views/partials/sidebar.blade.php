@@ -45,26 +45,24 @@
                      with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     <a href="{{route('categories.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
-                        <p>
+                        <i class="fas fa-layer-group"></i>
+                        <p style="margin-left: 10px">
                             Categories
-
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('menus.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-bars"></i>
-                        <p>
+                        <i class="fas fa-bars"></i>
+                        <p style="margin-left: 10px">
                             Menus
-
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('products.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-bars"></i>
-                        <p>
+                        <i class="fas fa-utensils"></i>
+                        <p style="margin-left: 10px">
                             Products
 
                         </p>
@@ -72,8 +70,8 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-bars"></i>
-                        <p>
+                        <i class="fas fa-users"></i>
+                        <p style="margin-left: 10px">
                             Users
 
                         </p>
@@ -81,16 +79,16 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('roles.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-bars"></i>
-                        <p>
+                        <i class="fas fa-user-tag"></i>
+                        <p style="margin-left: 10px">
                             Roles
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('permissions.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-bars"></i>
-                        <p>
+                        <i class="fas fa-user-lock"></i>
+                        <p style="margin-left: 10px">
                             Permissions
                         </p>
                     </a>
@@ -102,7 +100,7 @@
                     <li class="nav-item mb-auto">
                         <a href="{{route('admin.logout')}}" class="nav-link">
                             <i class="fas fa-sign-out-alt"></i>
-                            <p>
+                            <p style="margin-left: 10px">
                                 Log out
                             </p>
                         </a>

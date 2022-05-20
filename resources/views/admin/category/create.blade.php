@@ -2,7 +2,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Trang chu</title>
+    <title>Categories</title>
 @endsection
 @section('custom_css')
     <link rel="stylesheet" href="{{asset('admins/category/add/add.css')}}">
@@ -38,10 +38,10 @@
                         <form action="{{route('categories.store')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label>Ten danh muc</label>
+                                <label>Category name</label>
                                 <input type="text"
                                        class="form-control @error('name') is-invalid @enderror"
-                                       placeholder="nhap ten danh muc"
+                                       placeholder="Enter category name"
                                        name="name"
                                        value="{{old('name')}}"
                                 >
@@ -51,10 +51,10 @@
                             </div>
 
                                 <div class="form-group">
-                                    <label>Chon danh muc cha</label>
+                                    <label>Parent category</label>
                                     <select class="form-control @error('parent_id') is-invalid @enderror"
                                             name="parent_id">
-                                        <option value="0">Chon danh muc cha</option>
+                                        <option value="0">itself</option>
                                         {!! $htmlOption !!}
                                     </select>
                                     @error('parent_id')

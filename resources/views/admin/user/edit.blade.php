@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Add Product</title>
+    <title>Users</title>
 @endsection
 
 @section('custom_css')

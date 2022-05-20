@@ -7,6 +7,9 @@
 @section('custom_css')
     <link rel="stylesheet" href="{{asset('admins/permission/edit/edit.css')}}">
 @endsection
+@section('custom_js')
+    <script src="{{asset('admins/permission/add/add.js')}}"></script>
+@endsection
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->

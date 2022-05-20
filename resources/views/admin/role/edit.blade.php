@@ -6,13 +6,11 @@
 
 @section('custom_css')
     <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('admins/permission/edit/edit.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admins/role/edit/edit.css')}}" rel="stylesheet"/>
 @endsection
 
 @section('custom_js')
-    <script src="{{asset('admins/role/add/add.js')}}">
-
-    </script>
+    <script src="{{asset('admins/role/add/add.js')}}"></script>
 
 @endsection
 
@@ -34,20 +32,25 @@
                                 <div class="form-group">
                                     <label>Role name</label>
                                     <input type="text"
-                                           class="form-control "
+                                           class="form-control @error('name') is-invalid @enderror"
                                            placeholder="Enter role name"
                                            name="name"
                                            value="{{$role->name}}"
                                     >
+                                    @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label>Role description</label>
-                                    <textarea name="display_name"
-                                              class="form-control"
+                                    <textarea name="description"
+                                              class="form-control @error('description') is-invalid @enderror"
                                               rows="4"
-
                                     >{{$role->display_name}}</textarea>
+                                    @error('description')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col">

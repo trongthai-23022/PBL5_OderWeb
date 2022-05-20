@@ -10,9 +10,8 @@
 @endsection
 
 @section('custom_js')
-    <script src="{{asset('admins/role/add/add.js')}}">
-
-    </script>
+    <script src="{{asset('admins/role/add/add.js')}}"></script>
+    <script src="{{asset('admins/common.js')}}"></script>
 
 @endsection
 
@@ -28,27 +27,44 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-md-12 rounded bg-white px-3 mb-3">
+                        @if(session('success'))
+                            <div class="alert alert-success response_message ">
+                                {{session('success')}}
+                            </div>
+
+                        @elseif(session('failure'))
+                            <div class="alert alert-danger response_message ">
+                                {{session('failure')}}
+                            </div>
+                        @endif
                         <form action="{{route('roles.store')}}" method="post">
                             @csrf
                             <div class="col">
                                 <div class="form-group">
                                     <label>Role name</label>
                                     <input type="text"
-                                           class="form-control "
+                                           class="form-control @error('name') is-invalid @enderror"
                                            placeholder="Enter role name"
                                            name="name"
                                            value="{{old('name')}}"
                                     >
+                                    @error('name')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <div class="form-group">
                                     <label>Role description</label>
-                                    <textarea name="display_name"
-                                              class="form-control"
+                                    <textarea
+                                        name="description"
+                                              class="form-control @error('description') is-invalid @enderror"
                                               rows="4"
-
-                                    >{{old('display_name')}}</textarea>
+                                    >{{old('description')}}</textarea>
+                                    @error('description')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
                                 </div>
+
                             </div>
                             <div class="col">
                                 <p class="font-weight-bold">Permission of role</p>

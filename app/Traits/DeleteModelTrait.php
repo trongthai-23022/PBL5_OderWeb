@@ -11,8 +11,7 @@ trait DeleteModelTrait{
             return \response()->json([
                 'code' => 200,
                 'message'=> 'success'
-            ],200);
-
+            ]);
         } catch (\Exception $exception) {
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
             return \response()->json([
