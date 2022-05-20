@@ -5,3 +5,11 @@ input[type='checkbox']{
     transform: scale(1.2);
     margin-right: 5px;
 }
+
+
+.alert-danger {
+    background-color: #CF6679;
+    border-color: #CF6679;
+    color: white;
+    margin-top: 5px;
+}

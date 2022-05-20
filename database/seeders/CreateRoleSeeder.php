@@ -16,7 +16,6 @@ class CreateRoleSeeder extends Seeder
     {
         //
         DB::table('roles')->insert([
-            ['name' => 'admin', 'display_name'=>'Quản trị'],
             ['name' => 'guest', 'display_name'=>'Khách vãng lai'],
             ['name' => 'customer', 'display_name'=>'Khách hàng'],
             ['name' => 'moderator', 'display_name'=>'Kiểm duyệt'],

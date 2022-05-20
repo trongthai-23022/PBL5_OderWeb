@@ -28,7 +28,6 @@ class AddColDeletedAtPermissionsTable extends Migration
     {
         Schema::table('permissions', function (Blueprint $table) {
             //
-            $table->dropColumn('deleted_at');
         });
     }
 }

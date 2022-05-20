@@ -24,10 +24,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        @can('product-edit')
+                        @can('product-add')
                             <a href="{{ route('products.create') }}"
-                               class="btn btn-success float-left m-2 text-uppercase">Add
-                                new product</a>
+                               class="btn btn-success float-left m-2 text-uppercase">Add new product</a>
                         @endcan
                     </div>
                     <div class="col-md-6">
@@ -75,7 +74,7 @@
                                             <a href="{{route('products.edit',['id'=>$product->id])}}"
                                                class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Edit</a>
                                         @endcan
-                                        @can('product-edit')
+                                        @can('product-delete')
                                             <a href="" class="btn btn-danger action_delete"
                                                data-url="{{route('products.delete',['id'=>$product->id])}}">
                                                 <i class="fa fa-trash mr-2"></i>Delete</a>

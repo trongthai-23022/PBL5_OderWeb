@@ -54,7 +54,7 @@ class AdminProductController extends Controller
         ]);
     }
 
-    public function store(ProductAddRequest $req)
+    public function store(ProductAddRequest $req): RedirectResponse
     {
         try {
             DB::beginTransaction();
@@ -108,7 +108,7 @@ class AdminProductController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
             $resMessage = 'Thêm thất bại!';
-            return redirect()->route('products.create')->with('success', $resMessage);
+            return redirect()->route('products.create')->with('failure', $resMessage);
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
         }
     }
@@ -177,9 +177,9 @@ class AdminProductController extends Controller
             $resMessage = 'Sửa thành công!';
             return redirect()->route('products.index')->with('success', $resMessage);
         } catch (\Exception $exception) {
-            $resMessage = 'Sửa thành công!';
+            $resMessage = 'Sửa thất bại!';
             DB::rollBack();
-            return redirect()->route('products.index')->with('failure', $resMessage);
+            return redirect()->route('products.edit')->with('failure', $resMessage);
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
         }
 

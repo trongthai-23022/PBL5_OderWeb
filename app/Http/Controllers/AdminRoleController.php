@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleAddRequest;
+use App\Http\Requests\RoleUpdateRequest;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\RedirectResponse;
 
 class AdminRoleController extends Controller
 {
@@ -33,19 +36,22 @@ class AdminRoleController extends Controller
         return view('admin.role.create', ['parent_permissions' => $parentPermissions]);
     }
 
-    public function store(Request $request)
+    public function store(RoleAddRequest $request): RedirectResponse
     {
         try {
             DB::beginTransaction();
             $newRole = $this->role->create([
                 'name' => $request->name,
-                'display_name' => $request->display_name
+                'display_name' => $request->description
             ]);
             $newRole->permissions()->attach($request->permission_id);
             DB::commit();
-            return redirect()->route('roles.create');
+            $resMessage = 'Thêm thành công!';
+            return redirect()->route('roles.create')->with('success',$resMessage);
         } catch (\Exception $exc) {
             DB::rollBack();
+            $resMessage = 'Thêm thất bại!';
+            return redirect()->route('roles.create')->with('failure',$resMessage);
             Log::error('Message: ' . $exc->getMessage() . '----Line: ' . $exc->getLine());
         }
     }
@@ -62,7 +68,7 @@ class AdminRoleController extends Controller
         ]);
     }
 
-    public function update($id, Request $request)
+    public function update($id, RoleUpdateRequest $request): RedirectResponse
     {
         try {
             DB::beginTransaction();
@@ -70,13 +76,16 @@ class AdminRoleController extends Controller
 
             $updateRole->update([
                 'name' => $request->name,
-                'display_name' => $request->display_name
+                'display_name' => $request->description
             ]);
             $updateRole->permissions()->sync($request->permission_id);
             DB::commit();
-            return redirect()->route('roles.index');
+            $resMessage = 'Sửa thành công!';
+            return redirect()->route('roles.index')->with('success',$resMessage);;
         } catch (\Exception $exc) {
             DB::rollBack();
+            $resMessage = 'Sửa thất bại!';
+            return redirect()->route('roles.index')->with('failure',$resMessage);
             Log::error('Message: ' . $exc->getMessage() . '----Line: ' . $exc->getLine());
         }
     }

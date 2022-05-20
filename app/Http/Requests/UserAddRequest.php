@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\Rule;
 
-class StoreUserRequest extends FormRequest
+class UserAddRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,29 +22,26 @@ class StoreUserRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
-            'email' => ['required', 'max:255', 'email', 'regex:/(.*)@(gmail|outlook)\.com/i', 'unique:users'],
-            'password' => 'required|min:6',
-            'password_confirmation' => 'required| min:6'
+            'name' => 'bail|required|max:255',
+            'email' => ['required','email',Rule::unique('users')->withoutTrashed()],
+            'password' => 'bail|required|min:6',
         ];
     }
-    public function messages()
+    public function messages(): array
     {
         //format: 'field.rule' => 'message'
         return [
             'name.required' => 'Tên không được để trống',
             'name.max' => 'Tên không được quá 255 ký tự',
             'email.required' => 'Email không được để trống',
-            'email.regex' => 'Sai định dạng email',
+            'email.email' => 'Sai định dạng email',
             'email.max' => 'Email không được quá 255 ký tự',
             'email.unique' => 'Email đã được sử dụng',
             'password.required' => 'Password không được để trống',
             'password.min' => 'Password phải dài hơn 6 ký tự',
-            'password_confirmation.min' => 'Password phải dài hơn 6 ký tự',
-
         ];
     }
 }

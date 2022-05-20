@@ -10,6 +10,21 @@ return [
         'product-add' => 'product_add',
         'product-edit' => 'product_edit',
         'product-delete' => 'product_delete',
+
+        'user-view' => 'user_view',
+        'user-add' => 'user_add',
+        'user-edit' => 'user_edit',
+        'user-delete' => 'user_delete',
+
+        'role-view' => 'role_view',
+        'role-add' => 'role_add',
+        'role-edit' => 'role_edit',
+        'role-delete' => 'role_delete',
+
+        'permission-view' => 'permission_view',
+        'permission-add' => 'permission_add',
+        'permission-edit' => 'permission_edit',
+        'permission-delete' => 'permission_delete',
     ],
     'modules' => [
         'category' => "danh_mục",
@@ -17,6 +32,7 @@ return [
         'menu' => 'menu',
         'user' => 'người_dùng',
         'role' => 'vai_trò',
+        'permission' => 'phân_quyền'
     ],
     'module_actions' => [
         'view' => 'Danh_sách',

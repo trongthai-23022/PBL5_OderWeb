@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Add Product</title>
+    <title>Products</title>
 @endsection
 
 
@@ -91,7 +91,7 @@
                                 <label>Select a category</label>
                                 <select class="form-control"
                                         name="category_id">
-                                    <option value="">chooses a category</option>
+                                    <option value="">Category</option>
                                     {!! $htmlOption !!}
                                 </select>
                             </div>
