@@ -2,14 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\User\MainController;
 
-
+Route::get('/', function(){
+    return view('SuperKay.main', [
+        'title'=>'Super Kay'
+    ]);
+});
 Route::get('/home', function () {
     return view('home');
 });
-Route::get('/', function () {
-    return view('home');
-});
+
 
 Route::get('/admin-login', 'AdminController@loginAdmin');
 Route::post('/admin-login', 'AdminController@postLoginAdmin');
