@@ -4,11 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\User\MainController;
 
-Route::get('/', function(){
-    return view('SuperKay.main', [
-        'title'=>'Super Kay'
-    ]);
-});
+//Route::get('/', function(){
+//    return view('SuperKay.main', [
+//        'title'=>'Super Kay'
+//    ]);
+//});
+
+Route::get('/', [MainController::class, 'index']);
 Route::get('/home', function () {
     return view('home');
 });
