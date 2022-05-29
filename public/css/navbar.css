@@ -10,9 +10,7 @@ li:hover{
 /* .fix-menu-desktop{
     background-color: #6667AB;
 } */
-.main-menu > li.active-menu > a{
-    color:rgb(252, 252, 252);
-}
+
 .name{
     color: rgb(7, 7, 7);
     font-size: large;

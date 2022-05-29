@@ -179,7 +179,7 @@
       <!-- AdminLTE App -->
       <script src="{{asset('AdminLTE/dist/js/adminlte.min.js')}}"></script>
       <!-- AdminLTE for demo purposes -->
-      <script src="{{asset('AdminLTE/dist/js/demo.js')}}"></script>
+{{--      <script src="{{asset('AdminLTE/dist/js/demo.js')}}"></script>--}}
       <!-- Page specific script -->
       <script>
           $(function () {
