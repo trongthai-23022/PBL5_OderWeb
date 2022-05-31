@@ -1,0 +1,18 @@
+li:hover{
+    color: aliceblue;
+}
+/* .wrap-menu-desktop{
+    background-color: #6667AB;
+} */
+/* .container-menu-desktop{
+    background-color: #6667AB;
+} */
+/* .fix-menu-desktop{
+    background-color: #6667AB;
+} */
+
+.name{
+    color: rgb(7, 7, 7);
+    font-size: large;
+    font-family: Poppins-Medium;
+}
