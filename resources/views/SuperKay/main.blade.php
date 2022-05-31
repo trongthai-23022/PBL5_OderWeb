@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	@include('SuperKay.head')
+	@include('SuperKay.partials.head')
 </head>
 
 
@@ -11,9 +11,7 @@
 	@include('SuperKay.header')
 
 	<!-- Cart -->
-    @include('SuperKay.cart')
-
-
+    @include('SuperKay.partials.cart')
 
 	<!-- Slider -->
 	<section class="section-slide">
