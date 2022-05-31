@@ -13,8 +13,6 @@
 	<!-- Cart -->
     @include('SuperKay.partials.cart')
 
-
-
 	<!-- Slider -->
 	<section class="section-slide">
 		<div class="wrap-slick1">
