@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\User\MainController;
+use App\Http\Controllers\customers\MainController;
+use App\Http\Controllers\AdminController;
 
 //Route::get('/', function(){
 //    return view('SuperKay.main', [
@@ -10,16 +11,18 @@ use App\Http\Controllers\User\MainController;
 //    ]);
 //});
 
-Route::get('/', [MainController::class, 'index']);
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/', [MainController::class, 'index'])->name('home');
 
 
-Route::get('/admin-login', 'AdminController@loginAdmin');
-Route::post('/admin-login', 'AdminController@postLoginAdmin');
-Route::get('/logout', 'AdminController@logout')->name('admin.logout');
+
 Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    })->middleware('auth', 'verified')->name('admin.dashboard');
+
+    Route::get('/login', [AdminController::class,'loginAdmin']);
+    Route::post('/login', [AdminController::class,'postLoginAdmin']);
+    Route::get('/logout', [AdminController::class,'logout'])->name('admin.logout');
 
     //menus
     Route::prefix('menus')->group(function () {
@@ -50,7 +53,6 @@ Route::prefix('admin')->group(function () {
             'uses' => 'MenuController@delete'
         ]);
     });
-
 });
 
 

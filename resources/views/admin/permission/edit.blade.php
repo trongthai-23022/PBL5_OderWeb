@@ -11,7 +11,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('partials.content-header', ['name'=>'Permission', 'key'=>'Add'])
+        @include('admin.partials.content-header', ['name'=>'Permission', 'key'=>'Add'])
 
         <!-- Main content -->
         <div class="content">

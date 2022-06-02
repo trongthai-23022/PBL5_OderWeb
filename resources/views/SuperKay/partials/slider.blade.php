@@ -1,78 +1,32 @@
-<!-- Slider -->
-<section class="section-slide">
-    <div class="wrap-slick1">
-        <div class="slick1">
-            <div class="item-slick1" style="background-image: url(template/images/slide-01-kay.jpg);">
-                <div class="container h-full">
-                    <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                        <div class="layer-slick1 animated visible-false" data-appear="fadeInDown" data-delay="0">
-								<span class="ltext-101 cl2 respon2">
-									Bạn muốn ăn...
-								</span>
-                        </div>
-
-                        <div class="layer-slick1 animated visible-false" data-appear="fadeInUp" data-delay="800">
-                            <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                Ngon
-                            </h2>
-                        </div>
-
-                        <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                            <a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                Đặt ngay
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<div class="wrap-main-slide">
+    <div class="slide-carousel owl-carousel style-nav-1" data-items="1" data-loop="1" data-nav="true" data-dots="false">
+        <div class="item-slide">
+            <img src="{{asset('customers/assets/images/main-slider-1-1.jpg')}}" alt="" class="img-slide">
+            <div class="slide-info slide-1">
+                <h2 class="f-title">Kid Smart <b>Watches</b></h2>
+                <span class="subtitle">Compra todos tus productos Smart por internet.</span>
+                <p class="sale-info">Only price: <span class="price">$59.99</span></p>
+                <a href="#" class="btn-link">Shop Now</a>
             </div>
-
-            <div class="item-slick1" style="background-image: url(template/images/slide-02-kay.jpg);">
-                <div class="container h-full">
-                    <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                        <div class="layer-slick1 animated visible-false" data-appear="rollIn" data-delay="0">
-								<span class="ltext-101 cl2 respon2">
-									Nhưng muốn giá...
-								</span>
-                        </div>
-
-                        <div class="layer-slick1 animated visible-false" data-appear="lightSpeedIn" data-delay="800">
-                            <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1">
-                                Rẻ
-                            </h2>
-                        </div>
-
-                        <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-                            <a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                Đặt ngay
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="item-slide">
+            <img src="{{asset('customers/assets/images/main-slider-1-2.jpg')}}" alt="" class="img-slide">
+            <div class="slide-info slide-2">
+                <h2 class="f-title">Extra 25% Off</h2>
+                <span class="f-subtitle">On online payments</span>
+                <p class="discount-code">Use Code: #FA6868</p>
+                <h4 class="s-title">Get Free</h4>
+                <p class="s-subtitle">TRansparent Bra Straps</p>
             </div>
-
-            <div class="item-slick1" style="background-image: url(template/images/slide-03-kay.jpg);">
-                <div class="container h-full">
-                    <div class="flex-col-l-m h-full p-t-100 p-b-30 respon5">
-                        <div class="layer-slick1 animated visible-false"  data-appear="rotateInDownLeft" data-delay="0">
-								<span class="ltext-101 cl2 respon2" style="color:rgb(245, 244, 244);">
-									Chất lượng miễn...
-								</span>
-                        </div>
-
-                        <div class="layer-slick1 animated visible-false" data-appear="rotateInUpRight" data-delay="800">
-                            <h2 class="ltext-201 cl2 p-t-19 p-b-43 respon1" style="color:rgb(245, 244, 244);">
-                                Bàn
-                            </h2>
-                        </div>
-
-                        <div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-                            <a href="product.html" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
-                                Đặt ngay
-                            </a>
-                        </div>
-                    </div>
-                </div>
+        </div>
+        <div class="item-slide">
+            <img src="{{asset('customers/assets/images/main-slider-1-3.jpg')}}" alt="" class="img-slide">
+            <div class="slide-info slide-3">
+                <h2 class="f-title">Great Range of <b>Exclusive Furniture Packages</b></h2>
+                <span class="f-subtitle">Exclusive Furniture Packages to Suit every need.</span>
+                <p class="sale-info">Stating at: <b class="price">$225.00</b></p>
+                <a href="#" class="btn-link">Shop Now</a>
             </div>
         </div>
     </div>
-</section>
+</div>

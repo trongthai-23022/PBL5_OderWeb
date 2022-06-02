@@ -14,9 +14,9 @@ class AdminController extends Controller
 
 //        dd(bcrypt('admin'));
         if(auth()->check()){
-            return redirect()->to('home');
+            return redirect()->to('admin/dashboard');
         }
-        return view('admin-login');
+        return view('admin.admin-login');
     }
 
     public function postLoginAdmin(Request $request)
@@ -26,7 +26,7 @@ class AdminController extends Controller
             'password' => $request->password
         ], $remember)){
 //            $request->session()->regenerate();
-            return redirect()->to('home');
+            return redirect()->to('admin/dashboard');
         }
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
@@ -39,6 +39,6 @@ class AdminController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('admin-login');
+        return redirect('admin/login');
     }
 }

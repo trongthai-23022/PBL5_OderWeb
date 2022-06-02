@@ -13,7 +13,7 @@
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('partials.content-header', ['name'=>'Product', 'key'=>'Edit'])
+        @include('admin.partials.content-header', ['name'=>'Product', 'key'=>'Edit'])
         <div class="row justify-content-center">
             <div class="col-md-9">
                 @if ($errors->any())

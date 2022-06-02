@@ -9,7 +9,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('partials.content-header', ['name'=>'Menu', 'key'=>'Add'])
+        @include('admin.partials.content-header', ['name'=>'Menu', 'key'=>'Add'])
 
         <!-- Main content -->
         <div class="content">

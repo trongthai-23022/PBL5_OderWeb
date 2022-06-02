@@ -89,8 +89,8 @@ class AdminUserController extends Controller
         } catch (\Exception $exc) {
             DB::rollBack();
             $resMessage = 'Sửa thất bại!';
-            return redirect()->route('users.edit')->with('failure', $resMessage);
             Log::error('Message: ' . $exc->getMessage() . '----Line: ' . $exc->getLine());
+            return redirect()->route('users.edit')->with('failure', $resMessage);
         }
     }
 
