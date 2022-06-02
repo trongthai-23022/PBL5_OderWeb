@@ -14,4 +14,5 @@
     
 # After pull, plz run command: 'php artisan migrate' to update database
     
-# If u want refresh all database: artisan migrate:refresh --seed (if seeder database not working: php artisan db:seed --class=UserSeeder) => 1 available user: admin@gmail.com, password: admin (route: admin-login)
+# To run database seeder : artisan migrate:refresh --seed  
+available admin: admin@gmail.com, password: 123 (route: /admin-login)
