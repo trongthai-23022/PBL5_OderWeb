@@ -11,7 +11,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -75,7 +75,8 @@ class User extends Authenticatable
         }
         return false;
     }
-    public function hasRole($roleName){
+    public function hasRole($roleName): bool
+    {
         $roles = auth()->user()->roles;
         foreach ($roles as $role) {
             if($role->name === $roleName){

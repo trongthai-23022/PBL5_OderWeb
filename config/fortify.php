@@ -61,18 +61,10 @@ return [
     |
     */
 
-    'home' => function(){
-//        //if you want to go to a specific route
-//        return RouteServiceProvider::HOME;
-
-        //or if you have a bunch of redirection options
-        if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('moderator')) {
-            return route('admin.dashboard');
-        }
-        else{
-            return route('home');
-        }
-    },
+    'home' => '/home',
+    'admin' => [
+        'dashboard' => '/admin/dashboard'
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -33,7 +33,10 @@
                                         <a title="Euro (EUR)" href="#">Euro (EUR)</a>
                                     </li>
                                     <li class="menu-item" >
-                                        <a title="Dollar (USD)" href="#">Dollar (USD)</a>
+                                        <form id="logout" action="{{route('logout')}}" method="post">
+                                            @csrf
+                                            <a href="javascript:$('#logout').submit();">Logout</a>
+                                        </form>
                                     </li>
                                 </ul>
                             </li>

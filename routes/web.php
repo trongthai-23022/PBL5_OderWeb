@@ -11,7 +11,8 @@ use App\Http\Controllers\AdminController;
 //    ]);
 //});
 
-Route::get('/', [MainController::class, 'index'])->name('home');
+Route::get('/home', [MainController::class, 'index'])->name('app.home')->middleware('auth','verified');
+Route::get('/', [MainController::class, 'index'])->name('app.home')->middleware('auth','verified');
 
 
 
@@ -54,5 +55,7 @@ Route::prefix('admin')->group(function () {
         ]);
     });
 });
+
+require_once __DIR__ . '/fortify.php';
 
 
