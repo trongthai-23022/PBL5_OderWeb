@@ -60,6 +60,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('sliders.index')}}" class="nav-link">
+                        <i class="fas fa-ad"></i>
+                        <p style="margin-left: 10px">
+                            Sliders
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('products.index')}}" class="nav-link">
                         <i class="fas fa-utensils"></i>
                         <p style="margin-left: 10px">
