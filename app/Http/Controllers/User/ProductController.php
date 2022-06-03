@@ -14,11 +14,10 @@ class ProductController extends Controller
     public function __construct(ProductService $productService){
         $this->productService = $productService;
     }
-    public function index($id='1',$slug='1'){
+    public function index($id='1'){
 
          $product = $this->productService->show($id);
-         return view('SuperKay.products.content',[
-             'title' => $product->name,
+         return view('SuperKay.products.detail',[
              'product' => $product
          ]);
     }

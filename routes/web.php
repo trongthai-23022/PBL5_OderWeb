@@ -12,7 +12,7 @@ use App\Http\Controllers\AdminController;
 //});
 
 Route::get('/', [MainController::class, 'index'])->name('home');
-
+Route::get('/product/detail/{id}',[\App\Http\Controllers\User\ProductController::class,'index'])->name('detail');
 
 
 Route::prefix('admin')->group(function () {

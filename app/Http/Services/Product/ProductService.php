@@ -24,7 +24,6 @@ class ProductService
     public function show($id)
     {
         return Product::where('id', $id)
-            ->with('menu')
             ->firstOrFail();
     }
 
@@ -36,4 +35,5 @@ class ProductService
             ->limit(8)
             ->get();
     }
+
 }

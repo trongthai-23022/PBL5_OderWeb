@@ -52,15 +52,15 @@ class Helper
         foreach ($menus as $key => $menu) {
             if ($menu->parent_id == $parent_id) {
                 $html .= '
-                    <li>
-                        <a href="/danh-muc/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html">
+                    <li class="menu-item">
+                        <a href="/danh-muc/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html" class="link-term">
                             ' . $menu->name . '
-                        </a>';
+                        </a><span class="nav-label hot-label">hot</span>';
 
                 unset($menus[$key]);
 
                 if (self::isChild($menus, $menu->id)) {
-                    $html .= '<ul class="sub-menu">';
+                    $html .= '<ul class=" Can 1 class kieu dropdown">';
                     $html .= self::menus($menus, $menu->id);
                     $html .= '</ul>';
                 }
