@@ -12,9 +12,9 @@ use App\Http\Controllers\AdminController;
 //});
 
 Route::get('/', [MainController::class, 'index'])->name('home');
-Route::get('/detail/{id}',[\App\Http\Controllers\User\ProductController::class,'index'])->name('detail');
+Route::get('/detail/{id}.html',[\App\Http\Controllers\User\ProductController::class,'index'])->name('detail');
 Route::get('/shop',[\App\Http\Controllers\User\ProductController::class,'shop'])->name('shop');
-
+Route::get('/shop/{id}-{slug}.html',[\App\Http\Controllers\User\ProductController::class,'category_products'])->name('category');
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {

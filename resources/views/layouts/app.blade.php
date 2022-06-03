@@ -15,7 +15,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/chosen.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/color-01.css')}}">
+
     @yield('custom_css')
+
 </head>
 <body class="home-page home-01 ">
 

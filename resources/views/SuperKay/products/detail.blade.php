@@ -5,6 +5,10 @@
     <title>Chi tiet san pham</title>
 @endsection
 
+@section('custom_css')
+    <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/main.css')}}">
+@endsection
+
 @section('content')
 <main id="main" class="main-site">
 
