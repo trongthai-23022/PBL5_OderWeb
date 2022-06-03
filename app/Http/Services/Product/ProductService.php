@@ -10,6 +10,7 @@ class ProductService
 {
     const LIMIT = 16;
 
+
     public function get($page = null)
     {
         return Product::select('id', 'name', 'price', 'amount', 'main_image_path')

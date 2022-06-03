@@ -12,7 +12,8 @@ use App\Http\Controllers\AdminController;
 //});
 
 Route::get('/', [MainController::class, 'index'])->name('home');
-Route::get('/product/detail/{id}',[\App\Http\Controllers\User\ProductController::class,'index'])->name('detail');
+Route::get('/detail/{id}',[\App\Http\Controllers\User\ProductController::class,'index'])->name('detail');
+Route::get('/shop',[\App\Http\Controllers\User\ProductController::class,'shop'])->name('shop');
 
 
 Route::prefix('admin')->group(function () {

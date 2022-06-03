@@ -21,4 +21,10 @@ class ProductController extends Controller
              'product' => $product
          ]);
     }
+    public function shop(){
+        $product = $this->productService->get();
+        return view('SuperKay.products.shop',[
+            'product' => $product
+        ]);
+    }
 }
