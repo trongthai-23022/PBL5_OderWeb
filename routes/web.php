@@ -13,13 +13,13 @@ use App\Http\Controllers\AminSliderController;
 //});
 
 
+
 Route::get('/home', [HomeController::class, 'index'])->name('app.home')->middleware('auth', 'verified');
 Route::get('/', [HomeController::class, 'index'])->name('app.home')->middleware('auth', 'verified');
 
-
-
-Route::get('/detail/{id}', [\App\Http\Controllers\User\ProductController::class, 'index'])->name('detail');
-Route::get('/shop', [\App\Http\Controllers\User\ProductController::class, 'shop'])->name('shop');
+Route::get('/detail/{id}.html',[\App\Http\Controllers\User\ProductController::class,'index'])->name('detail');
+Route::get('/shop',[\App\Http\Controllers\User\ProductController::class,'shop'])->name('shop');
+Route::get('/shop/{id}-{slug}.html',[\App\Http\Controllers\User\ProductController::class,'category_products'])->name('category');
 
 
 Route::prefix('admin')->group(function () {
