@@ -1,0 +1,27 @@
+img.product-main-image{
+    height: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+}
+
+img.product-detail-image{
+    height: 150px;
+    object-fit: cover;
+    margin-top: 10px;
+}
+.select2-selection__choice{
+    background-color: #6667AB !important;
+}
+.select2-selection__choice__display {
+    margin-left: 8px;
+}.select2-selection__choice__remove span{
+    margin-right: 3px;
+    color: black;
+    padding-left: 3px;
+ }
+.alert-danger {
+    background-color: #CF6679;
+    border-color: #CF6679;
+    color: white;
+    margin-top: 5px;
+}

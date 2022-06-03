@@ -17,7 +17,7 @@
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('partials.content-header', ['name'=>'User', 'key'=>'Add'])
+        @include('admin.partials.content-header', ['name'=>'User', 'key'=>'Add'])
         <div class="row justify-content-center">
             <div class="col-md-9 rounded">
                 @if(session('success'))

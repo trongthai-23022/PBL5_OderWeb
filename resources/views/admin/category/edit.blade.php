@@ -13,7 +13,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('partials.content-header', ['name'=>'Category', 'key'=>'Update'])
+        @include('admin.partials.content-header', ['name'=>'Category', 'key'=>'Update'])
 
         <!-- Main content -->
         <div class="content">

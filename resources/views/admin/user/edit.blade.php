@@ -12,7 +12,7 @@
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('partials.content-header', ['name'=>'User', 'key'=>'Update'])
+        @include('admin.partials.content-header', ['name'=>'User', 'key'=>'Update'])
         <form action="{{route('users.update',['id'=>$user->id])}}" method="post" enctype="multipart/form-data">
             <!-- Main content -->
             <div class="content">

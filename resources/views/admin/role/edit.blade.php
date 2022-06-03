@@ -19,7 +19,7 @@
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('partials.content-header', ['name'=>'Role', 'key'=>'Update'])
+        @include('admin.partials.content-header', ['name'=>'Role', 'key'=>'Update'])
 
         <!-- Main content -->
         <div class="content">

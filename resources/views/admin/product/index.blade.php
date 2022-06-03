@@ -16,7 +16,7 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
-        @include('partials.content-header', ['name'=>'Product', 'key'=>'List'])
+        @include('admin.partials.content-header', ['name'=>'Product', 'key'=>'List'])
         <!-- /.content-header -->
 
         <!-- Main content -->
@@ -45,6 +45,7 @@
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">ID</th>
                                 <th scope="col">Product name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Image</th>
@@ -58,8 +59,8 @@
                             @endphp
                             @foreach($products as $product)
                                 <tr>
-                                    {{--                                    {{$products->perPage()*($products->currentPage()-1)+$i}}--}}
-                                    <th scope="row">{{$product->id}}</th>
+                                    <th scope="row">{{$products->perPage()*($products->currentPage()-1)+$i}}</th>
+                                    <td>{{$product->id}}</td>
                                     <td>{{$product->name}}</td>
                                     <td>{{number_format($product->price)}}</td>
                                     <td><img class="product-main-image"

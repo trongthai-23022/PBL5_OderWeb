@@ -7,60 +7,48 @@ use Illuminate\Support\Str;
 
 class Helper
 {
-    public static function menu($menus, $parent_id = 0, $char = '')
+    public static function categories($categories, $parent_id = 0) :string
     {
         $html = '';
-
-        foreach ($menus as $key => $menu) {
-            if ($menu->parent_id == $parent_id) {
+        foreach ($categories as $key => $category) {
+            if ($category->parent_id == $parent_id) {
                 $html .= '
-                    <tr>
-                        <td>' . $menu->id . '</td>
-                        <td>' . $char . $menu->name . '</td>
-                        <td>' . self::active($menu->active) . '</td>
-                        <td>' . $menu->updated_at . '</td>
-                        <td>
-                            <a class="btn btn-primary btn-sm" href="/admin/menus/edit/' . $menu->id . '">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                            <a href="#" class="btn btn-danger btn-sm"
-                                onclick="removeRow(' . $menu->id . ', \'/admin/menus/destroy\')">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                ';
+                    <li class="category-item has-child-cate ">
+                        <a class="cate-link" href="/shop/' . $category->id . '-' . Str::slug($category->name, '-') . '.html" >
+                            ' . $category->name . '
+                        ';
 
-                unset($menus[$key]);
+                unset($categories[$key]);
 
-                $html .= self::menu($menus, $menu->id, $char . '|--');
+                if (self::isChild($categories, $category->id)) {
+                    $html .= '</a><span class="toggle-control">+</span>';
+                    $html .= '<ul class="sub-cate">';
+                    $html .= self::categories($categories, $category->id);
+                    $html .= '</ul>';
+                }
+
+                $html .= '</li>';
             }
         }
 
         return $html;
     }
-
-    public static function active($active = 0): string
-    {
-        return $active == 0 ? '<span class="btn btn-danger btn-xs">NO</span>'
-            : '<span class="btn btn-success btn-xs">YES</span>';
-    }
-
     public static function menus($menus, $parent_id = 0) :string
     {
         $html = '';
         foreach ($menus as $key => $menu) {
             if ($menu->parent_id == $parent_id) {
                 $html .= '
-                    <li>
-                        <a href="/danh-muc/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html">
+                    <li class="menu-item">
+                        <a href="/danh-muc/' . $menu->id . '-' . Str::slug($menu->name, '-') . '.html" class="link-term">
                             ' . $menu->name . '
                         </a>';
 
                 unset($menus[$key]);
 
                 if (self::isChild($menus, $menu->id)) {
-                    $html .= '<ul class="sub-menu">';
+                    $html .= '<span class="nav-label hot-label">hot</span>';
+                    $html .= '<ul class=" Can 1 class kieu dropdown">';
                     $html .= self::menus($menus, $menu->id);
                     $html .= '</ul>';
                 }
