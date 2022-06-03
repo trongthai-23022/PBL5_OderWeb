@@ -10,6 +10,7 @@ class ProductService
 {
     const LIMIT = 16;
 
+
     public function get($page = null)
     {
         return Product::select('id', 'name', 'price', 'amount', 'main_image_path')
@@ -24,7 +25,6 @@ class ProductService
     public function show($id)
     {
         return Product::where('id', $id)
-            ->with('menu')
             ->firstOrFail();
     }
 
@@ -36,4 +36,5 @@ class ProductService
             ->limit(8)
             ->get();
     }
+
 }

@@ -11,8 +11,11 @@ use App\Http\Controllers\AdminController;
 //    ]);
 //});
 
+
 Route::get('/home', [MainController::class, 'index'])->name('app.home')->middleware('auth','verified');
 Route::get('/', [MainController::class, 'index'])->name('app.home')->middleware('auth','verified');
+Route::get('/detail/{id}',[\App\Http\Controllers\User\ProductController::class,'index'])->name('detail');
+Route::get('/shop',[\App\Http\Controllers\User\ProductController::class,'shop'])->name('shop');
 
 
 
