@@ -1,6 +1,6 @@
 @extends('SuperKay.products.shop')
 
-@section('tree')
+@section('breadscrum')
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="/" class="link">home</a></li>
