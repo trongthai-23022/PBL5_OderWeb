@@ -20,12 +20,12 @@
                 <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
                     <div class="product product-style-3 equal-elem ">
                         <div class="product-thumnail">
-                            <a href="{{route('detail',['id'=>$product->id])}}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
+                            <a href="{{route('detail',['slug'=> $product->slug,'id'=>$product->id])}}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
                                 <figure><img src="{{$product->main_image_path}}" alt=""></figure>
                             </a>
                         </div>
                         <div class="product-info">
-                            <a href="{{route('detail',['id'=>$product->id])}}" class="product-name"><span>{{$product->name}}</span></a>
+                            <a href="{{route('detail',['slug'=> $product->slug,'id'=>$product->id])}}" class="product-name"><span>{{$product->name}}</span></a>
                             <div class="wrap-price"><span class="product-price">{{$product->price}} VND</span></div>
                             <a href="#" class="btn add-to-cart">Add To Cart</a>
                         </div>

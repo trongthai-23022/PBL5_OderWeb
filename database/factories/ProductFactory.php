@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProductFactory extends Factory
 {
@@ -27,18 +28,19 @@ class ProductFactory extends Factory
             'https://nghebep.com/wp-content/uploads/2017/11/mon-chan-ga-nuong-muoi-ot.jpg',
             'http://file.hstatic.net/1000115147/file/ga-gion-sot-chua-ngot_06d6f8c40f9a49cf9a6176c0fc9796df_grande.jpg'
         ];
-        $dishName = 'This is great dish ';
+        $dishName = 'This is great dish ' . implode($this->faker->words);
         $des = '';
         for ($i = 0; $i < rand(10, 30); $i++) {
             $des .= '<p>' . $this->faker->sentence(rand(5, 10)) . '</p>';
         }
         return [
-            'name' => $dishName . implode($this->faker->words),
+            'name' => $dishName,
             'price' => $this->faker->numberBetween(15000, 30000),
             'description' => $des,
             'main_image_path' => $this->faker->randomElement($imgLinks),
             'main_image_name' => $this->faker->name(),
-            'amount' => '69'
+            'amount' => '69',
+            'slug' => Str::slug($dishName, '-')
         ];
     }
 }

@@ -65,7 +65,8 @@ class AdminProductController extends Controller
                 'user_id' => auth()->id(),
                 'description' => $req->description,
                 'category_id' => $req->category_id,
-                'amount' => 69
+                'amount' => 69,
+                'slug' => Str::slug($req->name, '-')
             ];
             //product main image data
             if ($req->hasFile('product_image')) {
@@ -108,8 +109,9 @@ class AdminProductController extends Controller
         } catch (\Exception $exception) {
             DB::rollBack();
             $resMessage = 'Thêm thất bại!';
-            return redirect()->route('products.create')->with('failure', $resMessage);
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
+            return redirect()->route('products.create')->with('failure', $resMessage);
+
         }
     }
 
@@ -179,8 +181,9 @@ class AdminProductController extends Controller
         } catch (\Exception $exception) {
             $resMessage = 'Sửa thất bại!';
             DB::rollBack();
-            return redirect()->route('products.edit')->with('failure', $resMessage);
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
+            return redirect()->route('products.edit')->with('failure', $resMessage);
+
         }
 
     }

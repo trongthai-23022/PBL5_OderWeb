@@ -13,7 +13,7 @@
 @section('custom_js')
     <script src="{{asset('admins/product/add/add.js')}}"></script>
     <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
-    <script src="https://cdn.tiny.cloud/1/hs0hspk14k2y30j7kqjieanll961v60zcy71z7m80zwbcnd4/tinymce/6/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/vnu0ov8n5r5z6vuhscwugch5dll4ecxqzp9zylomvtliz8iu/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
     <script src="{{asset('admins/common.js')}}"></script>
 
