@@ -13,8 +13,8 @@
                 <div class="item-slide">
                     <img src="{{$slider->image_path}}" alt="{{$slider->image_name}}" class="img-slide">
                     <div class="slide-info slide-{{$position[$slider->content_position]}}">
-                        <h2 class="f-title">{!! $slider->title !!}</h2>
-                        <span class="subtitle">{{$slider->subtile}}</span>
+                        <h2 style="color: red" class="f-title">{!! $slider->title !!}</h2>
+                        <span class="subtitle">{{$slider->subtitle}}</span>
                         <p class="s-subtitle">{!! $slider->description !!}</p>
                     </div>
                 </div>
@@ -23,10 +23,10 @@
                     <img src="{{$slider->image_path}}" alt="{{$slider->image_name}}" class="img-slide">
                     <div class="slide-info slide-{{$position[$slider->content_position]}}">
                         <h2 class="f-title">{!! $slider->title !!}</h2>
-                        <span class="subtitle">{{$slider->subtile}}</span>
+                        <span class="subtitle">{{$slider->subtitle}}</span>
                         <p class="sale-info">Only price: <span class="price">{{number_format($slider->getProduct->price)}} đ</span>
                         </p>
-                        <a href="#" class="btn-link">Shop Now</a>
+                        <a href="{{route('detail',['id'=>$slider->product_id])}}" class="btn-link">Shop Now</a>
                     </div>
                 </div>
             @endif

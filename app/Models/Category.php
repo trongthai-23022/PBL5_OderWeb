@@ -20,4 +20,9 @@ class Category extends Model
         return $this->hasMany(Product::class, 'category_id', 'id');
     }
 
+    public function latestProducts()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id')->latest()->limit(10);
+    }
+
 }

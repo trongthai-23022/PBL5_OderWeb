@@ -11,7 +11,7 @@
 
             @include('SuperKay.partials.slider')
 
-            @include('SuperKay.partials.banner')
+{{--            @include('SuperKay.partials.banner')--}}
 
             @include('SuperKay.partials.onsale')
 
