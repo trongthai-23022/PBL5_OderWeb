@@ -14,8 +14,8 @@ use App\Http\Controllers\AminSliderController;
 
 
 
-Route::get('/home', [HomeController::class, 'index'])->name('app.home')->middleware('auth', 'verified');
-Route::get('/', [HomeController::class, 'index'])->name('app.home')->middleware('auth', 'verified');
+Route::get('/home', [HomeController::class, 'index'])->name('app.home') ;
+Route::get('/', [HomeController::class, 'index'])->name('app.home');
 
 Route::get('/detail/{id}.html',[\App\Http\Controllers\User\ProductController::class,'detail'])->name('detail');
 Route::post('/product-comment',[\App\Http\Controllers\User\ProductController::class,'product_comment'])->middleware('auth', 'verified')->name('product.comment');
