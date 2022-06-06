@@ -8,12 +8,17 @@
 
     <main id="main">
         <div class="container">
+            @if(!is_null($sliders))
+                @include('SuperKay.partials.slider')
+            @endif
 
-            @include('SuperKay.partials.slider')
 
-{{--            @include('SuperKay.partials.banner')--}}
+            {{--            @include('SuperKay.partials.banner')--}}
+                @if(!is_null($onSaleProducts))
+                    @include('SuperKay.partials.onsale')
+                @endif
 
-            @include('SuperKay.partials.onsale')
+
 
             @include('SuperKay.partials.latest-product')
 
