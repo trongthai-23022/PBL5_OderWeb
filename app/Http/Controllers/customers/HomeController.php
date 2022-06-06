@@ -26,13 +26,20 @@ class HomeController extends Controller
     public function index(){
         //slider
         $sliders = $this->slider->all();
-        //on sale
-        $onSaleTag = Tag::where('name', 'sale')->first();
-        $onSaleProducts = $onSaleTag->products;
         // latest
         $latestPosts = $this->product->latest()->limit(10)->get();
         //cate products
         $categories = $this->category->inRandomOrder()->limit(5)->get();
+        $onSaleTag = null;
+        try {
+            //on sale
+            $onSaleTag = Tag::where('name', 'sale')->orWhere('name', 'SALE')->first();
+        }catch (\Exception $exception){
+        }
+        $onSaleProducts = null;
+         if(!is_null($onSaleTag)){
+             $onSaleProducts = $onSaleTag->products;
+         }
         return view('SuperKay.home.index', [
             'sliders' => $sliders,
             'onSaleProducts' =>$onSaleProducts,
