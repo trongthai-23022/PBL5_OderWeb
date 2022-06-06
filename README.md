@@ -15,7 +15,7 @@
 # (option1) After pull, plz run command: 'php artisan migrate' to create the database
     
 # (option2) To create the database with seeder (demo data) : php artisan migrate:refresh --seed  
-available admin: admin@gmail.com, password: 123 (route: /admin/login): go to 'roles' and 'permissions' in 'admin page' feature to add more permissions for admin 
+available admin: admin@gmail.com, password: 123 (route: /admin/login): go to 'roles' and 'permissions' feature in 'admin page' to add more permissions for admin 
 
 # Setup to use 'Email Verification'
 ## Step1: setting your gmail account
