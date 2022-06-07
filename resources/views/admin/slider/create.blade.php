@@ -6,15 +6,14 @@
 
 
 @section('custom_css')
-    <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('admins/product/add/add.css')}}" rel="stylesheet"/>
+    <link rel="stylesheet" href="{{asset('admins/slider/add/add.css')}}">
 @endsection
 
 @section('custom_js')
-    <script src="{{asset('admins/product/add/add.js')}}"></script>
-    <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
+    <script src="{{asset('admins/slider/add/add.js')}}"></script>
     <script src="https://cdn.tiny.cloud/1/vnu0ov8n5r5z6vuhscwugch5dll4ecxqzp9zylomvtliz8iu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="{{asset('admins/common.js')}}"></script>
+    <script src="{{asset('admins/jquery.min.js')}}"></script>
 @endsection
 
 @section('content')
@@ -88,10 +87,15 @@
                             <div class="form-group">
                                 <label>Slide image</label>
                                 <input type="file"
+                                       id="fileupload"
                                        class="form-control-file"
                                        placeholder="Chooses a file"
                                        name="slider_image"
-                                >
+                                       onchange="readURL(this);"
+                                />
+                                <div class="row">
+                                    <div class="col-4" id="dvPreview">
+                                </div>
                             </div>
 
                             <div class="form-group">

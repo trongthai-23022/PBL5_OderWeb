@@ -8,6 +8,14 @@
      color: black;
      padding-left: 3px;
  }
+.gallery img{
+     height: 100px;
+    margin-right: 10px;
+    margin-top: 10px;
+ }
+#dvPreview img{
+    height: 150px;
+}
 
 .alert-danger {
     background-color: #CF6679;
