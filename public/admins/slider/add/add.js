@@ -1,14 +1,4 @@
 $(function () {
-    $(".tags_select2").select2({
-        tags: true,
-        tokenSeparators: [',', ' ']
-    });
-
-    $(".select2_init").select2({
-        placeholder: "Select a category",
-        allowClear: true
-    });
-
     tinymce.init({
         selector: '#tinymce-editor',
         height : "300",
@@ -30,3 +20,4 @@ $(function () {
     });
 
 })
+

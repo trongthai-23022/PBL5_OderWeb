@@ -11,6 +11,7 @@
 @endsection
 
 @section('custom_js')
+    <script src="{{asset('admins/jquery.min.js')}}"></script>
     <script src="{{asset('admins/product/add/add.js')}}"></script>
     <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
     <script src="https://cdn.tiny.cloud/1/vnu0ov8n5r5z6vuhscwugch5dll4ecxqzp9zylomvtliz8iu/tinymce/6/tinymce.min.js"
@@ -74,10 +75,14 @@
                             <div class="form-group">
                                 <label>Product main image</label>
                                 <input type="file"
+                                       id="fileupload"
                                        class="form-control-file"
                                        placeholder="Chooses a file"
                                        name="product_image"
+                                       onchange="readURL(this);"
                                 >
+                                <div class="row mt-4">
+                                    <div id="dvPreview"></div>
                             </div>
 
                             <div class="form-group">
@@ -87,7 +92,11 @@
                                        class="form-control-file"
                                        placeholder="Chooses a file"
                                        name="product_images[]"
+                                       id="gallery-photo-add"
                                 >
+                                <div class="">
+                                    <div id="gallery" class="gallery"></div>
+                                </div>
                             </div>
 
                             <div class="form-group">
