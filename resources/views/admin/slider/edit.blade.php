@@ -1,122 +1,132 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Products</title>
+    <title>Sliders</title>
 @endsection
 
 
 @section('custom_css')
-    <link href="{{asset('vendor/select2/select2.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('admins/product/edit/edit.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admins/slider/edit/edit.css')}}" rel="stylesheet"/>
+@endsection
+
+@section('custom_js')
+    <script src="{{asset('admins/slider/edit/edit.js')}}"></script>
+    <script src="https://cdn.tiny.cloud/1/vnu0ov8n5r5z6vuhscwugch5dll4ecxqzp9zylomvtliz8iu/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin"></script>
+    <script src="{{asset('admins/common.js')}}"></script>
 @endsection
 
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.content-header', ['name'=>'Product', 'key'=>'Edit'])
+        @include('admin.partials.content-header', ['name'=>'Slider', 'key'=>'Add'])
         <div class="row justify-content-center">
-            <div class="col-md-9">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
+            <div class="col-md-9 rounded">
+                @if(session('success'))
+                    <div class="alert alert-success response_message ">
+                        {{session('success')}}
+                    </div>
+
+                @elseif(session('failure'))
+                    <div class="alert alert-danger response_message ">
+                        {{session('failure')}}
                     </div>
                 @endif
             </div>
         </div>
-        <form action="{{route('products.update',['id'=>$product->id])}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('sliders.update',['id'=> $slide->id])}}" method="post" enctype="multipart/form-data">
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
                     <div class="row justify-content-center">
                         <div class="col-md-9 rounded bg-white px-3 mb-3">
                             @csrf
-                            <div class="form-group mt-2">
-                                <label>Product name</label>
-                                <input type="text"
-                                       class="form-control"
-                                       placeholder="Enter product name"
-                                       name="name"
-                                       value="{{$product->name}}"
-                                >
-                            </div>
-
                             <div class="form-group">
-                                <label>Price</label>
-                                <input type="number"
-                                       class="form-control"
-                                       placeholder="Enter price"
-                                       name="price"
-                                       value="{{$product->price}}"
-                                >
-                            </div>
-
-                            <div class="form-group">
-                                <label>Product main image</label>
-                                <input type="file"
-                                       class="form-control-file"
-                                       placeholder="Chooses a file"
-                                       name="product_image"
-                                >
-
-                                    <div class="col">
-                                        <img class="product-main-image" src="{{$product->main_image_path}}" alt="{{$product->main_image_name}}">
-                                    </div>
-
-                            </div>
-
-                            <div class="form-group">
-                                <label>Product detail image </label>
-                                <input type="file"
-                                       multiple
-                                       class="form-control-file"
-                                       placeholder="Chooses a file"
-                                       name="product_images[]"
-                                >
-                                <div class="col">
-                                    <div class="row">
-                                        @foreach($product->detailImages as $img)
-                                            <div class="col-4">
-                                                <img class="product-detail-image" src="{{$img->image_path}}" alt="{{$img->image_name}}">
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label>Select a category</label>
-                                <select class="form-control"
-                                        name="category_id">
-                                    <option value="">Category</option>
-                                    {!! $htmlOption !!}
+                                <label>Content position</label>
+                                <select class="form-control "
+                                        name="content_position">
+                                    <option value="left" {{$slide->content_position === 'left'?'selected':''}}>left
+                                    </option>
+                                    <option value="middle" {{$slide->content_position === 'middle'?'selected':''}}>middle
+                                    </option>
+                                    <option value="right" {{$slide->content_position === 'right'?'selected':''}}>right
+                                    </option>
                                 </select>
+                                {{--                                @error('parent_id')--}}
+                                {{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+                                {{--                                @enderror--}}
                             </div>
-
                             <div class="form-group">
-                                <label>Enter tags</label>
-                                <select name="tags[]" class="form-control tags_select2" multiple="multiple">
-                                    @foreach($product->tags as $tag)
-                                        <option selected value="{{$tag->name}} ">{{$tag->name}}</option>
-                                    @endforeach
-
-                                </select>
-
-                            </div>
-                            <div class="">
                                 <div class="form-group ">
-                                    <label>Product Description</label>
-                                    <textarea id="tinymce-editor" name="description" class="form-control"
-                                              rows="3">{{$product->description}}</textarea>
+                                    <label>Title</label>
+                                    <textarea id="tinymce-editor" name="title"
+                                              class="form-control "
+                                              rows="3">{{$slide->title}}
+                                        {{old('title')}}
+                                </textarea>
+                                    {{--                                @error('description')--}}
+                                    {{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+                                    {{--                                @enderror--}}
                                 </div>
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                {{--                                @error('name')--}}
+                                {{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+                                {{--                                @enderror--}}
+                            </div>
+
+                            <div class="form-group">
+                                <label>Subtitle</label>
+                                <input type="text"
+                                       {{--                                       @error('name') is-invalid @enderror--}}
+                                       class="form-control "
+                                       placeholder="Enter slide subtitle"
+                                       name="subtitle"
+                                       value="{{$slide->subtitle}}"
+                                >
+                                {{--                                @error('name')--}}
+                                {{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+                                {{--                                @enderror--}}
+                            </div>
+
+                            <div class="form-group">
+                                <label>Slide image</label>
+                                <input type="file"
+                                       class="form-control-file"
+                                       placeholder="Chooses a file"
+                                       name="slider_image"
+                                >
+                                <div class="col mt-3">
+                                    <img  src="{{$slide->image_path}}"
+                                         alt="{{$slide->image_name}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Product ID</label>
+                                <input type="text"
+                                       {{--                                       @error('name') is-invalid @enderror--}}
+                                       class="form-control "
+                                       placeholder="Enter product id"
+                                       name="product_id"
+                                       value="{{$slide->product_id}}"
+                                >
+                            </div>
+
+                            <div>
+                                <div class="form-group ">
+                                    <label>Description</label>
+                                    <textarea id="tinymce-editor" name="description"
+                                              class="form-control "
+                                              rows="3">
+                                    {{$slide->description}}
+                                </textarea>
+                                    {{--                                @error('description')--}}
+                                    {{--                                <div class="alert alert-danger">{{ $message }}</div>--}}
+                                    {{--                                @enderror--}}
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
 
                         </div>
-
 
                     </div>
                     <!-- /.row -->
@@ -128,9 +138,4 @@
     <!-- /.content-wrapper -->
 @endsection
 
-@section('custom_js')
-    <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
-    <script src="{{asset('admins/product/add/add.js')}}"></script>
-    <script src="https://cdn.tiny.cloud/1/hs0hspk14k2y30j7kqjieanll961v60zcy71z7m80zwbcnd4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
-@endsection
