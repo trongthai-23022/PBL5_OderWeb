@@ -14,6 +14,6 @@ class Slider extends Model
 
     public function getProduct()
     {
-        return $this->hasOne(Product::class, 'id','product_id');
+        return $this->hasOne(Product::class, 'id');
     }
 }
