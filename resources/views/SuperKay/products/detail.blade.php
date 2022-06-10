@@ -64,18 +64,24 @@
                         <div class="stock-info in-stock">
                             <p class="availability">Availability: <b>{{$product->amount}}</b></p>
                         </div>
-                        <div class="quantity">
-                            <span>Quantity:</span>
-                            <div class="quantity-input">
-                                <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
+                        <form action="/add-cart" method="post">
+                            <div class="quantity">
+                                <span>Quantity:</span>
+                                <div class="quantity-input">
+                                    <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
 
-                                <a class="btn btn-reduce" href="#"></a>
-                                <a class="btn btn-increase" href="#"></a>
+                                    <a class="btn btn-reduce" href="#"></a>
+                                    <a class="btn btn-increase" href="#"></a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="wrap-butons">
-                            <a href="#" class="btn add-to-cart">Add to Cart</a>
-                        </div>
+                            <div class="wrap-butons">
+                                <button type="submit" class="btn add-to-cart">Add to Cart</button>
+                            </div>
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                            @csrf
+                        </form>
+
+
                     </div>
                     <div class="advance-info">
                         <div class="tab-control normal">

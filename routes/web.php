@@ -20,8 +20,10 @@ Route::get('/', [HomeController::class, 'index'])->name('app.home');
 Route::get('/detail/{id}.html',[\App\Http\Controllers\User\ProductController::class,'detail'])->name('detail');
 Route::post('/product-comment',[\App\Http\Controllers\User\ProductController::class,'product_comment'])->middleware('auth', 'verified')->name('product.comment');
 Route::get('/shop',[\App\Http\Controllers\User\ProductController::class,'shop'])->name('shop');
+Route::get('/cart',[\App\Http\Controllers\customers\CartController::class,'show'])->name('cart');
 Route::get('/shop/{id}-{slug}.html',[\App\Http\Controllers\User\ProductController::class,'category_products'])->name('category');
-
+Route::post('add-cart',[\App\Http\Controllers\customers\CartController::class,'index']);
+Route::post('update-cart',[\App\Http\Controllers\customers\CartController::class,'update']);
 
 Route::prefix('admin')->group(function () {
     Route::get('/dashboard', function () {

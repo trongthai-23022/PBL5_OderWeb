@@ -26,8 +26,15 @@
                         </div>
                         <div class="product-info">
                             <a href="{{route('detail',['slug'=> $product->slug,'id'=>$product->id])}}" class="product-name"><span>{{$product->name}}</span></a>
-                            <div class="wrap-price"><span class="product-price">{{$product->price}} VND</span></div>
-                            <a href="#" class="btn add-to-cart">Add To Cart</a>
+                            <div class="wrap-price"><span class="product-price">{{number_format($product->price)}} VND</span></div>
+                            <form action="/add-cart" method="post">
+                                <div class="wrap-butons">
+                                    <button type="submit" class="btn add-to-cart">Add to Cart</button>
+                                </div>
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                <input type="hidden" name="product-quatity" value="1" >
+                                @csrf
+                            </form>
                         </div>
                     </div>
                 </li>
