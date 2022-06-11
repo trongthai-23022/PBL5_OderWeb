@@ -52,6 +52,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{route('products.index')}}" class="nav-link">
+                        <i class="fas fa-utensils"></i>
+                        <p style="margin-left: 10px">
+                            Products
+
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{route('menus.index')}}" class="nav-link">
                         <i class="fas fa-bars"></i>
                         <p style="margin-left: 10px">
@@ -64,15 +73,6 @@
                         <i class="fas fa-ad"></i>
                         <p style="margin-left: 10px">
                             Sliders
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('products.index')}}" class="nav-link">
-                        <i class="fas fa-utensils"></i>
-                        <p style="margin-left: 10px">
-                            Products
-
                         </p>
                     </a>
                 </li>

@@ -14,9 +14,9 @@
 
 
             {{--            @include('SuperKay.partials.banner')--}}
-                @if(!is_null($onSaleProducts))
-                    @include('SuperKay.partials.onsale')
-                @endif
+            @if(!is_null($onSaleProducts))
+                @include('SuperKay.partials.onsale')
+            @endif
 
 
 

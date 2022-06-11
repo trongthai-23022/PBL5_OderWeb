@@ -18,7 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use phpDocumentor\Reflection\Types\This;
+
+use Yajra\Datatables\Datatables;
 
 class AdminProductController extends Controller
 {
@@ -40,11 +41,75 @@ class AdminProductController extends Controller
     }
 
     //
-    public function index()
+    public function index(Request $request)
     {
-        $productsList =  $this->product->latest()->paginate(config('constants.pagination_records'));
-        return view('admin.product.index',['products'=>$productsList]);
+
+        (!is_null($request->category_id))?$cateID = $request->category_id:$cateID = null;
+        (!is_null($request->sort_by))?$sortBy = $request->sort_by: $sortBy = 'created_at-desc';
+        (!is_null($request->q))?$search = $request->q: $search ='';
+
+        $sortColumn = explode('-', $sortBy)[0];
+        $sortDirection = explode('-', $sortBy)[1];
+        if (is_null($cateID)) {
+            $productsList = Product::query()
+                ->where('name', 'like', '%' . $search . '%')
+                ->orWhere('created_at', 'like', '%' . $search . '%')
+                ->orWhere('price', '>=', $search )
+                ->orderBy($sortColumn, $sortDirection)
+                ->paginate(config('constants.pagination_records'));
+            $htmlCategoryOptions = $this->getAllCategories($parent_id = '');
+        } else {
+            $productsList = Product::query()
+                ->where('category_id', '=', $cateID)
+                ->where(function ($query) use ($cateID,$search){
+                    $query->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('created_at', 'like', '%' . $search . '%')
+                        ->orWhere('price', '>=', $search );
+                })
+                ->orderBy($sortColumn, $sortDirection)
+                ->paginate(config('constants.pagination_records'));
+            $htmlCategoryOptions = $this->getAllCategories($cateID);
+        }
+
+        $productsList->appends([
+            'q' => $search,
+            'category_id' => $cateID,
+            'sort_by' => $sortBy,
+        ]);
+
+
+        return view('admin.product.index', [
+            'products' => $productsList,
+            'search' => $search,
+            'cate_options' => $htmlCategoryOptions,
+            'sort_by' => $sortBy,
+        ]);
     }
+
+//    public function api()
+//    {
+//        return Datatables::of(Product::query())
+//            ->addIndexColumn()
+//            ->editColumn('created_at', function ($product) {
+//                return $product->created_at->format('Y/m/d');
+//            })
+//            ->addColumn('image', function ($product){
+//                return "<img class='product-main-image'
+//                             src='$product->main_image_path')
+//                             alt='$product->main_image_name'>";
+//            })
+//            ->addColumn('cate', function ($product){
+//                return $product->category->name;
+//            })
+//            ->addColumn('edit', function ($product){
+//                return route('products.edit',['id'=>$product->id]);
+//            })
+//            ->addColumn('delete', function ($product){
+//                return route('products.delete',['id'=>$product->id]);
+//            })
+//            ->rawColumns(['image'])
+//            ->make(true);
+//    }
 
     public function create()
     {
@@ -120,12 +185,12 @@ class AdminProductController extends Controller
         $product = $this->product->find($id);
         $htmlOption = $this->getAllCategories($product->category_id);
         return view('admin.product.edit', [
-            'htmlOption'=> $htmlOption,
-            'product'=>$product
+            'htmlOption' => $htmlOption,
+            'product' => $product
         ]);
     }
 
-    public function update($id, ProductUpdateRequest $req):RedirectResponse
+    public function update($id, ProductUpdateRequest $req): RedirectResponse
     {
         try {
             DB::beginTransaction();
@@ -190,7 +255,7 @@ class AdminProductController extends Controller
 
     public function delete($id)
     {
-       return $this->deleteModelTrait($id, $this->product);
+        return $this->deleteModelTrait($id, $this->product);
     }
 
 
