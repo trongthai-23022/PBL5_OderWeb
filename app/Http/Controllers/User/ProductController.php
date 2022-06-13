@@ -35,7 +35,7 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = $this->productService->show($id);
-        return view('SuperKay.products.detail', [
+        return view('Shop.products.detail', [
             'product' => $product,
         ]);
     }
@@ -89,7 +89,7 @@ class ProductController extends Controller
     public function shop()
     {
 
-        return view('SuperKay.products.shop', [
+        return view('Shop.products.shop', [
         ]);
     }
 
@@ -97,7 +97,7 @@ class ProductController extends Controller
     {
         $category = $this->categoryService->getId($id);
         $products = $this->categoryService->getProduct($category, $request);
-        return view('SuperKay.products.listProduct', [
+        return view('Shop.products.listProduct', [
             'products' => $products,
             'category' => $category
         ]);

@@ -40,7 +40,7 @@ class HomeController extends Controller
          if(!is_null($onSaleTag)){
              $onSaleProducts = $onSaleTag->products;
          }
-        return view('SuperKay.home.index', [
+        return view('Shop.home.index', [
             'sliders' => $sliders,
             'onSaleProducts' =>$onSaleProducts,
             'latestProducts' =>$latestPosts,
