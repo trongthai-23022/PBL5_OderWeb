@@ -172,11 +172,10 @@ $(function () {
                     $('#cart-items-count').text(data.cart_items_count + " items");
                 }
             },
-        })
+        });
 
+    });
 
-    })
-});
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
