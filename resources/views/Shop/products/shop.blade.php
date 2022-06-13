@@ -1,4 +1,4 @@
-@extends('layouts.shop')
+@extends('layouts.app')
 
 @section('title')
     <title>Danh muc</title>
@@ -110,9 +110,9 @@
                                 <li class="list-item default-hiden"><a class="filter-link " href="#">Shop Smartphone &
                                         Tablets</a></li>
                                 <li class="list-item"><a
-                                            data-label='Show less<i class="fa fa-angle-up" aria-hidden="true"></i>'
-                                            class="btn-control control-show-more" href="#">Show more<i
-                                                class="fa fa-angle-down" aria-hidden="true"></i></a></li>
+                                        data-label='Show less<i class="fa fa-angle-up" aria-hidden="true"></i>'
+                                        class="btn-control control-show-more" href="#">Show more<i
+                                            class="fa fa-angle-down" aria-hidden="true"></i></a></li>
                             </ul>
                         </div>
                     </div><!-- brand widget-->
