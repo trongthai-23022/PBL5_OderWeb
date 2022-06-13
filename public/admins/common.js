@@ -172,6 +172,7 @@ $(function () {
                     $('#cart-items-count').text(data.cart_items_count + " items");
                 }
             },
+
         });
 
     });
