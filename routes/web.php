@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\customers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\customers\HomeController;
@@ -7,7 +8,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AminSliderController;
 
 //Route::get('/', function(){
-//    return view('SuperKay.main', [
+//    return view('Shop.main', [
 //        'title'=>'Super Kay'
 //    ]);
 //});
@@ -17,10 +18,10 @@ use App\Http\Controllers\AminSliderController;
 Route::get('/home', [HomeController::class, 'index'])->name('app.home') ;
 Route::get('/', [HomeController::class, 'index'])->name('app.home');
 
-Route::get('/detail/{id}.html',[\App\Http\Controllers\User\ProductController::class,'detail'])->name('detail');
+Route::get('/detail/{id}_{slug}',[\App\Http\Controllers\User\ProductController::class,'detail'])->name('detail');
 Route::post('/product-comment',[\App\Http\Controllers\User\ProductController::class,'product_comment'])->middleware('auth', 'verified')->name('product.comment');
 Route::get('/shop',[\App\Http\Controllers\User\ProductController::class,'shop'])->name('shop');
-Route::get('/shop/{id}-{slug}.html',[\App\Http\Controllers\User\ProductController::class,'category_products'])->name('category');
+Route::get('/shop/{id}-{slug}',[\App\Http\Controllers\User\ProductController::class,'category_products'])->name('category');
 
 
 Route::prefix('admin')->group(function () {
@@ -82,6 +83,13 @@ Route::prefix('admin')->group(function () {
             'uses' => 'AminSliderController@delete'
         ]);
     });
+});
+
+Route::prefix('cart')->group(function (){
+    Route::get('/',[CartController::class,'index'])->name('cart.index');
+    Route::post('/store',[CartController::class,'store'])->name('cart.store');
+    Route::get('/update',[CartController::class,'update'])->name('cart.update');
+    Route::get('/destroy/{rowId}',[CartController::class,'destroy'])->name('cart.destroy');
 });
 
 require_once __DIR__ . '/fortify.php';

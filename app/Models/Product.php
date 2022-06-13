@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\CreateSlugTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -12,6 +13,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use CreateSlugTrait;
     protected $guarded = [];
     public function detailImages(){
         return $this->hasMany(ProductImage::class, 'product_id');
@@ -34,5 +36,10 @@ class Product extends Model
     public function rates(): HasMany
     {
         return $this->hasMany(Rate::class, 'product_id');
+    }
+
+    public function slug(): string
+    {
+        return $this->create_slug($this->attributes['name']);
     }
 }

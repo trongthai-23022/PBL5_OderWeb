@@ -14,6 +14,7 @@ class Tag extends Model
             'product_tags',
             'tag_id',
             'product_id')
-            ->withTimestamps();
+            ->withTimestamps()
+            ->latest();
     }
 }
