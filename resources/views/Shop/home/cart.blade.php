@@ -117,7 +117,7 @@
                     </div>
                     <div class="checkout-info">
 
-                        <a class="btn btn-checkout" href="checkout.html">Check out</a>
+                        <a class="btn btn-checkout" href="{{route('cart.checkout.info')}}">Check out</a>
                         <a class="link-to-shop" href="{{route('shop')}}">Continue Shopping<i
                                     class="fa fa-arrow-circle-right"
                                     aria-hidden="true"></i></a>

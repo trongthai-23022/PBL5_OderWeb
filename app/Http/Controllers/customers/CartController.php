@@ -2,17 +2,27 @@
 
 namespace App\Http\Controllers\customers;
 
+use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
+use App\Models\UserProfile;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use function response;
 
 class CartController extends Controller
 {
+    private $order;
+    public function __construct(Order $order)
+    {
+        $this->order = $order;
+    }
+
     //
     public function index()
 
@@ -112,5 +122,68 @@ class CartController extends Controller
             ], 500);
         }
 
+    }
+
+
+    public function getCheckout()
+    {
+        $res = UserProfile::where('user_id', auth()->user()->id)->first();
+        if(is_null($res)){
+           return  redirect('account');
+        }
+
+        $userInfo = $res;
+        $userInfo['name'] = auth()->user()->name;
+        $userInfo['email'] = auth()->user()->email;
+
+
+        return view('Shop.checkout.index',[
+            'userInfo' => $userInfo
+        ]);
+    }
+
+    public function postOrder(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            $orderInfo = $request->all();
+            $cart = Cart::content();
+//            dd(Cart::subtotal(0,',',''));
+            $dataOrderCreate = [
+                'user_id' => auth()->user()->id,
+                'user_name' => $orderInfo['name'],
+                'user_email' => $orderInfo['email'],
+                'user_phone' => $orderInfo['phone'],
+                'user_address' => $orderInfo['address'],
+                'user_note' => $orderInfo['note'],
+                'status' => 0,
+                'item_count' => intval(Cart::count(0,',','')),
+                'sub_total' => intval(Cart::subtotal(0,',','')),
+                'total' => intval(Cart::total(0,',','')),
+            ];
+//            if(!empty($orderInfo['coupon-code'])){
+//
+//                $orderCreate['discount'] = $orderInfo['coupon-code'];
+//            }
+            $newOrder = $this->order->create($dataOrderCreate);
+
+            foreach ($cart as $product){
+                $newOrder->orderDetail()->create([
+                    'product_id' => $product->id,
+                    'product_price' => intval($product->price),
+                    'product_qty' => intval($product->qty),
+                    'total' => intval($product->qty) * intval($product->price),
+                ]);
+            }
+            DB::commit();
+            Cart::destroy();
+            return view('Shop.checkout.thankyou');
+
+        }
+        catch (Exception $exception){
+            DB::rollBack();
+            Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
+            return redirect()->back();
+        }
     }
 }

@@ -53,7 +53,12 @@
                                                 @endif
                                             </div>
                                             <div class="wrap-btn">
-                                                <a href="#" class="function-link">quick view</a>
+                                                <form method="post">
+                                                    @csrf
+                                                    <input type="hidden" value="1" name="cart_product_qty" class="cart_product_qty_{{$latestProduct->id}}">
+                                                    <input type="hidden" value="{{$latestProduct->id}}" name="cart_product_id" class="cart_product_id_{{$latestProduct->id}}">
+                                                    <input type="button" value="Add To Cart" class="function-link add-to-cart" data-product_item="{{$latestProduct->id}}" data-url="{{route('cart.store')}}">
+                                                </form>
                                             </div>
                                         </div>
                                         <div class="product-info">
@@ -85,13 +90,17 @@
                                                             @break
                                                         @endif
                                                         <span class="flash-item {{array_key_exists($tag->name,$colors) ?$colors[$tag->name] . '':'new-label'}}">{{$tag->name}}</span>
-
                                                         @php($j++)
                                                     @endforeach
                                                 @endif
                                             </div>
                                             <div class="wrap-btn">
-                                                <a href="#" class="function-link">quick view</a>
+                                                <form method="post">
+                                                    @csrf
+                                                    <input type="hidden" value="1" name="cart_product_qty" class="cart_product_qty_{{$latestProduct->id}}">
+                                                    <input type="hidden" value="{{$latestProduct->id}}" name="cart_product_id" class="cart_product_id_{{$latestProduct->id}}">
+                                                    <input type="button" value="Add To Cart" class="function-link add-to-cart" data-product_item="{{$latestProduct->id}}" data-url="{{route('cart.store')}}">
+                                                </form>
                                             </div>
                                         </div>
                                         <div class="product-info">
