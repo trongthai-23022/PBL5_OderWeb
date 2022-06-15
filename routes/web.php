@@ -89,6 +89,7 @@ Route::prefix('admin')->group(function () {
     // order
     Route::prefix('order')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/api', [OrderController::class, 'api'])->name('orders.api');
         Route::get('/create', [OrderController::class, 'create'])->name('orders.create');
         Route::post('/store', [OrderController::class, 'store'])->name('orders.store');
         //button edit to show update form
