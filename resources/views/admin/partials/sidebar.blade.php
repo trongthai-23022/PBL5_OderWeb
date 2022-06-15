@@ -69,7 +69,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('sliders.index')}}" class="nav-link">
+                    <a href="{{route('orders.index')}}" class="nav-link">
                         <i class="fas fa-list-alt"></i>
                         <p style="margin-left: 10px">
                             Đơn hàng

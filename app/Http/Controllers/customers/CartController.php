@@ -159,6 +159,7 @@ class CartController extends Controller
                 'status' => 0,
                 'item_count' => intval(Cart::count(0,',','')),
                 'sub_total' => intval(Cart::subtotal(0,',','')),
+                'tax' => intval(Cart::tax(0,',','')),
                 'total' => intval(Cart::total(0,',','')),
             ];
 //            if(!empty($orderInfo['coupon-code'])){

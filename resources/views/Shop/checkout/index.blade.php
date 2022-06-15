@@ -86,8 +86,9 @@
 
                     </ul>
                 </div>
+                <hr>
                 <div class="wrap-address-billing">
-                    <h3 class="box-title">Thông tin hóa đơn</h3>
+                    <h3 class="box-title">Thông tin khách hàng</h3>
                     <form action="{{route('cart.order')}}" method="post" name="frm-billing" id="order">
                         <p class="row-in-form">
                             <label for="fname">Họ Tên<span>*</span></label>

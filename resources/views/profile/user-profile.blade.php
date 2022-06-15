@@ -20,10 +20,24 @@
 @section('content')
 
 <div class="container">
+    <div class="wrap-breadcrumb">
+        <ul>
+            <li class="item-link"><a href="{{route('app.home')}}" class="link">Home</a></li>
+            @php
+                $segments = '' ;
+            @endphp
+            @foreach(\Illuminate\Support\Facades\Request::segments() as $segment)
+                @php
+                    $segments .= '/'. $segment;
+                @endphp
+                <li>
+                    <a href="{{ $segments }}">{{$segment}}</a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
     <div class="row">
         <div class="col-sm-3"><!--left col-->
-
-
             <div class="text-center">
                 <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
                 <h6>Upload a different photo...</h6>

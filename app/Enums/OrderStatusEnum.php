@@ -19,10 +19,10 @@ final class OrderStatusEnum extends Enum
     public static function getArrayView()
     {
         return [
-            'Đang xử lý' => self::PROCESSING,
-            'Đang vận chuyển' => self::IN_TRANSIT,
-            'Hoàn Thành' => self::PROCESSING,
-            'Đã Hủy' => self::PROCESSING,
+            self::PROCESSING =>  'Đang xử lý',
+            self::IN_TRANSIT =>   'Đang vận chuyển',
+            self::COMPLETED => 'Hoàn Thành',
+            self::CANCELED =>  'Đã Hủy',
         ];
     }
 }

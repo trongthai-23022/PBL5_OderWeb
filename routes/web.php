@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\customers\CartController;
 use App\Http\Controllers\customers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\User\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
@@ -87,21 +88,13 @@ Route::prefix('admin')->group(function () {
     });
 
     // order
-    Route::prefix('order')->group(function () {
+    Route::prefix('orders')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->name('orders.index');
-        Route::get('/orders/api', [OrderController::class, 'api'])->name('orders.api');
-        Route::get('/create', [OrderController::class, 'create'])->name('orders.create');
-        Route::post('/store', [OrderController::class, 'store'])->name('orders.store');
-        //button edit to show update form
-        Route::get('/edit/{id}', [
-            'as' => 'orders.edit',
-            'uses' => 'AminSliderController@edit'
-        ]);
-        // submit to update
-        Route::post('/update/{id}', [
-            'as' => 'orders.update',
-            'uses' => 'AminSliderController@update'
-        ]);
+        Route::get('/orders/api', [OrderController::class, 'api'])->name('api.orders.index');
+        Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('orders.edit');
+
+        Route::post('/update', [OrderController::class, 'update_status'])->name('orders.update');
+
         Route::get('/delete/{id}', [
             'as' => 'orders.delete',
             'uses' => 'AminSliderController@delete'
@@ -109,7 +102,7 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-Route::prefix('cart')->group(function (){
+Route::prefix('cart')->middleware('auth')->group(function (){
     Route::get('/',[CartController::class,'index'])->name('cart.index');
     Route::post('/store',[CartController::class,'store'])->name('cart.store');
     Route::get('/update',[CartController::class,'update'])->name('cart.update');
@@ -125,7 +118,10 @@ Route::prefix('cart')->group(function (){
 });
 
 Route::prefix('account')->group(function (){
-    Route::get('/',[UserController::class,'show'])->name('account.show');
+
+    Route::get('/purchases/{id}',[OrderController::class, 'user_purchase_show'])->name('purchase.show');
+
+    Route::get('/profile/{id}',[UserController::class,'show'])->name('account.show');
 });
 
 

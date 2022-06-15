@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\customers\UserController;
+use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Route;
 //users
 Route::prefix('users')->group(function (){
     Route::get('/', [
@@ -32,4 +35,5 @@ Route::prefix('users')->group(function (){
         'uses' => 'AdminUserController@delete',
         'middleware'=> 'can:user-delete'
     ]);
+
 });
