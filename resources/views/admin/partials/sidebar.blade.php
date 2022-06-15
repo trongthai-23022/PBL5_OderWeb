@@ -47,7 +47,32 @@
                     <a href="{{route('categories.index')}}" class="nav-link">
                         <i class="fas fa-layer-group"></i>
                         <p style="margin-left: 10px">
-                            Categories
+                            Danh mục
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('products.index')}}" class="nav-link">
+                        <i class="fas fa-utensils"></i>
+                        <p style="margin-left: 10px">
+                            Sản phẩm
+
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('sliders.index')}}" class="nav-link">
+                        <i class="fas fa-ad"></i>
+                        <p style="margin-left: 10px">
+                            Sliders - Quảng cáo
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('sliders.index')}}" class="nav-link">
+                        <i class="fas fa-list-alt"></i>
+                        <p style="margin-left: 10px">
+                            Đơn hàng
                         </p>
                     </a>
                 </li>
@@ -59,28 +84,12 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('sliders.index')}}" class="nav-link">
-                        <i class="fas fa-ad"></i>
-                        <p style="margin-left: 10px">
-                            Sliders
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('products.index')}}" class="nav-link">
-                        <i class="fas fa-utensils"></i>
-                        <p style="margin-left: 10px">
-                            Products
 
-                        </p>
-                    </a>
-                </li>
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">
                         <i class="fas fa-users"></i>
                         <p style="margin-left: 10px">
-                            Users
+                            Người dùng
 
                         </p>
                     </a>
@@ -89,7 +98,7 @@
                     <a href="{{route('roles.index')}}" class="nav-link">
                         <i class="fas fa-user-tag"></i>
                         <p style="margin-left: 10px">
-                            Roles
+                            Vai trò
                         </p>
                     </a>
                 </li>
@@ -97,7 +106,7 @@
                     <a href="{{route('permissions.index')}}" class="nav-link">
                         <i class="fas fa-user-lock"></i>
                         <p style="margin-left: 10px">
-                            Permissions
+                            Phân Quyền
                         </p>
                     </a>
                 </li>

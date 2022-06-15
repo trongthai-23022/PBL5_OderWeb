@@ -85,6 +85,27 @@ Route::prefix('admin')->group(function () {
             'uses' => 'AminSliderController@delete'
         ]);
     });
+
+    // order
+    Route::prefix('order')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/create', [OrderController::class, 'create'])->name('orders.create');
+        Route::post('/store', [OrderController::class, 'store'])->name('orders.store');
+        //button edit to show update form
+        Route::get('/edit/{id}', [
+            'as' => 'orders.edit',
+            'uses' => 'AminSliderController@edit'
+        ]);
+        // submit to update
+        Route::post('/update/{id}', [
+            'as' => 'orders.update',
+            'uses' => 'AminSliderController@update'
+        ]);
+        Route::get('/delete/{id}', [
+            'as' => 'orders.delete',
+            'uses' => 'AminSliderController@delete'
+        ]);
+    });
 });
 
 Route::prefix('cart')->group(function (){
