@@ -117,10 +117,9 @@ Route::prefix('cart')->middleware('auth')->group(function (){
         ->name('cart.order');
 });
 
-Route::prefix('account')->group(function (){
+Route::prefix('account')->middleware('auth')->group(function (){
 
     Route::get('/purchases/{id}',[OrderController::class, 'user_purchase_show'])->name('purchase.show');
-
     Route::get('/profile/{id}',[UserController::class,'show'])->name('account.show');
 });
 

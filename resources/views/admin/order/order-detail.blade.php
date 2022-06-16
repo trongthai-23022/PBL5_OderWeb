@@ -66,7 +66,7 @@
                                                          alt="{{$item['image_name']}}"></figure>
                                         </div>
                                         <div class="product-name">
-                                            <p class="price">{{$item['name']}}}</p>
+                                            <p class="price">{{$item['name']}}</p>
                                         </div>
                                         <div class="price-field">
                                             <p class="price">{{number_format(intval($item['price']),0,',','.')}} đ</p>
@@ -83,13 +83,16 @@
                             @endforeach
                             <li class="pr-cart-item">
                                 <div class="product-name">
-                                    <b>Tổng số lượng: {{$order->item_count}}</b>
+                                    <p class="price">Tổng số lượng: {{$order->item_count}}</p>
                                 </div>
                                 <div class="product-name">
-                                    <b>Thuế (10%): {{$order->tax}} đ</b>
+                                    <p class="price">Số tiền: {{number_format($order->sub_total,0,',','.')}} đ</p>
                                 </div>
                                 <div class="product-name">
-                                    <b>Thành tiền: {{$order->total}} đ</b>
+                                    <p class="price">Thuế (10%): {{number_format($order->tax,0,',','.')}} đ</p>
+                                </div>
+                                <div class=" price-field ">
+                                    <p class="price">Thành tiền: {{number_format($order->total,0,',','.')}} đ</p>
                                 </div>
                             </li>
 

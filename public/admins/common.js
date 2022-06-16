@@ -215,6 +215,58 @@ $(document).on('click', '.update-status', function () {
     })
 
 });
+$(document).on('click', '.cancel', function () {
+    let urlRequest = $(this).data('url');
+    let orderId = $('.order-id').val();
+    let status = $('.order-status').val();
+    let _token = $('input[name = "_token"]').val();
+    Swal.fire({
+        title: 'Bạn chắc chắn muốn hủy?',
+        text: "Bạn có thể vào phần đã hủy để đặt lại",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Vâng, hủy đi!',
+        cancelButtonText: 'Thôi'
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                type: 'POST',
+                url: urlRequest,
+                data: {
+                    order_id:orderId,
+                    status:status,
+                    _token:_token
+                },
+                success:function (data){
+                    if(data.code === 200) {
+                        Swal.fire({
+                            position: 'middle',
+                            icon: 'success',
+                            title: "Đã hủy đơn!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        $('#order-status').val(data.status);
+                    }
+                    else {
+                        Swal.fire({
+                            position: 'middle',
+                            icon: 'warning',
+                            title: "Hủy thất bại!",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                }
+
+            })
+        }
+
+    })
+
+});
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");

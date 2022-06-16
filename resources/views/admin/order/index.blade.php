@@ -23,23 +23,7 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-12">
-                        @can('product-add')
-                            <a href="{{ route('products.create') }}"
-                               class="btn btn-success float-left m-2 text-uppercase">Add new product</a>
-                        @endcan
-                    </div>
-                    <div class="col-md-6">
-                        @if(session('success'))
-                            <div class="alert alert-success response_message ">
-                                {{session('success')}}
-                            </div>
-                        @elseif(session('failure'))
-                            <div class="alert alert-danger response_message ">
-                                {{session('failure')}}
-                            </div>
-                        @endif
-                    </div>
+
                     <div class="col-md-12">
                         <table class="table table-striped" id="table-index">
                             <thead>
