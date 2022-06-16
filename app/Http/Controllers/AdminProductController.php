@@ -40,10 +40,49 @@ class AdminProductController extends Controller
     }
 
     //
-    public function index()
+    public function index(Request $request)
     {
-        $productsList =  $this->product->latest()->paginate(config('constants.pagination_records'));
-        return view('admin.product.index',['products'=>$productsList]);
+
+        (!is_null($request->category_id))?$cateID = $request->category_id:$cateID = null;
+        (!is_null($request->sort_by))?$sortBy = $request->sort_by: $sortBy = 'created_at-desc';
+        (!is_null($request->q))?$search = $request->q: $search ='';
+
+        $sortColumn = explode('-', $sortBy)[0];
+        $sortDirection = explode('-', $sortBy)[1];
+        if (is_null($cateID)) {
+            $productsList = Product::query()
+                ->where('name', 'like', '%' . $search . '%')
+                ->orWhere('created_at', 'like', '%' . $search . '%')
+                ->orWhere('price', '>=', $search )
+                ->orderBy($sortColumn, $sortDirection)
+                ->paginate(config('constants.pagination_records'));
+            $htmlCategoryOptions = $this->getAllCategories($parent_id = '');
+        } else {
+            $productsList = Product::query()
+                ->where('category_id', '=', $cateID)
+                ->where(function ($query) use ($cateID,$search){
+                    $query->where('name', 'like', '%' . $search . '%')
+                        ->orWhere('created_at', 'like', '%' . $search . '%')
+                        ->orWhere('price', '>=', $search );
+                })
+                ->orderBy($sortColumn, $sortDirection)
+                ->paginate(config('constants.pagination_records'));
+            $htmlCategoryOptions = $this->getAllCategories($cateID);
+        }
+
+        $productsList->appends([
+            'q' => $search,
+            'category_id' => $cateID,
+            'sort_by' => $sortBy,
+        ]);
+
+
+        return view('admin.product.index', [
+            'products' => $productsList,
+            'search' => $search,
+            'cate_options' => $htmlCategoryOptions,
+            'sort_by' => $sortBy,
+        ]);
     }
 
     public function create()

@@ -5,11 +5,10 @@
 @endsection
 @section('custom_css')
     <link rel="stylesheet" href="{{asset('admins/product/index/index.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css"/>
+
 @endsection
-@section('custom_js')
-    <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
-    <script src="{{asset('admins/common.js')}}"></script>
-@endsection
+
 
 @section('content')
 
@@ -41,7 +40,49 @@
                         @endif
                     </div>
                     <div class="col-md-12">
-                        <table class="table">
+                        <form id="form1" method="get">
+                            @csrf
+                            <div class="input-group-append d-flex justify-content-between">
+                                <div class="col-md-3 form-group">
+                                    <label>Select a category</label>
+                                    <select
+                                        class="form-control  "
+                                        name="category_id">
+                                        <option value="">All</option>
+                                        {!! $cate_options !!}
+                                    </select>
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Sort by</label>
+                                    <select
+                                        class="form-control "
+                                        name="sort_by">
+                                        <option value="created_at-desc" {{$sort_by=='created_at-desc'? 'selected':''}}>Latest</option>
+                                        <option value="created_at-asc" {{$sort_by=='created_at-asc'? 'selected':''}}>Earliest</option>
+                                        <option value="price-desc" {{$sort_by=='price-desc'? 'selected':''}}>Price Desc</option>
+                                        <option value="price-asc" {{$sort_by=='price-asc'? 'selected':''}}>Price Asc</option>
+                                        <option value="name-desc" {{$sort_by=='name-desc'? 'selected':''}}>Name Desc</option>
+                                        <option value="name-asc" {{$sort_by=='name-asc'? 'selected':''}}>Name Asc</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="float-right form-group">
+                                        <label class="form-label" for="form1">Search</label>
+                                        <div class="input-group-append">
+                                            <div class="input-group">
+                                                <input name="q" type="search" id="form1" class="form-control" value="{{$search}}"/>
+                                            </div>
+                                            <button form="form1" id="search-button" type="submit" class="btn btn-primary">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-12">
+                        <table id="table-products" class="table">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -49,11 +90,15 @@
                                 <th scope="col">Product name</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Image</th>
-                                <th scope="col">Category name</th>
-                                <th scope="col">Action</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">Created At</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Actions</th>
+                                {{--                                <th scope="col">Edit</th>--}}
+                                {{--                                <th scope="col">Delete</th>--}}
                             </tr>
                             </thead>
-                            <tbody>
+                            <body>
                             @php
                                 $i = 1;
                             @endphp
@@ -70,6 +115,8 @@
                                              alt="{{isset($product->main_image_name)?$product->main_image_name: 'no-image'
                                                 }}"></td>
                                     <td>{{optional($product->category)->name}}</td>
+                                    <td>{{ $product->created_at->format('Y/m/d')}}</td>
+                                    <td>{{ $product->amount}}</td>
                                     <td>
                                         @can('product-edit')
                                             <a href="{{route('products.edit',['id'=>$product->id])}}"
@@ -86,13 +133,12 @@
                                     $i++;
                                 @endphp
                             @endforeach
-                            </tbody>
+                            </body>
                         </table>
+                        <div class="row">
+                            {{$products->links()}}
+                        </div>
                     </div>
-                    <div class="col-md-12">
-                        {{$products->links()}}
-                    </div>
-
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -102,3 +148,8 @@
     <!-- /.content-wrapper -->
 @endsection
 
+@section('custom_js')
+    <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
+    <script src="{{asset('admins/common.js')}}"></script>
+
+@endsection
