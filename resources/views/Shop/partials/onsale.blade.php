@@ -17,12 +17,7 @@
                                 @csrf
                                 <input type="hidden" value="1" name="cart_product_qty" class="cart_product_qty_{{$onSaleProduct->id}}">
                                 <input type="hidden" value="{{$onSaleProduct->id}}" name="cart_product_id" class="cart_product_id_{{$onSaleProduct->id}}">
-{{--                                <input type="hidden" value="{{$onSaleProduct->name}}" name="cart_product_name" class="cart_product_name_{{$onSaleProduct->id}}">--}}
-{{--                                <input type="hidden" value="{{$onSaleProduct->price}}" name="cart_product_price" class="cart_product_price_{{$onSaleProduct->id}}">--}}
-{{--                                <input type="hidden" value="{{$onSaleProduct->main_image_path}}" name="cart_product_main_image_path" class="cart_product_main_image_path_{{$onSaleProduct->id}}">--}}
-{{--                                <input type="hidden" value="{{$onSaleProduct->main_image_name}}" name="cart_product_main_image_name" class="cart_product_main_image_name_{{$onSaleProduct->id}}">--}}
                                 <input type="button" value="Add To Cart" class="function-link add-to-cart" data-product_item="{{$onSaleProduct->id}}" data-url="{{route('cart.store')}}">
-{{--                                <button type="button"  class="btn btn-default ">ADD TO CART</button>--}}
                             </form>
 
                         </div>

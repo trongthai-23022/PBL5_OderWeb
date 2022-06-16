@@ -20,7 +20,7 @@ class CreateSlidersTable extends Migration
             $table->string('description');
             $table->string('image_path');
             $table->string('image_name');
-            $table->string('product_id')->nullable();
+            $table->bigInteger('product_id')->nullable();
             $table->timestamps();
         });
     }

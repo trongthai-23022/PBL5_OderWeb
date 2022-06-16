@@ -1,4 +1,4 @@
-@extends('layouts.shop')
+@extends('layouts.app')
 
 @section('title')
     <title>Cart</title>
@@ -16,11 +16,11 @@
 @section('content')
     <!--main area-->
     <main id="main" class="main-site">
-{{--        @php--}}
-{{--            echo '<pre>';--}}
-{{--                print_r(\Gloudemans\Shoppingcart\Facades\Cart::content());--}}
-{{--            echo '</pre>';--}}
-{{--        @endphp--}}
+        {{--        @php--}}
+        {{--            echo '<pre>';--}}
+        {{--                print_r(\Gloudemans\Shoppingcart\Facades\Cart::content());--}}
+        {{--            echo '</pre>';--}}
+        {{--        @endphp--}}
         <div class="container mt-4">
 
             <div class="wrap-breadcrumb">
@@ -57,22 +57,23 @@
                                            href="{{route('detail', [ 'slug' => $cartItem->options->slug,'id' => $cartItem->id])}}">{{$cartItem->name}}</a>
                                     </div>
                                     <div class="price-field product-price"><p
-                                            id="cart-item-price-{{$cartItem->rowId}}"
-                                            class="price">{{number_format($cartItem->price,0,',','.')}} đ</p>
+                                                id="cart-item-price-{{$cartItem->rowId}}"
+                                                class="price">{{number_format($cartItem->price,0,',','.')}} đ</p>
                                         <input hidden
-                                            id="cart-item-price-hidden-{{$cartItem->rowId}}"
-                                            class="price" value="{{$cartItem->price}}"
+                                               id="cart-item-price-hidden-{{$cartItem->rowId}}"
+                                               class="price" value="{{$cartItem->price}}"
                                         >
                                     </div>
                                     <div class="quantity">
                                         <div class="quantity-input">
-                                            <input id="{{$cartItem->rowId}}" type="text" class="qty-input" name="product-quatity"
+                                            <input id="{{$cartItem->rowId}}" type="text" class="qty-input"
+                                                   name="product-quatity"
                                                    data-row_id="{{$cartItem->rowId}}"
                                                    data-url="{{route('cart.update')}}"
                                                    value="{{$cartItem->qty}}" data-min="1"
                                                    data-max="20" pattern="[0-9]*">
                                             <a class="btn btn-increase qty-change" href=""
-                                                data-row_id="{{$cartItem->rowId}}"
+                                               data-row_id="{{$cartItem->rowId}}"
                                                data-url="{{route('cart.update')}}"
                                             ></a>
                                             <a class="btn btn-reduce qty-change" href=""
@@ -82,8 +83,9 @@
                                         </div>
                                     </div>
                                     <div class="price-field sub-total"><p
-                                            id="cart-item-total-{{$cartItem->rowId}}"
-                                            class="price">{{number_format($cartItem->price * $cartItem->qty,0,',','.')}} đ</p></div>
+                                                id="cart-item-total-{{$cartItem->rowId}}"
+                                                class="price">{{number_format($cartItem->price * $cartItem->qty,0,',','.')}}
+                                            đ</p></div>
                                     <div class="delete">
                                         <a href=""
                                            data-url="{{route('cart.destroy', ['rowId'=> $cartItem->rowId])}}"
@@ -101,22 +103,24 @@
                     <div class="order-summary">
                         <h4 class="title-box">Order Summary</h4>
                         <p class="summary-info"><span class="title">Tổng</span><b
-                                id="cart-sub-total"
-                                class="index">{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal(0,',','.')}} đ</b></p>
+                                    id="cart-sub-total"
+                                    class="index">{{\Gloudemans\Shoppingcart\Facades\Cart::subtotal(0,',','.')}} đ</b>
+                        </p>
                         <p class="summary-info"><span class="title">Free Ship</span><b
-                                class="index">0 đ</b></p>
+                                    class="index">0 đ</b></p>
                         <p class="summary-info"><span class="title">Thuế (10%)</span><b
-                                id="cart-tax"
-                                class="index">{{\Gloudemans\Shoppingcart\Facades\Cart::tax(0,',','.')}} đ</b></p>
+                                    id="cart-tax"
+                                    class="index">{{\Gloudemans\Shoppingcart\Facades\Cart::tax(0,',','.')}} đ</b></p>
                         <p class="summary-info total-info "><span class="title">Thành tiền</span><b
-                                id="cart-total"
-                                class="index">{{\Gloudemans\Shoppingcart\Facades\Cart::total(0,',','.')}} đ</b></p>
+                                    id="cart-total"
+                                    class="index">{{\Gloudemans\Shoppingcart\Facades\Cart::total(0,',','.')}} đ</b></p>
                     </div>
                     <div class="checkout-info">
 
-                        <a class="btn btn-checkout" href="checkout.html">Check out</a>
-                        <a class="link-to-shop" href="{{route('shop')}}">Continue Shopping<i class="fa fa-arrow-circle-right"
-                                                                                     aria-hidden="true"></i></a>
+                        <a class="btn btn-checkout" href="{{route('cart.checkout.info')}}">Check out</a>
+                        <a class="link-to-shop" href="{{route('shop')}}">Continue Shopping<i
+                                    class="fa fa-arrow-circle-right"
+                                    aria-hidden="true"></i></a>
                     </div>
 
                 </div>

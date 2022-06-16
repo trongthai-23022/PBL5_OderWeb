@@ -1,4 +1,4 @@
-@extends('layouts.shop')
+@extends('layouts.app')
 
 @section('title')
     <title>Chi tiet san pham</title>
@@ -9,6 +9,11 @@
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/flexslider.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/style.css')}}">
+@endsection
+
+@section('custom_js')
+    <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
+    <script src="{{asset('admins/common.js')}}"></script>
 @endsection
 
 @section('content')
@@ -63,9 +68,6 @@
                                 <a href="#" class="count-review">(05 review)</a>
                             </div>
                             <h2 class="product-name">{{$product->name}}</h2>
-                            <div class="short-desc">
-                                {!!$product->description!!}
-                            </div>
                             {{--                        <div class="wrap-social">--}}
                             {{--                            <a class="link-socail" href="#"><img src="assets/images/social-list.png" alt=""></a>--}}
                             {{--                        </div>--}}
@@ -74,18 +76,23 @@
                             <div class="stock-info in-stock">
                                 <p class="availability">Availability: <b>{{$product->amount}}</b></p>
                             </div>
+                            <form method="post">
+                                @csrf
                             <div class="quantity">
                                 <span>Quantity:</span>
                                 <div class="quantity-input">
-                                    <input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*">
-
+                                    <input type="text" data-max="120" pattern="[0-9]*" value="1" name="product-quatity" class="product-quatity cart_product_qty_{{$product->id}}">
                                     <a class="btn btn-reduce" href="#"></a>
                                     <a class="btn btn-increase" href="#"></a>
                                 </div>
                             </div>
                             <div class="wrap-butons">
-                                <a href="#" class="btn add-to-cart">Add to Cart</a>
+
+                                    <input type="hidden" value="1" name="cart_product_qty" class="cart_product_qty_{{$product->id}}">
+                                    <input type="hidden" value="{{$product->id}}" name="cart_product_id" class="cart_product_id_{{$product->id}}">
+                                    <input type="button" value="Thêm vào giỏ hàng" class="function-link add-to-cart" data-product_item="{{$product->id}}" data-url="{{route('cart.store')}}">
                             </div>
+                            </form>
                         </div>
                         <div class="advance-info">
                             <div class="tab-control normal">

@@ -16,34 +16,32 @@
                     </div>
                     <div class="topbar-menu right-menu">
                         <ul>
-                            <li class="menu-item" ><a title="Register or Login" href="{{route('login')}}">Sign in</a></li>
-                            <li class="menu-item" ><a title="Register or Login" href="{{route('register')}}">Register</a></li>
-                            <li class="menu-item lang-menu menu-item-has-children parent">
-                                <a title="English" href="#"><span class="img label-before"><img src="{{asset('customers/assets/images/lang-en.png')}}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                <ul class="submenu lang" >
-                                    <li class="menu-item" ><a title="hungary" href="#"><span class="img label-before"><img src="{{asset('customers/assets/images/lang-hun.png')}}" alt="lang-hun"></span>Hungary</a></li>
-                                    <li class="menu-item" ><a title="german" href="#"><span class="img label-before"><img src="{{asset('customers/assets/images/lang-ger.png')}}" alt="lang-ger" ></span>German</a></li>
-                                    <li class="menu-item" ><a title="french" href="#"><span class="img label-before"><img src="{{asset('customers/assets/images/lang-fra.png')}}" alt="lang-fre"></span>French</a></li>
-                                    <li class="menu-item" ><a title="canada" href="#"><span class="img label-before"><img src="{{asset('customers/assets/images/lang-can.png')}}" alt="lang-can"></span>Canada</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item menu-item-has-children parent" >
-                                <a title="Dollar (USD)" href="#">Dollar (USD)<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                                <ul class="submenu curency" >
-                                    <li class="menu-item" >
-                                        <a title="Pound (GBP)" href="#">Pound (GBP)</a>
-                                    </li>
-                                    <li class="menu-item" >
-                                        <a title="Euro (EUR)" href="#">Euro (EUR)</a>
-                                    </li>
-                                    <li class="menu-item" >
-                                        <form id="logout" action="{{route('logout')}}" method="post">
-                                            @csrf
-                                            <a href="javascript:$('#logout').submit();">Logout</a>
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
+                            @if(!\Illuminate\Support\Facades\Auth::check())
+                                <li class="menu-item" ><a title="Register or Login" href="{{route('login')}}">Sign in</a></li>
+                                <li class="menu-item" ><a title="Register or Login" href="{{route('register')}}">Register</a></li>
+                            @else
+                                <li class="menu-item menu-item-has-children parent" >
+                                    <a title="Profile" href="{{route('account.show',['id' => auth()->user()->id])}}">{{auth()->user()->name}}</a>
+                                    <ul class="submenu curency" >
+                                        <li class="menu-item" >
+{{--                                            <a title="Profile" href="{{route('profile.show')}}">Tài khoản của tôi</a>--}}
+                                            <a title="Profile" href="{{route('account.show',['id' => auth()->user()->id])}}">Tài khoản của tôi</a>
+                                        </li>
+                                        <li class="menu-item" >
+                                            <a title="Profile" href="{{route('purchase.show',['id' => auth()->user()->id])}}">Đơn mua</a>
+                                        </li>
+                                        @if(\Illuminate\Support\Facades\Auth::check())
+                                            <li class="menu-item" >
+                                                <form id="logout" action="{{route('logout')}}" method="post">
+                                                    @csrf
+                                                    <a href="javascript:$('#logout').submit();">Đăng xuất</a>
+                                                </form>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </li>
+                            @endif
+
                         </ul>
                     </div>
                 </div>
