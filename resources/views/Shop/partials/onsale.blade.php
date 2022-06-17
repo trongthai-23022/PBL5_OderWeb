@@ -7,7 +7,9 @@
                 <div class="product product-style-2 equal-elem ">
                     <div class="product-thumnail">
                         <a href="{{route('detail', [ 'slug' => $onSaleProduct->slug,'id' => $onSaleProduct->id])}}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                            <figure><img src="{{$onSaleProduct->main_image_path}}" width="800" height="800" alt="{{$onSaleProduct->main_image_name}}"></figure>
+                            <figure><img
+                                    style="width: 100%; height: 250px;object-fit: cover;"
+                                    src="{{$onSaleProduct->main_image_path}}" width="800" height="800" alt="{{$onSaleProduct->main_image_name}}"></figure>
                         </a>
                         <div class="group-flash">
                             <span class="flash-item sale-label">sale</span>

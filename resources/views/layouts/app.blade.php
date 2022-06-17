@@ -28,8 +28,11 @@
 @include('Shop.partials.mobile-menu')
 
 @include('Shop.partials.header')
-
-@yield('content')
+<main id="main" style="background-color: #f0f0f0 ">
+<div class="container" style="padding: 20px; background-color: #ffffff">
+    @yield('content')
+</div>
+</main>
 
 
 @include('Shop.partials.footer')

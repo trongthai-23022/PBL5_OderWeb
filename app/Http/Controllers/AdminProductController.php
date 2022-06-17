@@ -39,6 +39,7 @@ class AdminProductController extends Controller
         $this->productImage = $productImage;
     }
 
+
     //
     public function index(Request $request)
     {
@@ -76,7 +77,6 @@ class AdminProductController extends Controller
             'sort_by' => $sortBy,
         ]);
 
-
         return view('admin.product.index', [
             'products' => $productsList,
             'search' => $search,
@@ -84,6 +84,7 @@ class AdminProductController extends Controller
             'sort_by' => $sortBy,
         ]);
     }
+
 
     public function create()
     {

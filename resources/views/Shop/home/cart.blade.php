@@ -14,14 +14,7 @@
 @endsection
 
 @section('content')
-    <!--main area-->
-    <main id="main" class="main-site">
-        {{--        @php--}}
-        {{--            echo '<pre>';--}}
-        {{--                print_r(\Gloudemans\Shoppingcart\Facades\Cart::content());--}}
-        {{--            echo '</pre>';--}}
-        {{--        @endphp--}}
-        <div class="container mt-4">
+
 
             <div class="wrap-breadcrumb">
                 <ul>
@@ -303,10 +296,7 @@
                 </div>
 
             </div><!--end main content area-->
-        </div><!--end container-->
 
-    </main>
-    <!--main area-->
 
 @endsection
 

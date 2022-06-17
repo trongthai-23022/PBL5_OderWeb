@@ -3,7 +3,7 @@
     <h3 class="title-box">Product Categories</h3>
     <div class="wrap-top-banner">
         <a href="#" class="link-banner banner-effect-2">
-            <figure><img src="{{asset('customers/assets/images/fashion-accesories-banner.jpg')}}" width="1170" height="240" alt=""></figure>
+            <figure><img src="{{$bannerCate->image_path}}" width="1170" height="240" alt="{{$bannerCate->image_name}}"></figure>
         </a>
     </div>
     <div class="wrap-products">
@@ -36,7 +36,9 @@
                                         <div class="product-thumnail">
                                             <a href="{{route('detail', [ 'slug' => $latestProduct->slug,'id' => $latestProduct->id])}}"
                                                title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                                <figure><img src="{{$latestProduct->main_image_path}}" width="800" height="800"
+                                                <figure><img
+                                                        style="width: 100%; height: 250px;object-fit: cover;"
+                                                        src="{{$latestProduct->main_image_path}}" width="800" height="800"
                                                              alt="{{$latestProduct->main_image_name}}"></figure>
                                             </a>
                                             <div class="group-flash">
@@ -79,7 +81,9 @@
                                         <div class="product-thumnail">
                                             <a href="{{route('detail', [ 'slug' => $latestProduct->slug,'id' => $latestProduct->id])}}"
                                                title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                                <figure><img src="{{$latestProduct->main_image_path}}" width="800" height="800"
+                                                <figure><img
+                                                        style="width: 100%; height: 250px;object-fit: cover;"
+                                                        src="{{$latestProduct->main_image_path}}" width="800" height="800"
                                                              alt="{{$latestProduct->main_image_name}}"></figure>
                                             </a>
                                             <div class="group-flash">

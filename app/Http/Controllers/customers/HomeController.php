@@ -25,7 +25,7 @@ class HomeController extends Controller
     }
     public function index(){
         //slider
-        $sliders = $this->slider->all();
+        $sliders = $this->slider->where('type', 1)->get();
         // latest
         $latestPosts = $this->product->latest()->limit(10)->get();
         //cate products
@@ -40,11 +40,18 @@ class HomeController extends Controller
          if(!is_null($onSaleTag)){
              $onSaleProducts = $onSaleTag->products;
          }
+
+         //banner
+        $bannerCate = $this->slider->where('type', 2)->where('content_position', 'cate-pro')->first();
+        $bannerLatest= $this->slider->where('type', 2)->where('content_position', 'latest')->first();
+
         return view('Shop.home.index', [
             'sliders' => $sliders,
             'onSaleProducts' =>$onSaleProducts,
             'latestProducts' =>$latestPosts,
             'categories' =>$categories,
+            'bannerCate' => $bannerCate,
+            'bannerLatest' => $bannerLatest,
         ]);
     }
 }

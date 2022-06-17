@@ -6,7 +6,19 @@
 @section('custom_css')
     <link rel="stylesheet" href="{{asset('admins/product/index/index.css')}}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/fc-4.1.0/fh-3.2.3/r-2.3.0/rg-1.2.0/sc-2.0.6/sb-1.3.3/sl-1.4.0/datatables.min.css"/>
+    <style>
+        tfoot input {
+            width: 80%;
+            padding: 2px;
+            box-sizing: border-box;
+        }
+        .dataTables_length{
+            margin-top: 20px;
+        }
+        .dt-buttons{
 
+        }
+    </style>
 
 @endsection
 
@@ -23,9 +35,12 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
-
                     <div class="col-md-12">
                         <table class="table table-striped" id="table-index">
+                            <div class="dt-buttons">
+                                Export
+                            </div>
+                            <div class="dataTables_length"></div>
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -40,7 +55,19 @@
 {{--                                <th scope="col">Action</th>--}}
                             </tr>
                             </thead>
-
+                            <tfoot>
+                            <tr>
+                                <th></th>
+                                <th class="search">name</th>
+                                <th class="search">phone</th>
+                                <th class="search">qty</th>
+                                <th class="search">total</th>
+                                <th class="search">created_at</th>
+                                <th class="search">updated_at</th>
+                                <th class="search">status</th>
+                                <th></th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
 
@@ -61,7 +88,41 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/fc-4.1.0/fh-3.2.3/r-2.3.0/rg-1.2.0/sc-2.0.6/sb-1.3.3/sl-1.4.0/datatables.min.js"></script>
     <script>
         $(function() {
+            $('#table-index tfoot th.search').each(function () {
+                var title = $(this).text();
+                $(this).html('<input type="text" id="' + title +'" placeholder="Search ' + title + '" />');
+
+            });
+            // $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            //     let min = parseInt($('#qty').val(), 0);
+            //     let qty = parseInt(data[3]) || 0; // use data for the age column
+            //
+            //     return (isNaN(min) || (min <= qty));
+            // });
             $('#table-index').DataTable({
+                dom: 'Blrtip',
+                select: true,
+                buttons: [
+                    {
+                        extend: 'excel',
+                        exportOptions: {
+                            columns: ':visible :not(.not-export)'
+                        },
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: ':visible :not(.not-export)'
+                        },
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: ':visible :not(.not-export)'
+                        },
+                    },
+                    'colvis'
+                ],
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('api.orders.index') !!}',
@@ -79,27 +140,36 @@
                         targets: 8,
                         orderable: false,
                         searchable: false,
+                        columnDefs: [
+                            {className: "not-export", "targets": [8]}
+                        ],
                         data: "edit",
                         render: function ( data, type, row, meta ) {
                             return `<a href="${data}"
                                         class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Xem</a>`;
                         }
                     },
-                    // {
-                    //     targets: 7,
-                    //     orderable: false,
-                    //     searchable: false,
-                    //     data: "delete",
-                    //     render: function ( data, type, row, meta ) {
-                    //         return `<a href="" class="btn btn-danger action_delete"
-                    //                                                        data-url="${data}"">
-                    //                                                         <i class="fa fa-trash mr-2"></i>Delete</a>`;
-                    //     }
-                    // },
-
                 ],
+                initComplete: function () {
+                    // Apply the search
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            let that = this;
+
+                            $('input', this.footer()).on('keyup change clear', function () {
+                                if (that.search() !== this.value) {
+                                    that.search(this.value).draw();
+                                }
+                            });
+                        });
+                },
 
             });
+
+            // $('#qty').keyup(function () {
+            //     table.draw();
+            // });
         });
     </script>
 @endsection

@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use function PHPUnit\Framework\isEmpty;
 
 
@@ -35,8 +36,13 @@ class ProductController extends Controller
     public function detail($id)
     {
         $product = $this->productService->show($id);
+        $rates = $this->product->where('id', $id)->first()->rates;
+        $ratesCount = $rates->count('rate_value');
+        $ratesAvg = $rates->avg('rate_value');
         return view('Shop.products.detail', [
             'product' => $product,
+            'ratesAvg' => number_format($ratesAvg,1),
+            'ratesCount' => $ratesCount,
         ]);
     }
 
@@ -44,6 +50,7 @@ class ProductController extends Controller
     {
         $product_id = $request->product_id;
         $rateValue = $request->rating;
+        $productName = $this->product->where('id', $product_id)->pluck('name');
         try {
             DB::beginTransaction();
             $comment= Comment::where('user_id', Auth::id())->where('product_id',$product_id)->first();
@@ -76,12 +83,18 @@ class ProductController extends Controller
 
 
             DB::commit();
-            $resMessage = 'Cảm ơn đã bình luận!';
-            return redirect()->route('detail', $product_id)->with('success', $resMessage);
+            return redirect()->route('detail',[
+                'id' => $product_id,
+                'slug' => Str::slug($productName)
+            ]);
+
+
         } catch (\Exception $exception) {
-            $resMessage = 'Bình luận thất bại!';
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
-            return redirect()->route('detail', $product_id)->with('failure', $resMessage);
+            return redirect()->route('detail',[
+                'id' => $product_id,
+                'slug' => Str::slug($productName)
+            ]);
 
         }
     }

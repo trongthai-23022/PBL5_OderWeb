@@ -129,7 +129,7 @@ class CartController extends Controller
     {
         $res = UserProfile::where('user_id', auth()->user()->id)->first();
         if(is_null($res)){
-           return  redirect('account');
+           return  redirect()->route('account.show',auth()->user()->id);
         }
 
         $userInfo = $res;

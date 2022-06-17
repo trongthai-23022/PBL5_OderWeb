@@ -52,21 +52,33 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('products.index')}}" class="nav-link">
+                    <a href="#products" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
                         <i class="fas fa-utensils"></i>
-                        <p style="margin-left: 10px">
-                            Sản phẩm
+                        <p style="margin-left: 10px">Sản phẩm</p></a>
 
-                        </p>
-                    </a>
+                    <ul class="collapse list-unstyled nav nav-pills nav-sidebar flex-column" id="products">
+                        <li class="nav-item " style="margin-left: 20px">
+                            <a class="nav-link" href="{{route('products.index')}}">Danh Sách SP</a>
+                        </li>
+                        <li class="nav-item" style="margin-left: 20px">
+                            <a class="nav-link" >Mã Giảm Giá</a>
+                        </li>
+                    </ul>
                 </li>
+
                 <li class="nav-item">
-                    <a href="{{route('sliders.index')}}" class="nav-link">
+                    <a href="#add" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
                         <i class="fas fa-ad"></i>
-                        <p style="margin-left: 10px">
-                            Sliders - Quảng cáo
-                        </p>
-                    </a>
+                        <p style="margin-left: 10px">Quảng cáo</p></a>
+
+                    <ul class="collapse list-unstyled nav nav-pills nav-sidebar flex-column" id="add">
+                        <li class="nav-item " style="margin-left: 20px">
+                            <a class="nav-link" href="{{route('sliders.index')}}">Sliders</a>
+                        </li>
+                        <li class="nav-item" style="margin-left: 20px">
+                            <a class="nav-link" href="{{route('banners.index')}}">Banners</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('orders.index')}}" class="nav-link">
@@ -76,15 +88,7 @@
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="{{route('menus.index')}}" class="nav-link">
-                        <i class="fas fa-bars"></i>
-                        <p style="margin-left: 10px">
-                            Menus
-                        </p>
-                    </a>
-                </li>
-
+                
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">
                         <i class="fas fa-users"></i>

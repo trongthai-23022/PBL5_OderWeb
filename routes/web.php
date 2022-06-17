@@ -37,68 +37,57 @@ Route::prefix('admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     //menus
-    Route::prefix('menus')->group(function () {
-        Route::get('/', [
-            'as' => 'menus.index',
-            'uses' => 'MenuController@index'
-        ]);
-        Route::get('/create', [
-            'as' => 'menus.create',
-            'uses' => 'MenuController@create'
-        ]);
-        Route::post('/store', [
-            'as' => 'menus.store',
-            'uses' => 'MenuController@store'
-        ]);
-        //button edit to show update form
-        Route::get('/edit/{id}', [
-            'as' => 'menus.edit',
-            'uses' => 'MenuController@edit'
-        ]);
-        // submit to update
-        Route::post('/update/{id}', [
-            'as' => 'menus.update',
-            'uses' => 'MenuController@update'
-        ]);
-        Route::get('/delete/{id}', [
-            'as' => 'menus.delete',
-            'uses' => 'MenuController@delete'
-        ]);
-    });
+//    Route::prefix('menus')->group(function () {
+//        Route::get('/', [
+//            'as' => 'menus.index',
+//            'uses' => 'MenuController@index'
+//        ]);
+//        Route::get('/create', [
+//            'as' => 'menus.create',
+//            'uses' => 'MenuController@create'
+//        ]);
+//        Route::post('/store', [
+//            'as' => 'menus.store',
+//            'uses' => 'MenuController@store'
+//        ]);
+//        //button edit to show update form
+//        Route::get('/edit/{id}', [
+//            'as' => 'menus.edit',
+//            'uses' => 'MenuController@edit'
+//        ]);
+//        // submit to update
+//        Route::post('/update/{id}', [
+//            'as' => 'menus.update',
+//            'uses' => 'MenuController@update'
+//        ]);
+//        Route::get('/delete/{id}', [
+//            'as' => 'menus.delete',
+//            'uses' => 'MenuController@delete'
+//        ]);
+//    });
 
     //slider
     Route::prefix('sliders')->group(function () {
-        Route::get('/', [AminSliderController::class, 'index'])->name('sliders.index');
-        Route::get('/create', [AminSliderController::class, 'create'])->name('sliders.create');
+        Route::get('/', [AminSliderController::class, 'index'])->can('slider-view')->name('sliders.index');
+        Route::get('/create', [AminSliderController::class, 'create'])->can('slider-add')->name('sliders.create');
         Route::post('/store', [AminSliderController::class, 'store'])->name('sliders.store');
-        //button edit to show update form
-        Route::get('/edit/{id}', [
-            'as' => 'sliders.edit',
-            'uses' => 'AminSliderController@edit'
-        ]);
-        // submit to update
-        Route::post('/update/{id}', [
-            'as' => 'sliders.update',
-            'uses' => 'AminSliderController@update'
-        ]);
-        Route::get('/delete/{id}', [
-            'as' => 'sliders.delete',
-            'uses' => 'AminSliderController@delete'
-        ]);
+        Route::post('/edit/{id}', [AminSliderController::class, 'edit'])->can('slider-edit')->name('sliders.edit');
+        Route::post('/update/{id}', [AminSliderController::class, 'update'])->name('sliders.update');
+        Route::get('/delete/{id}', [AminSliderController::class, 'delete'])->can('slider-delete')->name('sliders.delete');
+
+        Route::prefix('banners')->group(function (){
+            Route::get('/', [AminSliderController::class, 'index_banner'])->can('slider-view')->name('banners.index');
+            Route::get('/create', [AminSliderController::class, 'create_banner'])->can('slider-add')->name('banners.create');
+        });
     });
 
     // order
     Route::prefix('orders')->group(function () {
-        Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/', [OrderController::class, 'index'])->can('order-view')->name('orders.index');
         Route::get('/orders/api', [OrderController::class, 'api'])->name('api.orders.index');
-        Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('orders.edit');
-
+        Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->can('order-edit')->name('orders.edit');
         Route::post('/update', [OrderController::class, 'update_status'])->name('orders.update');
 
-        Route::get('/delete/{id}', [
-            'as' => 'orders.delete',
-            'uses' => 'AminSliderController@delete'
-        ]);
     });
 });
 

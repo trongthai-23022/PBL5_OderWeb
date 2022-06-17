@@ -1,8 +1,5 @@
 <header id="header" class="header header-style-1">
-    @php
-        use App\Helpers\Helper;
-        $menusHtml = Helper::menus($menus);
-    @endphp
+
     <div class="container-fluid">
         <div class="row">
             <div class="topbar-menu-area">
@@ -87,15 +84,7 @@
                     </div>
 
                     <div class="wrap-icon right-section">
-                        <div class="wrap-icon-section wishlist">
-                            <a href="#" class="link-direction">
-                                <i class="fa fa-heart" aria-hidden="true"></i>
-                                <div class="left-info">
-                                    <span class="index">0 item</span>
-                                    <span class="title">Wishlist</span>
-                                </div>
-                            </a>
-                        </div>
+
                         <div class="wrap-icon-section minicart">
                             <a href="{{route('cart.index')}}" class="link-direction">
                                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
@@ -121,8 +110,6 @@
                 <div class="header-nav-section">
                     <div class="container">
                         <ul class="nav menu-nav clone-main-menu" id="mercado_haead_menu" data-menuname="Sale Info" >
-                            {!! $menusHtml !!}
-
                         </ul>
                     </div>
                 </div>
@@ -134,16 +121,16 @@
                                 <a href="{{route('app.home')}}" class="link-term mercado-item-title"><i class="fa fa-home" aria-hidden="true"></i></a>
                             </li>
                             <li class="menu-item">
-                                <a href="about-us.html" class="link-term mercado-item-title">About Us</a>
-                            </li>
-                            <li class="menu-item">
                                 <a href="{{route('shop')}}" class="link-term mercado-item-title">Shop</a>
                             </li>
                             <li class="menu-item">
-                                <a href="cart.html" class="link-term mercado-item-title">Cart</a>
+                                <a href="cart.html" class="link-term mercado-item-title">Flash Order</a>
                             </li>
                             <li class="menu-item">
-                                <a href="checkout.html" class="link-term mercado-item-title">Checkout</a>
+                                <a href="{{route('cart.checkout.info')}}" class="link-term mercado-item-title">Checkout</a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="about-us.html" class="link-term mercado-item-title">About Us</a>
                             </li>
                             <li class="menu-item">
                                 <a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>

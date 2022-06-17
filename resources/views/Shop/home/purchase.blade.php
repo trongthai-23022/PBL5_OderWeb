@@ -9,6 +9,13 @@
         ul {
             list-style-type: none;
         }
+        li.order-item{
+            padding: 10px;
+            background-color: #f4f4f4;
+            margin-top: 10px;
+            margin-right: 20px;
+            border-radius: 10px;
+        }
     </style>
 @endsection
 
@@ -36,7 +43,6 @@
 @endsection
 
 @section('content')
-    <div class="container">
         <div class="wrap-breadcrumb">
             <ul>
                 <li class="item-link"><a href="{{route('app.home')}}" class="link">Home</a></li>
@@ -56,26 +62,26 @@
         <div class="row d-flex justify-content-center">
             <!-- Nav tabs -->
             <ul class="nav nav-tabs multi-tab" role="tablist">
-                <li role="presentation" class="active col-md-2"><a href="#all" aria-controls="all" role="tab"
-                                                                   data-toggle="tab">Tất cả</a></li>
+                <li role="presentation" class=" col-md-2"><a href="#all" aria-controls="all" role="tab"
+                                                                   data-toggle="tab"><b>Tất cả</b></a></li>
                 <li role="presentation" class=" col-md-2"><a href="#processing" aria-controls="processing" role="tab"
-                                                             data-toggle="tab">Đang xử lý</a></li>
+                                                             data-toggle="tab"><b>Đang xử lý</b></a></li>
                 <li role="presentation" class=" col-md-2"><a href="#intransit" aria-controls="intransit" role="tab"
-                                                             data-toggle="tab">Đang vận chuyển</a></li>
+                                                             data-toggle="tab"><b>Đang giao</b></a></li>
                 <li role="presentation" class=" col-md-2"><a href="#completed" aria-controls="completed" role="tab"
-                                                             data-toggle="tab">Đã hoàn thành</a></li>
+                                                             data-toggle="tab"><b>Đã hoàn thành</b></a></li>
                 <li role="presentation" class=" col-md-2"><a href="#canceled" aria-controls="canceled" role="tab"
-                                                             data-toggle="tab">Đã hủy</a></li>
+                                                             data-toggle="tab"><b>Đã hủy</b></a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="all">
-                    <div class="container">
-                        <h3 class="box-title mt-4">Các đơn đã đặt</h3>
+                    <div>
                         <ul>
+                            <h3 class="box-title mt-4">Tất cả đơn đã đặt</h3>
                             @foreach($allOrders as $order)
-                                <li style="padding: 10px; background-color: #ebebeb; margin: 20px 0px; border-radius: 10px">
+                                <li class="order-item">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
@@ -133,11 +139,11 @@
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="processing">
-                    <div class="container">
-                        <h3 class="box-title mt-4">Các đơn đã đặt</h3>
+                    <div>
                         <ul>
+                            <h3 class="box-title mt-4">Các đơn đang được xử lý</h3>
                             @foreach($processing as $order)
-                                <li style="padding: 10px; background-color: #ebebeb; margin: 20px 0px; border-radius: 10px">
+                                <li class="order-item">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
@@ -201,11 +207,11 @@
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="intransit">
-                    <div class="container">
-                        <h3 class="box-title mt-4">Các đơn đã đặt</h3>
+                    <div>
                         <ul>
+                            <h3 class="box-title mt-4">Các đơn đang giao</h3>
                             @foreach($inTransit as $order)
-                                <li style="padding: 10px; background-color: #ebebeb; margin: 20px 0px; border-radius: 10px">
+                                <li class="order-item">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
@@ -260,11 +266,11 @@
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="completed">
-                    <div class="container">
-                        <h3 class="box-title mt-4">Các đơn đã đặt</h3>
+                    <div >
                         <ul>
+                            <h3 class="box-title mt-4">Các đơn đã hoàn thành</h3>
                             @foreach($completed as $order)
-                                <li style="padding: 10px; background-color: #ebebeb; margin: 20px 0px; border-radius: 10px">
+                                <li class="order-item">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
@@ -315,30 +321,16 @@
                                     </div>
                                 </li>
                             @endforeach
-                            {{--                                <li class="pr-cart-item">--}}
-                            {{--                                    <div class="product-name">--}}
-                            {{--                                        <p class="price">Tổng số lượng: {{$order->item_count}}</p>--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class="product-name">--}}
-                            {{--                                        <p class="price">Số tiền: {{number_format($order->sub_total,0,',','.')}} đ</p>--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class="product-name">--}}
-                            {{--                                        <p class="price">Thuế (10%): {{number_format($order->tax,0,',','.')}} đ</p>--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class=" price-field ">--}}
-                            {{--                                        <p class="price">Thành tiền: {{number_format($order->total,0,',','.')}} đ</p>--}}
-                            {{--                                    </div>--}}
-                            {{--                                </li>--}}
 
                         </ul>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="canceled">
-                    <div class="container">
-                        <h3 class="box-title mt-4">Các đơn đã đặt</h3>
+                    <div >
                         <ul>
+                            <h3 class="box-title mt-4">Các đơn đã hủy</h3>
                             @foreach($canceled as $order)
-                                <li style="padding: 10px; background-color: #ebebeb; margin: 20px 0px; border-radius: 10px">
+                                <li class="order-item">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6">
@@ -389,26 +381,12 @@
                                     </div>
                                 </li>
                             @endforeach
-                            {{--                                <li class="pr-cart-item">--}}
-                            {{--                                    <div class="product-name">--}}
-                            {{--                                        <p class="price">Tổng số lượng: {{$order->item_count}}</p>--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class="product-name">--}}
-                            {{--                                        <p class="price">Số tiền: {{number_format($order->sub_total,0,',','.')}} đ</p>--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class="product-name">--}}
-                            {{--                                        <p class="price">Thuế (10%): {{number_format($order->tax,0,',','.')}} đ</p>--}}
-                            {{--                                    </div>--}}
-                            {{--                                    <div class=" price-field ">--}}
-                            {{--                                        <p class="price">Thành tiền: {{number_format($order->total,0,',','.')}} đ</p>--}}
-                            {{--                                    </div>--}}
-                            {{--                                </li>--}}
+
+
 
                         </ul>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
 @endsection
