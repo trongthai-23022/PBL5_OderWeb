@@ -18,11 +18,11 @@
                                 <li class="menu-item" ><a title="Register or Login" href="{{route('register')}}">Register</a></li>
                             @else
                                 <li class="menu-item menu-item-has-children parent" >
-                                    <a title="Profile" href="{{route('account.show',['id' => auth()->user()->id])}}">{{auth()->user()->name}}</a>
+                                    <a title="Profile" href="{{route('account.show')}}">{{auth()->user()->name}}</a>
                                     <ul class="submenu curency" >
                                         <li class="menu-item" >
 {{--                                            <a title="Profile" href="{{route('profile.show')}}">Tài khoản của tôi</a>--}}
-                                            <a title="Profile" href="{{route('account.show',['id' => auth()->user()->id])}}">Tài khoản của tôi</a>
+                                            <a title="Profile" href="{{route('account.show')}}">Tài khoản của tôi</a>
                                         </li>
                                         <li class="menu-item" >
                                             <a title="Profile" href="{{route('purchase.show',['id' => auth()->user()->id])}}">Đơn mua</a>

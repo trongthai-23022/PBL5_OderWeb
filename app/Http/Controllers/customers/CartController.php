@@ -129,7 +129,7 @@ class CartController extends Controller
     {
         $res = UserProfile::where('user_id', auth()->user()->id)->first();
         if(is_null($res)){
-           return  redirect()->route('account.show',auth()->user()->id);
+           return  redirect()->route('account.show')->with('message', 'Vui lòng điền đầy đủ thông tin cá nhân của bạn' );
         }
 
         $userInfo = $res;

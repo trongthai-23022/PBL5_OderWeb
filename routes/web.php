@@ -98,18 +98,18 @@ Route::prefix('cart')->middleware('auth')->group(function (){
     Route::get('/destroy/{rowId}',[CartController::class,'destroy'])->name('cart.destroy');
 
     Route::get('/checkout-info', [CartController::class,'getCheckout'])
-        ->middleware('auth', 'verified')
+        ->middleware('verified')
         ->name('cart.checkout.info');
 
     Route::post('/order', [CartController::class,'postOrder'])
-        ->middleware('auth', 'verified')
+        ->middleware('verified')
         ->name('cart.order');
 });
 
-Route::prefix('account')->middleware('auth')->group(function (){
-
+Route::prefix('account')->middleware(['auth','verified'])->group(function (){
     Route::get('/purchases/{id}',[OrderController::class, 'user_purchase_show'])->name('purchase.show');
-    Route::get('/profile/{id}',[UserController::class,'show'])->name('account.show');
+    Route::get('/profile',[UserController::class,'show'])->name('account.show');
+    Route::post('/profile',[UserController::class,'store'])->name('account.store');
 });
 
 

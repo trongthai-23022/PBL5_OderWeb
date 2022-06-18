@@ -42,9 +42,8 @@ class HomeController extends Controller
          }
 
          //banner
-        $bannerCate = $this->slider->where('type', 2)->where('content_position', 'cate-pro')->first();
-        $bannerLatest= $this->slider->where('type', 2)->where('content_position', 'latest')->first();
-
+        $bannerCate = $this->slider->where('type', 2)->where('content_position', 'cate-pro')->latest()->first();
+        $bannerLatest= $this->slider->where('type', 2)->where('content_position', 'latest')->latest()->first();
         return view('Shop.home.index', [
             'sliders' => $sliders,
             'onSaleProducts' =>$onSaleProducts,

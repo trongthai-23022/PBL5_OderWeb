@@ -1,11 +1,13 @@
 <!--Latest Products-->
 <div class="wrap-show-advance-info-box style-1">
     <h3 class="title-box">Latest Products</h3>
-    <div class="wrap-top-banner">
-        <a href="#" class="link-banner banner-effect-2">
-            <figure><img src="{{$bannerLatest->image_path}}" width="1170" height="240" alt="{{$bannerCate->image_name}}"></figure>
-        </a>
-    </div>
+    @if(!is_null($bannerLatest))
+        <div class="wrap-top-banner">
+            <a href="#" class="link-banner banner-effect-2">
+                <figure><img src="{{$bannerLatest->image_path}}" width="1170" height="240" alt="{{$bannerLatest->image_name}}"></figure>
+            </a>
+        </div>
+    @endif
     <div class="wrap-products">
         <div class="wrap-product-tab tab-style-1">
             <div class="tab-contents">
