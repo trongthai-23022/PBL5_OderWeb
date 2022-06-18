@@ -78,10 +78,6 @@ class AdminProductController extends Controller
             'sort_by' => $sortBy,
         ]);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
         return view('admin.product.index', [
             'products' => $productsList,
             'search' => $search,
@@ -90,33 +86,6 @@ class AdminProductController extends Controller
         ]);
     }
 
-<<<<<<< HEAD
-//    public function api()
-//    {
-//        return Datatables::of(Product::query())
-//            ->addIndexColumn()
-//            ->editColumn('created_at', function ($product) {
-//                return $product->created_at->format('Y/m/d');
-//            })
-//            ->addColumn('image', function ($product){
-//                return "<img class='product-main-image'
-//                             src='$product->main_image_path')
-//                             alt='$product->main_image_name'>";
-//            })
-//            ->addColumn('cate', function ($product){
-//                return $product->category->name;
-//            })
-//            ->addColumn('edit', function ($product){
-//                return route('products.edit',['id'=>$product->id]);
-//            })
-//            ->addColumn('delete', function ($product){
-//                return route('products.delete',['id'=>$product->id]);
-//            })
-//            ->rawColumns(['image'])
-//            ->make(true);
-//    }
-=======
->>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
 
     public function create()
     {

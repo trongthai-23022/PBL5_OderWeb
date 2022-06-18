@@ -153,7 +153,4 @@
     <script src="{{asset('admins/common.js')}}"></script>
 
 @endsection
-<<<<<<< HEAD
 
-=======
->>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b

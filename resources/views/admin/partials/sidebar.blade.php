@@ -52,23 +52,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-<<<<<<< HEAD
-                    <a href="{{route('products.index')}}" class="nav-link">
-                        <i class="fas fa-utensils"></i>
-                        <p style="margin-left: 10px">
-                            Products
-
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{route('menus.index')}}" class="nav-link">
-                        <i class="fas fa-bars"></i>
-                        <p style="margin-left: 10px">
-                            Menus
-                        </p>
-                    </a>
-=======
                     <a href="#products" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
                         <i class="fas fa-utensils"></i>
                         <p style="margin-left: 10px">Sản phẩm</p></a>
@@ -81,7 +64,6 @@
                             <a class="nav-link" >Mã Giảm Giá</a>
                         </li>
                     </ul>
->>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
                 </li>
 
                 <li class="nav-item">
@@ -101,8 +83,7 @@
                 </li>
 
                 <li class="nav-item">
-<<<<<<< HEAD
-=======
+
                     <a href="{{route('orders.index')}}" class="nav-link">
                         <i class="fas fa-list-alt"></i>
                         <p style="margin-left: 10px">
@@ -112,7 +93,6 @@
                 </li>
 
                 <li class="nav-item">
->>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
                     <a href="{{route('users.index')}}" class="nav-link">
                         <i class="fas fa-users"></i>
                         <p style="margin-left: 10px">

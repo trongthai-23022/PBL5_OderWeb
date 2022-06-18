@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Product extends Model
@@ -29,11 +28,9 @@ class Product extends Model
             'tag_id')
             ->withTimestamps()->latest();
     }
-<<<<<<< HEAD
+
     public function category(): BelongsTo
-=======
-    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
->>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
+
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
