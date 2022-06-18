@@ -14,7 +14,6 @@
 @endsection
 
 @section('content')
-
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="{{route('app.home')}}" class="link">Home</a></li>

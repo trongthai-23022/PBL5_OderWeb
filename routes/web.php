@@ -88,6 +88,21 @@ Route::prefix('admin')->group(function () {
         Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->can('order-edit')->name('orders.edit');
         Route::post('/update', [OrderController::class, 'update_status'])->name('orders.update');
 
+
+    });
+
+    // order
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders/api', [OrderController::class, 'api'])->name('api.orders.index');
+        Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('orders.edit');
+
+        Route::post('/update', [OrderController::class, 'update_status'])->name('orders.update');
+
+        Route::get('/delete/{id}', [
+            'as' => 'orders.delete',
+            'uses' => 'AminSliderController@delete'
+        ]);
     });
 });
 
@@ -104,6 +119,7 @@ Route::prefix('cart')->middleware('auth')->group(function (){
     Route::post('/order', [CartController::class,'postOrder'])
         ->middleware('verified')
         ->name('cart.order');
+
 });
 
 Route::prefix('account')->middleware(['auth','verified'])->group(function (){
@@ -111,6 +127,7 @@ Route::prefix('account')->middleware(['auth','verified'])->group(function (){
     Route::get('/profile',[UserController::class,'show'])->name('account.show');
     Route::post('/profile',[UserController::class,'store'])->name('account.store');
 });
+
 
 
 require_once __DIR__ . '/fortify.php';

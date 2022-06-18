@@ -79,7 +79,9 @@
                             <a class="nav-link" href="{{route('banners.index')}}">Banners</a>
                         </li>
                     </ul>
+
                 </li>
+
                 <li class="nav-item">
                     <a href="{{route('orders.index')}}" class="nav-link">
                         <i class="fas fa-list-alt"></i>
@@ -88,7 +90,7 @@
                         </p>
                     </a>
                 </li>
-                
+
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">
                         <i class="fas fa-users"></i>

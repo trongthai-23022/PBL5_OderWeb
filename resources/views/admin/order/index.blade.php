@@ -35,12 +35,14 @@
         <div class="content">
             <div class="container-fluid">
                 <div class="row">
+
                     <div class="col-md-12">
                         <table class="table table-striped" id="table-index">
                             <div class="dt-buttons">
                                 Export
                             </div>
                             <div class="dataTables_length"></div>
+
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -68,6 +70,7 @@
                                 <th></th>
                             </tr>
                             </tfoot>
+
                         </table>
                     </div>
 
@@ -143,6 +146,7 @@
                         columnDefs: [
                             {className: "not-export", "targets": [8]}
                         ],
+
                         data: "edit",
                         render: function ( data, type, row, meta ) {
                             return `<a href="${data}"

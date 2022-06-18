@@ -49,6 +49,5 @@ class UserController extends Controller
         catch (\Exception $exception){
             return redirect()->back();
         }
-
     }
 }

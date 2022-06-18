@@ -12,8 +12,6 @@
 @endsection
 @section('content')
 
-
-
         <div class="container">
             <div class="wrap-breadcrumb">
                 <ul>
@@ -32,5 +30,4 @@
                 </div>
             </div>
         </div><!--end container-->
-
 @endsection
