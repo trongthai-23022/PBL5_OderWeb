@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @yield('title')
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('customers/assets/images/favicon.ico')}}">
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open%20Sans:300,400,400italic,600,600italic,700,700italic&amp;subset=latin,latin-ext" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic&amp;subset=latin,latin-ext"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open%20Sans:300,400,400italic,600,600italic,700,700italic&amp;subset=latin,latin-ext"
+        rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/animate.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/bootstrap.min.css')}}">
@@ -21,14 +25,17 @@
 </head>
 <body class="home-page home-01 ">
 
-@include('SuperKay.partials.mobile-menu')
+@include('Shop.partials.mobile-menu')
 
-@include('SuperKay.partials.header')
+@include('Shop.partials.header')
+<main id="main" style="background-color: #f0f0f0 ">
+<div class="container" style="padding: 20px; background-color: #ffffff">
+    @yield('content')
+</div>
+</main>
 
-@yield('content')
 
-
-@include('SuperKay.partials.footer')
+@include('Shop.partials.footer')
 
 <script src="{{asset('customers/assets/js/jquery-1.12.4.minb8ff.js?ver=1.12.4')}}"></script>
 <script src="{{asset('customers/assets/js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4')}}"></script>

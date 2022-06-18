@@ -15,7 +15,7 @@ class AddContentPositionToSlidersTable extends Migration
     {
         Schema::table('sliders', function (Blueprint $table) {
             //
-            $table->string('content_position');
+            $table->string('content_position')->nullable();
         });
     }
 

@@ -28,7 +28,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('SuperKay.partials.header', MenuComposer::class);
-        View::composer('SuperKay.products.shop', CatagoryComposer::class);
+        View::composer('Shop.partials.header', MenuComposer::class);
+        View::composer('Shop.products.shop', CatagoryComposer::class);
     }
 }

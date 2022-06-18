@@ -45,10 +45,11 @@ class AdminUserController extends Controller
 
         try {
             DB::beginTransaction();
-            $user = $this->user->create([
+            $user = $this->user->forceCreate([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
+                'email_verified_at' => now(),
             ]);
             $roleIds = $request->role_ids;
             $user->roles()->attach($roleIds);

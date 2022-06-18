@@ -40,6 +40,7 @@ class AdminProductController extends Controller
         $this->productImage = $productImage;
     }
 
+
     //
     public function index(Request $request)
     {
@@ -77,7 +78,10 @@ class AdminProductController extends Controller
             'sort_by' => $sortBy,
         ]);
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
         return view('admin.product.index', [
             'products' => $productsList,
             'search' => $search,
@@ -86,6 +90,7 @@ class AdminProductController extends Controller
         ]);
     }
 
+<<<<<<< HEAD
 //    public function api()
 //    {
 //        return Datatables::of(Product::query())
@@ -110,6 +115,8 @@ class AdminProductController extends Controller
 //            ->rawColumns(['image'])
 //            ->make(true);
 //    }
+=======
+>>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
 
     public function create()
     {

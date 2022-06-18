@@ -34,28 +34,6 @@ class AdminPermissionController extends Controller
         ]);
     }
 
-    public function store_manual(PermissionAddRequest $req): RedirectResponse
-    {
-        try {
-            DB::beginTransaction();
-            DB::table('permissions')->insert(
-                [
-                    'name' => $req->name,
-                    'parent_id' => $req->parent_id,
-                    'display_name' => $req->description,
-                    'key_code' => $req->key_code
-                ]
-            );
-            DB::commit();
-            $resMessage = 'Thêm thành công!';
-            return redirect()->route('permissions.create-manual')->with('success', $resMessage);
-        } catch (\Exception $exception) {
-            DB::rollBack();
-            Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
-            $resMessage = 'Thêm thất bại!';
-            return redirect()->route('permissions.create-manual')->with('failure', $resMessage);
-        }
-    }
 
     public function store(Request $req): RedirectResponse
     {
@@ -103,13 +81,7 @@ class AdminPermissionController extends Controller
         ]);
     }
 
-    public function create_manual()
-    {
-        $htmlCategoryOptions = $this->getAllCategories($parentId = '');
-        return view('admin.permission.create-manual', [
-            'htmlOption' => $htmlCategoryOptions
-        ]);
-    }
+
 
     public function edit($id)
     {

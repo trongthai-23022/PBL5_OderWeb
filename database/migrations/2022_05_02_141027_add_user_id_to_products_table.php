@@ -15,7 +15,7 @@ class AddUserIdToProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             //
-            $table->string('user_id');
+            $table->bigInteger('user_id');
         });
     }
 

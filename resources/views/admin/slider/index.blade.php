@@ -24,10 +24,10 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-{{--                        @can('slider-add')--}}
+                        @can('slider-add')
                             <a href="{{ route('sliders.create') }}"
                                class="btn btn-success float-left m-2 text-uppercase">Add new slider</a>
-{{--                        @endcan--}}
+                        @endcan
                     </div>
                     <div class="col-md-6">
                         @if(session('success'))
@@ -74,15 +74,15 @@
                                                 }}">
                                     </td>
                                     <td>
-{{--                                        @can('slider-edit')--}}
+                                        @can('slider-edit')
                                             <a href="{{route('sliders.edit',['id'=>$slider->id])}}"
                                                class="btn btn-primary"><i class="fa fa-edit mr-2"></i>Edit</a>
-{{--                                        @endcan--}}
-{{--                                        @can('slider-delete')--}}
+                                        @endcan
+                                        @can('slider-delete')
                                             <a href="" class="btn btn-danger action_delete"
                                                data-url="{{route('sliders.delete',['id'=>$slider->id])}}">
                                                 <i class="fa fa-trash mr-2"></i>Delete</a>
-{{--                                        @endcan--}}
+                                        @endcan
                                     </td>
                                 </tr>
                                 @php

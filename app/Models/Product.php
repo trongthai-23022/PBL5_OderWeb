@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Traits\CreateSlugTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,6 +15,7 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use CreateSlugTrait;
     protected $guarded = [];
     public function detailImages(): HasMany
     {
@@ -24,9 +27,13 @@ class Product extends Model
             'product_tags',
             'product_id',
             'tag_id')
-            ->withTimestamps()->latest();;
+            ->withTimestamps()->latest();
     }
+<<<<<<< HEAD
     public function category(): BelongsTo
+=======
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+>>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
@@ -38,5 +45,10 @@ class Product extends Model
     public function rates(): HasMany
     {
         return $this->hasMany(Rate::class, 'product_id');
+    }
+
+    public function slug(): string
+    {
+        return $this->create_slug($this->attributes['name']);
     }
 }

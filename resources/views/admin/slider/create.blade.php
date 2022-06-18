@@ -35,6 +35,7 @@
             </div>
         </div>
         <form action="{{route('sliders.store')}}" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="type" value="1">
             <!-- Main content -->
             <div class="content">
                 <div class="container-fluid">
@@ -45,6 +46,7 @@
                                 <label>Content position</label>
                                 <select class="form-control "
                                         name="content_position">
+                                    <option value="">chooses content display position</option>
                                     <option value="left">left</option>
                                     <option value="middle">middle</option>
                                     <option value="right">right</option>

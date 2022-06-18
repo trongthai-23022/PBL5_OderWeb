@@ -47,11 +47,12 @@
                     <a href="{{route('categories.index')}}" class="nav-link">
                         <i class="fas fa-layer-group"></i>
                         <p style="margin-left: 10px">
-                            Categories
+                            Danh mục
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
+<<<<<<< HEAD
                     <a href="{{route('products.index')}}" class="nav-link">
                         <i class="fas fa-utensils"></i>
                         <p style="margin-left: 10px">
@@ -67,20 +68,55 @@
                             Menus
                         </p>
                     </a>
+=======
+                    <a href="#products" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
+                        <i class="fas fa-utensils"></i>
+                        <p style="margin-left: 10px">Sản phẩm</p></a>
+
+                    <ul class="collapse list-unstyled nav nav-pills nav-sidebar flex-column" id="products">
+                        <li class="nav-item " style="margin-left: 20px">
+                            <a class="nav-link" href="{{route('products.index')}}">Danh Sách SP</a>
+                        </li>
+                        <li class="nav-item" style="margin-left: 20px">
+                            <a class="nav-link" >Mã Giảm Giá</a>
+                        </li>
+                    </ul>
+>>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
                 </li>
+
                 <li class="nav-item">
-                    <a href="{{route('sliders.index')}}" class="nav-link">
+                    <a href="#add" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
                         <i class="fas fa-ad"></i>
+                        <p style="margin-left: 10px">Quảng cáo</p></a>
+
+                    <ul class="collapse list-unstyled nav nav-pills nav-sidebar flex-column" id="add">
+                        <li class="nav-item " style="margin-left: 20px">
+                            <a class="nav-link" href="{{route('sliders.index')}}">Sliders</a>
+                        </li>
+                        <li class="nav-item" style="margin-left: 20px">
+                            <a class="nav-link" href="{{route('banners.index')}}">Banners</a>
+                        </li>
+                    </ul>
+
+                </li>
+
+                <li class="nav-item">
+<<<<<<< HEAD
+=======
+                    <a href="{{route('orders.index')}}" class="nav-link">
+                        <i class="fas fa-list-alt"></i>
                         <p style="margin-left: 10px">
-                            Sliders
+                            Đơn hàng
                         </p>
                     </a>
                 </li>
+
                 <li class="nav-item">
+>>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
                     <a href="{{route('users.index')}}" class="nav-link">
                         <i class="fas fa-users"></i>
                         <p style="margin-left: 10px">
-                            Users
+                            Người dùng
 
                         </p>
                     </a>
@@ -89,7 +125,7 @@
                     <a href="{{route('roles.index')}}" class="nav-link">
                         <i class="fas fa-user-tag"></i>
                         <p style="margin-left: 10px">
-                            Roles
+                            Vai trò
                         </p>
                     </a>
                 </li>
@@ -97,7 +133,7 @@
                     <a href="{{route('permissions.index')}}" class="nav-link">
                         <i class="fas fa-user-lock"></i>
                         <p style="margin-left: 10px">
-                            Permissions
+                            Phân Quyền
                         </p>
                     </a>
                 </li>

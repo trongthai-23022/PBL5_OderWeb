@@ -25,14 +25,15 @@ class HomeController extends Controller
     }
     public function index(){
         //slider
-        $sliders = $this->slider->all();
+        $sliders = $this->slider->where('type', 1)->get();
         // latest
         $latestPosts = $this->product->latest()->limit(10)->get();
         //cate products
         $categories = $this->category->inRandomOrder()->limit(5)->get();
+
+        //on sale
         $onSaleTag = null;
         try {
-            //on sale
             $onSaleTag = Tag::where('name', 'sale')->orWhere('name', 'SALE')->first();
         }catch (\Exception $exception){
         }
@@ -40,11 +41,17 @@ class HomeController extends Controller
          if(!is_null($onSaleTag)){
              $onSaleProducts = $onSaleTag->products;
          }
-        return view('SuperKay.home.index', [
+
+         //banner
+        $bannerCate = $this->slider->where('type', 2)->where('content_position', 'cate-pro')->latest()->first();
+        $bannerLatest= $this->slider->where('type', 2)->where('content_position', 'latest')->latest()->first();
+        return view('Shop.home.index', [
             'sliders' => $sliders,
             'onSaleProducts' =>$onSaleProducts,
             'latestProducts' =>$latestPosts,
             'categories' =>$categories,
+            'bannerCate' => $bannerCate,
+            'bannerLatest' => $bannerLatest,
         ]);
     }
 }
