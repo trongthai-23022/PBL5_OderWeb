@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Comment extends Model
 {
@@ -12,7 +13,8 @@ class Comment extends Model
     use SoftDeletes;
     protected $guarded =[];
 
-    public function rate(){
+    public function rate(): HasOne
+    {
         return $this->hasOne(Rate::class, 'comment_id');
     }
     public function getCreatedAttribute(){

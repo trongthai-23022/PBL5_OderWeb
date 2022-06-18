@@ -14,8 +14,7 @@
     <script src="{{asset('admins/jquery.min.js')}}"></script>
     <script src="{{asset('admins/product/add/add.js')}}"></script>
     <script src="{{asset('vendor/select2/select2.min.js')}}"></script>
-    <script src="https://cdn.tiny.cloud/1/vnu0ov8n5r5z6vuhscwugch5dll4ecxqzp9zylomvtliz8iu/tinymce/6/tinymce.min.js"
-            referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/vnu0ov8n5r5z6vuhscwugch5dll4ecxqzp9zylomvtliz8iu/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="{{asset('admins/common.js')}}"></script>
 
 @endsection
@@ -83,64 +82,70 @@
                                 >
                                 <div class="row mt-4">
                                     <div id="dvPreview"></div>
+<<<<<<< HEAD
+=======
                                 </div>
                             </div>
+>>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
 
-                            <div class="form-group">
-                                <label>Product detail image </label>
-                                <input type="file"
-                                       multiple
-                                       class="form-control-file"
-                                       placeholder="Chooses a file"
-                                       name="product_images[]"
-                                       id="gallery-photo-add"
-                                >
-                                <div class="">
-                                    <div id="gallery" class="gallery"></div>
                                 </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label>Select a category</label>
-                                <select
-                                    class="form-control  @error('category_id') is-invalid @enderror"
-                                    name="category_id">
-                                    <option value="">Category</option>
-                                    {!! $htmlOption !!}
-                                </select>
-                                @error('category_id')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label>Product detail image </label>
+                                    <input type="file"
+                                           multiple
+                                           class="form-control-file"
+                                           placeholder="Chooses a file"
+                                           name="product_images[]"
+                                           id="gallery-photo-add"
+                                    >
+                                    <div class="">
+                                        <div id="gallery" class="gallery"></div>
+                                    </div>
+                                </div>
 
-                            <div class="form-group">
-                                <label>Enter tags</label>
-                                <select name="tags[]" class="form-control tags_select2" multiple="multiple">
-                                </select>
-                            </div>
-
-                            <div>
-                                <div class="form-group ">
-                                    <label>Product Description</label>
-                                    <textarea id="tinymce-editor" name="description"
-                                              class="form-control @error('description') is-invalid @enderror"
-                                              rows="3">{{old('description')}}</textarea>
-                                    @error('description')
+                                <div class="form-group">
+                                    <label>Select a category</label>
+                                    <select
+                                        class="form-control  @error('category_id') is-invalid @enderror"
+                                        name="category_id">
+                                        <option value="">Category</option>
+                                        {!! $htmlOption !!}
+                                    </select>
+                                    @error('category_id')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <button type="submit" class="btn btn-primary">Submit</button>
+
+                                <div class="form-group">
+                                    <label>Enter tags</label>
+                                    <select name="tags[]" class="form-control tags_select2" multiple="multiple">
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <div class="form-group ">
+                                        <label>Product Description</label>
+                                        <textarea id="tinymce-editor" name="description"
+                                                  class="form-control @error('description') is-invalid @enderror"
+                                                  rows="3">{{old('description')}}</textarea>
+                                        @error('description')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
                             </div>
 
                         </div>
+                        <!-- /.row -->
 
-
-                    </div>
-                    <!-- /.row -->
-                </div><!-- /.container-fluid -->
+                    </div><!-- /.container-fluid -->
+                </div>
             </div>
         </form>
         <!-- /.content -->
+
     </div>
     <!-- /.content-wrapper -->
 @endsection

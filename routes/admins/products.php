@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 //products
 Route::prefix('products')->group(function () {
     Route::get('/', [
@@ -6,6 +7,7 @@ Route::prefix('products')->group(function () {
         'uses' => 'AdminProductController@index',
         'middleware' => 'can:product-view'
     ]);
+    Route::get('api/products/index', [\App\Http\Controllers\AdminProductController::class, 'api'])->name('api.products.index');
     Route::get('/create', [
         'as' => 'products.create',
         'uses' => 'AdminProductController@create',

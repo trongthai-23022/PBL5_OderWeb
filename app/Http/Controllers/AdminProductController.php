@@ -18,7 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use phpDocumentor\Reflection\Types\This;
+
+use Yajra\Datatables\Datatables;
 
 class AdminProductController extends Controller
 {
@@ -160,12 +161,12 @@ class AdminProductController extends Controller
         $product = $this->product->find($id);
         $htmlOption = $this->getAllCategories($product->category_id);
         return view('admin.product.edit', [
-            'htmlOption'=> $htmlOption,
-            'product'=>$product
+            'htmlOption' => $htmlOption,
+            'product' => $product
         ]);
     }
 
-    public function update($id, ProductUpdateRequest $req):RedirectResponse
+    public function update($id, ProductUpdateRequest $req): RedirectResponse
     {
         try {
             DB::beginTransaction();
@@ -230,7 +231,7 @@ class AdminProductController extends Controller
 
     public function delete($id)
     {
-       return $this->deleteModelTrait($id, $this->product);
+        return $this->deleteModelTrait($id, $this->product);
     }
 
 
