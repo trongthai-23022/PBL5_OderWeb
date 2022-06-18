@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
 use App\Models\Tag;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use App\Http\Services\Product\ProductService;
 
@@ -24,6 +25,7 @@ class HomeController extends Controller
         $this->category = $category;
     }
     public function index(){
+
         //slider
         $sliders = $this->slider->where('type', 1)->get();
         // latest

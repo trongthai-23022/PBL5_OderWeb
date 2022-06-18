@@ -21,9 +21,13 @@
                                     <a title="Profile" href="{{route('account.show')}}"><span class="img label-before">
                                             @if(auth()->check())
                                                 @php
-                                                    $user = \App\Models\UserProfile::where('user_id',auth()->user()->id)->first();
-                                                    if (!is_null($user->image_path)){
-                                                        echo '<img style="vertical-align: middle;width: 20px;height: 20px;object-fit: cover;border-radius: 50%;" src="'.$user->image_path .'" alt="avt">';
+                                                    $profile = \App\Models\UserProfile::where('user_id',auth()->user()->id)->first();
+                                                    if(!is_null($profile)){
+                                                        $avt = $profile->pluck('image_path')[0];
+                                                        if (!is_null($avt))
+                                                            echo '<img style="vertical-align: middle;width: 20px;height: 20px;object-fit: cover;border-radius: 50%;" src="'.$avt .'" alt="avt">';
+                                                        else
+                                                            echo '<img style="vertical-align: middle;width: 20px;height: 20px;" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">';
                                                     }
                                                     else{
                                                         echo '<img style="vertical-align: middle;width: 20px;height: 20px;" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">';
