@@ -13,7 +13,9 @@ use App\Models\Slider;
 use App\Models\Tag;
 use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTraits;
+use Exception;
 use http\Env\Response;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,18 +37,30 @@ class AminSliderController extends Controller
     //
     public function index()
     {
-        $sliderList =  $this->slider->latest()->paginate(config('constants.pagination_records'));
+        $sliderList =  $this->slider->where('type',1)->latest()->paginate(config('constants.pagination_records'));
         return view('admin.slider.index',['sliders'=>$sliderList]);
+    }
+
+    public function index_banner()
+    {
+        $sliderList =  $this->slider->where('type',2)->latest()->paginate(config('constants.pagination_records'));
+        return view('admin.banner.index',['sliders'=>$sliderList]);
     }
 
     public function create()
     {
-        $sliderList = $this->slider->latest()->paginate(config('constants.pagination_records'));
-        return view('admin.slider.create',['sliders' => $sliderList]);
+        return view('admin.slider.create');
+    }
+    public function create_banner()
+    {
+        return view('admin.banner.create',);
     }
 
     public function store(Request $req): RedirectResponse
     {
+//
+//        $a = $req->content_position;
+//        dd($a);
         try {
             DB::beginTransaction();
             $dataSliderCreate = [
@@ -54,11 +68,10 @@ class AminSliderController extends Controller
                 'subtitle' => $req->subtitle,
                 'description' => $req->description,
                 'content_position' => $req->content_position,
-
+                'type' => $req->type,
+                'product_id' => $req->product_id
             ];
-            if(isset($req->product_id)){
-                $dataSliderCreate['product_id'] = $req->product_id;
-            }
+
             //image data
             if ($req->hasFile('slider_image')) {
                 $image_file = $req->slider_image;
@@ -73,7 +86,7 @@ class AminSliderController extends Controller
             DB::commit();
             $resMessage = 'Thêm thành công!';
             return redirect()->route('sliders.create')->with('success', $resMessage);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             DB::rollBack();
             $resMessage = 'Thêm thất bại!';
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
@@ -118,7 +131,7 @@ class AminSliderController extends Controller
             DB::commit();
             $resMessage = 'Sửa thành công!';
             return redirect()->route('sliders.index')->with('success', $resMessage);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $resMessage = 'Sửa thất bại!';
             DB::rollBack();
             Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
@@ -127,7 +140,7 @@ class AminSliderController extends Controller
 
     }
 
-    public function delete($id)
+    public function delete($id): JsonResponse
     {
         return $this->deleteModelTrait($id, $this->slider);
     }

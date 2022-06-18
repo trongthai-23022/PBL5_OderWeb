@@ -1,12 +1,13 @@
 <!--Latest Products-->
 <div class="wrap-show-advance-info-box style-1">
     <h3 class="title-box">Latest Products</h3>
-    <div class="wrap-top-banner">
-        <a href="#" class="link-banner banner-effect-2">
-            <figure><img src="{{asset('customers/assets/images/digital-electronic-banner.jpg')}}" width="1170"
-                         height="240" alt=""></figure>
-        </a>
-    </div>
+    @if(!is_null($bannerLatest))
+        <div class="wrap-top-banner">
+            <a href="#" class="link-banner banner-effect-2">
+                <figure><img src="{{$bannerLatest->image_path}}" width="1170" height="240" alt="{{$bannerLatest->image_name}}"></figure>
+            </a>
+        </div>
+    @endif
     <div class="wrap-products">
         <div class="wrap-product-tab tab-style-1">
             <div class="tab-contents">
@@ -26,8 +27,10 @@
                                 <div class="product-thumnail">
                                     <a href="{{route('detail', [ 'slug' => $latestProduct->slug,'id' => $latestProduct->id])}}"
                                        title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                        <figure><img src="{{$latestProduct->main_image_path}}" width="800" height="800"
-                                                     alt="{{$latestProduct->main_image_name}}"></figure>
+                                        <figure><img
+                                                style="width: 100%; height: 250px;object-fit: cover;"
+                                                src="{{$latestProduct->main_image_path}}" width="800" height="800"
+                                                alt="{{$latestProduct->main_image_name}}"></figure>
                                     </a>
                                     <div class="group-flash">
                                         @if(!empty($latestProduct->tags))

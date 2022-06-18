@@ -11,6 +11,16 @@ return [
         'product-edit' => 'product_edit',
         'product-delete' => 'product_delete',
 
+        'slider-view' => 'slider_view',
+        'slider-add' => 'slider_add',
+        'slider-edit' => 'slider_edit',
+        'slider-delete' => 'slider_delete',
+
+        'order-view' => 'order_view',
+        'order-add' => 'order_add',
+        'order-edit' => 'order_edit',
+        'order-delete' => 'order_delete',
+
         'user-view' => 'user_view',
         'user-add' => 'user_add',
         'user-edit' => 'user_edit',
@@ -29,6 +39,8 @@ return [
     'modules' => [
         'category' => "danh_mục",
         'product' => 'sản_phẩm',
+        'slider' => 'quảng_cáo',
+        'order' => 'đơn_hàng',
         'menu' => 'menu',
         'user' => 'người_dùng',
         'role' => 'vai_trò',

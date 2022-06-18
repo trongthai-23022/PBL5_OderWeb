@@ -25,16 +25,16 @@ class OrderController extends Controller
         return DataTables::of(Order::query())
             ->addIndexColumn()
             ->editColumn('created_at', function ($order) {
-                return $order->created_at->format('Y/m/d - H:i');
+                return $order->created_at->format('Y-m-d | H:i');
             })
             ->editColumn('updated_at', function ($order) {
-                return $order->updated_at->format('Y/m/d - H:i');
+                return $order->updated_at->format('Y-m-d | H:i');
             })
             ->editColumn('total', function ($order) {
                 return number_format($order->total, 0, ',', '.');
             })
             ->editColumn('status', function ($order) {
-                return OrderStatusEnum::getArrayView()[$order->status];
+                return OrderStatusEnum::getArrayView()[$order->status] ." [".$order->status ."]";
             })
             ->addColumn('edit', function ($order) {
                 return route('orders.edit', ['id' => $order->id]);

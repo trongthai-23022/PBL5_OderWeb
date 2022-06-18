@@ -8,7 +8,6 @@
     <main id="main" class="main-site left-sidebar">
         @php $categoriesHtml = \App\Helpers\Helper::categories($categories); @endphp
 
-        <div class="container">
 
             {{--        @yield('breadscrum')--}}
             <div class="wrap-breadcrumb">
@@ -236,7 +235,6 @@
 
             </div><!--end row-->
 
-        </div><!--end container-->
 
     </main>
 @endsection

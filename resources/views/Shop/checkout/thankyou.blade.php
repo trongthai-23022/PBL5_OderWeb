@@ -12,9 +12,6 @@
 @endsection
 @section('content')
 
-    <!--main area-->
-    <main id="main" class="main-site">
-
         <div class="container">
 
             <div class="wrap-breadcrumb">
@@ -34,7 +31,4 @@
                 </div>
             </div>
         </div><!--end container-->
-
-    </main>
-    <!--main area-->
 @endsection

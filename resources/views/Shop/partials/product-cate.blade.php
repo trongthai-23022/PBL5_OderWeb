@@ -1,12 +1,14 @@
 <!--Product Categories-->
 <div class="wrap-show-advance-info-box style-1">
     <h3 class="title-box">Product Categories</h3>
-    <div class="wrap-top-banner">
-        <a href="#" class="link-banner banner-effect-2">
-            <figure><img src="{{asset('customers/assets/images/fashion-accesories-banner.jpg')}}" width="1170" height="240" alt=""></figure>
-        </a>
-    </div>
-    <div class="wrap-products">
+    @if(!is_null($bannerCate))
+        <div class="wrap-top-banner">
+            <a href="#" class="link-banner banner-effect-2">
+                <figure><img src="{{$bannerCate->image_path}}" width="1170" height="240" alt="{{$bannerCate->image_name}}"></figure>
+            </a>
+        </div>
+    @endif
+    <div class="wrap-products col-12">
         <div class="wrap-product-tab tab-style-1">
             <div class="tab-control">
                 @php($i = 0)
@@ -36,7 +38,9 @@
                                         <div class="product-thumnail">
                                             <a href="{{route('detail', [ 'slug' => $latestProduct->slug,'id' => $latestProduct->id])}}"
                                                title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                                <figure><img src="{{$latestProduct->main_image_path}}" width="800" height="800"
+                                                <figure><img
+                                                        style="width: 100%; height: 250px;object-fit: cover;"
+                                                        src="{{$latestProduct->main_image_path}}" width="800" height="800"
                                                              alt="{{$latestProduct->main_image_name}}"></figure>
                                             </a>
                                             <div class="group-flash">
@@ -79,7 +83,9 @@
                                         <div class="product-thumnail">
                                             <a href="{{route('detail', [ 'slug' => $latestProduct->slug,'id' => $latestProduct->id])}}"
                                                title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                                <figure><img src="{{$latestProduct->main_image_path}}" width="800" height="800"
+                                                <figure><img
+                                                        style="width: 100%; height: 250px;object-fit: cover;"
+                                                        src="{{$latestProduct->main_image_path}}" width="800" height="800"
                                                              alt="{{$latestProduct->main_image_name}}"></figure>
                                             </a>
                                             <div class="group-flash">

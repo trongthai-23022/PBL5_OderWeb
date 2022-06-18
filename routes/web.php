@@ -37,54 +37,57 @@ Route::prefix('admin')->group(function () {
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
     //menus
-    Route::prefix('menus')->group(function () {
-        Route::get('/', [
-            'as' => 'menus.index',
-            'uses' => 'MenuController@index'
-        ]);
-        Route::get('/create', [
-            'as' => 'menus.create',
-            'uses' => 'MenuController@create'
-        ]);
-        Route::post('/store', [
-            'as' => 'menus.store',
-            'uses' => 'MenuController@store'
-        ]);
-        //button edit to show update form
-        Route::get('/edit/{id}', [
-            'as' => 'menus.edit',
-            'uses' => 'MenuController@edit'
-        ]);
-        // submit to update
-        Route::post('/update/{id}', [
-            'as' => 'menus.update',
-            'uses' => 'MenuController@update'
-        ]);
-        Route::get('/delete/{id}', [
-            'as' => 'menus.delete',
-            'uses' => 'MenuController@delete'
-        ]);
-    });
+//    Route::prefix('menus')->group(function () {
+//        Route::get('/', [
+//            'as' => 'menus.index',
+//            'uses' => 'MenuController@index'
+//        ]);
+//        Route::get('/create', [
+//            'as' => 'menus.create',
+//            'uses' => 'MenuController@create'
+//        ]);
+//        Route::post('/store', [
+//            'as' => 'menus.store',
+//            'uses' => 'MenuController@store'
+//        ]);
+//        //button edit to show update form
+//        Route::get('/edit/{id}', [
+//            'as' => 'menus.edit',
+//            'uses' => 'MenuController@edit'
+//        ]);
+//        // submit to update
+//        Route::post('/update/{id}', [
+//            'as' => 'menus.update',
+//            'uses' => 'MenuController@update'
+//        ]);
+//        Route::get('/delete/{id}', [
+//            'as' => 'menus.delete',
+//            'uses' => 'MenuController@delete'
+//        ]);
+//    });
 
     //slider
     Route::prefix('sliders')->group(function () {
-        Route::get('/', [AminSliderController::class, 'index'])->name('sliders.index');
-        Route::get('/create', [AminSliderController::class, 'create'])->name('sliders.create');
+        Route::get('/', [AminSliderController::class, 'index'])->can('slider-view')->name('sliders.index');
+        Route::get('/create', [AminSliderController::class, 'create'])->can('slider-add')->name('sliders.create');
         Route::post('/store', [AminSliderController::class, 'store'])->name('sliders.store');
-        //button edit to show update form
-        Route::get('/edit/{id}', [
-            'as' => 'sliders.edit',
-            'uses' => 'AminSliderController@edit'
-        ]);
-        // submit to update
-        Route::post('/update/{id}', [
-            'as' => 'sliders.update',
-            'uses' => 'AminSliderController@update'
-        ]);
-        Route::get('/delete/{id}', [
-            'as' => 'sliders.delete',
-            'uses' => 'AminSliderController@delete'
-        ]);
+        Route::post('/edit/{id}', [AminSliderController::class, 'edit'])->can('slider-edit')->name('sliders.edit');
+        Route::post('/update/{id}', [AminSliderController::class, 'update'])->name('sliders.update');
+        Route::get('/delete/{id}', [AminSliderController::class, 'delete'])->can('slider-delete')->name('sliders.delete');
+
+        Route::prefix('banners')->group(function (){
+            Route::get('/', [AminSliderController::class, 'index_banner'])->can('slider-view')->name('banners.index');
+            Route::get('/create', [AminSliderController::class, 'create_banner'])->can('slider-add')->name('banners.create');
+        });
+    });
+
+    // order
+    Route::prefix('orders')->group(function () {
+        Route::get('/', [OrderController::class, 'index'])->can('order-view')->name('orders.index');
+        Route::get('/orders/api', [OrderController::class, 'api'])->name('api.orders.index');
+        Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->can('order-edit')->name('orders.edit');
+        Route::post('/update', [OrderController::class, 'update_status'])->name('orders.update');
+
     });
 
     // order
@@ -109,19 +112,20 @@ Route::prefix('cart')->middleware('auth')->group(function (){
     Route::get('/destroy/{rowId}',[CartController::class,'destroy'])->name('cart.destroy');
 
     Route::get('/checkout-info', [CartController::class,'getCheckout'])
-        ->middleware('auth', 'verified')
+        ->middleware('verified')
         ->name('cart.checkout.info');
 
     Route::post('/order', [CartController::class,'postOrder'])
-        ->middleware('auth', 'verified')
+        ->middleware('verified')
         ->name('cart.order');
 });
 
-Route::prefix('account')->middleware('auth')->group(function (){
-
+Route::prefix('account')->middleware(['auth','verified'])->group(function (){
     Route::get('/purchases/{id}',[OrderController::class, 'user_purchase_show'])->name('purchase.show');
-    Route::get('/profile/{id}',[UserController::class,'show'])->name('account.show');
+    Route::get('/profile',[UserController::class,'show'])->name('account.show');
+    Route::post('/profile',[UserController::class,'store'])->name('account.store');
 });
+
 
 
 require_once __DIR__ . '/fortify.php';

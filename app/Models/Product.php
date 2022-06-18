@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\CreateSlugTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
@@ -15,17 +16,20 @@ class Product extends Model
     use SoftDeletes;
     use CreateSlugTrait;
     protected $guarded = [];
-    public function detailImages(){
+    public function detailImages(): HasMany
+    {
         return $this->hasMany(ProductImage::class, 'product_id');
     }
-    public function tags(){
+    public function tags(): BelongsToMany
+    {
         return $this->belongsToMany(Tag::class,
             'product_tags',
             'product_id',
             'tag_id')
-            ->withTimestamps()->latest();;
+            ->withTimestamps()->latest();
     }
-    public function category(){
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
         return $this->belongsTo(Category::class, 'category_id');
     }
 

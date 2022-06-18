@@ -17,9 +17,6 @@
 @endsection
 
 @section('content')
-    <main id="main" class="main-site">
-
-        <div class="container">
 
             <div class="wrap-breadcrumb">
                 <ul>
@@ -60,38 +57,42 @@
                         </div>
                         <div class="detail-info">
                             <div class="product-rating">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <a href="#" class="count-review">(05 review)</a>
+                                <b style="font-size: 130%; margin-right: 5px">{{$ratesAvg}} </b>
+                                <div class="star-rating">
+                                    <span class="width-{{ceil($ratesAvg)*20}}-percent"></span>
+                                </div>
+                                <a href="#" class="count-review">({{$ratesCount}} reviews)</a>
                             </div>
                             <h2 class="product-name">{{$product->name}}</h2>
                             {{--                        <div class="wrap-social">--}}
                             {{--                            <a class="link-socail" href="#"><img src="assets/images/social-list.png" alt=""></a>--}}
                             {{--                        </div>--}}
                             <div class="wrap-price"><span
-                                        class="product-price">{{number_format($product->price)}} VND</span></div>
+                                    class="product-price">{{number_format($product->price)}} VND</span></div>
                             <div class="stock-info in-stock">
                                 <p class="availability">Availability: <b>{{$product->amount}}</b></p>
                             </div>
                             <form method="post">
                                 @csrf
-                            <div class="quantity">
-                                <span>Quantity:</span>
-                                <div class="quantity-input">
-                                    <input type="text" data-max="120" pattern="[0-9]*" value="1" name="product-quatity" class="product-quatity cart_product_qty_{{$product->id}}">
-                                    <a class="btn btn-reduce" href="#"></a>
-                                    <a class="btn btn-increase" href="#"></a>
+                                <div class="quantity">
+                                    <span>Quantity:</span>
+                                    <div class="quantity-input">
+                                        <input type="text" data-max="120" pattern="[0-9]*" value="1"
+                                               name="product-quatity"
+                                               class="product-quatity cart_product_qty_{{$product->id}}">
+                                        <a class="btn btn-reduce" href="#"></a>
+                                        <a class="btn btn-increase" href="#"></a>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="wrap-butons">
+                                <div class="wrap-butons">
 
-                                    <input type="hidden" value="1" name="cart_product_qty" class="cart_product_qty_{{$product->id}}">
-                                    <input type="hidden" value="{{$product->id}}" name="cart_product_id" class="cart_product_id_{{$product->id}}">
-                                    <input type="button" value="Thêm vào giỏ hàng" class="function-link add-to-cart" data-product_item="{{$product->id}}" data-url="{{route('cart.store')}}">
-                            </div>
+                                    <input type="hidden" value="1" name="cart_product_qty"
+                                           class="cart_product_qty_{{$product->id}}">
+                                    <input type="hidden" value="{{$product->id}}" name="cart_product_id"
+                                           class="cart_product_id_{{$product->id}}">
+                                    <input type="button" value="Thêm vào giỏ hàng" class="function-link add-to-cart"
+                                           data-product_item="{{$product->id}}" data-url="{{route('cart.store')}}">
+                                </div>
                             </form>
                         </div>
                         <div class="advance-info">
@@ -139,7 +140,7 @@
                                                         </div>
                                                         <p class="comment-form-comment">
                                                             <label for="comment">Your review <span
-                                                                        class="required">*</span>
+                                                                    class="required">*</span>
                                                             </label>
                                                             <textarea id="comment" name="comment" cols="45"
                                                                       rows="8"></textarea>
@@ -175,13 +176,16 @@
                                                                  height="80" width="80">
                                                             <div class="comment-text">
                                                                 <div class="star-rating">
-                                                                    <span class="width-{{$comment->rate->rate_value*20}}-percent">Rated <strong
-                                                                                class="rating">{{$comment->rate->rate_value}}</strong> out of 5</span>
+                                                                    <span
+                                                                        class="width-{{$comment->rate->rate_value*20}}-percent">Rated <strong
+                                                                            class="rating">{{$comment->rate->rate_value}}</strong> out of 5</span>
                                                                 </div>
                                                                 <p class="meta">
-                                                                    <strong class="woocommerce-review__author">{{$comment->getUserName()}}</strong>
+                                                                    <strong
+                                                                        class="woocommerce-review__author">{{$comment->getUserName()}}</strong>
                                                                     <span class="woocommerce-review__dash">–</span>
-                                                                    <time class="woocommerce-review__published-date">{{$comment->getCreatedAttribute()}}</time>
+                                                                    <time
+                                                                        class="woocommerce-review__published-date">{{$comment->getCreatedAttribute()}}</time>
                                                                 </p>
                                                                 <div class="description">
                                                                     <p>{{$comment->content}}</p>
@@ -321,7 +325,4 @@
 
             </div><!--end row-->
 
-        </div><!--end container-->
-
-    </main>
 @endsection

@@ -10,6 +10,8 @@ class GateAndPolicyAccess
     {
         GateAndPolicyAccess::defineGateCategory();
         GateAndPolicyAccess::defineGateProduct();
+        GateAndPolicyAccess::defineGateSlider();
+        GateAndPolicyAccess::defineGateOrder();
         GateAndPolicyAccess::defineGateUser();
         GateAndPolicyAccess::defineGateRole();
         GateAndPolicyAccess::defineGatePermission();
@@ -27,6 +29,18 @@ class GateAndPolicyAccess
         Gate::define('product-add', 'App\Policies\ProductPolicy@create');
         Gate::define('product-edit', 'App\Policies\ProductPolicy@update');
         Gate::define('product-delete', 'App\Policies\ProductPolicy@delete');
+    }
+    private static function defineGateSlider(){
+        Gate::define('slider-view', 'App\Policies\SliderPolicy@view');
+        Gate::define('slider-add', 'App\Policies\SliderPolicy@create');
+        Gate::define('slider-edit', 'App\Policies\SliderPolicy@update');
+        Gate::define('slider-delete', 'App\Policies\SliderPolicy@delete');
+    }
+    private static function defineGateOrder(){
+        Gate::define('order-view', 'App\Policies\OrderPolicy@view');
+        Gate::define('order-add', 'App\Policies\OrderPolicy@create');
+        Gate::define('order-edit', 'App\Policies\OrderPolicy@update');
+        Gate::define('order-delete', 'App\Policies\OrderPolicy@delete');
     }
     private static function defineGateUser(){
         Gate::define('user-view', 'App\Policies\UserPolicy@view');

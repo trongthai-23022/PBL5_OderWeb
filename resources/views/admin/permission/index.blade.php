@@ -29,10 +29,6 @@
                             <a href="{{ route('permissions.create') }}"
                                class="btn btn-success float-left m-2 text-uppercase">Add new permission</a>
                         </div>
-                        <div class="col-6">
-                            <a href="{{ route('permissions.create-manual') }}"
-                               class="btn btn-success float-left m-2 text-uppercase">Add new permission manually</a>
-                        </div>
                     </div>
                     @endcan
                     <div class="col-md-6">
