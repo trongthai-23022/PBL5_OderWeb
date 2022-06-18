@@ -83,7 +83,6 @@
                             <div class="col-xs-6">
                                 <label for="name"><h4>Họ tên</h4></label>
                                 <input type="text" class="form-control" name="name" id="name" placeholder="full name" title="enter your last name if any.">
-
                             </div>
                         </div>
 
@@ -125,6 +124,7 @@
                             </div>
                         </div>
                     </form>
+
                     <hr>
 
                 </div><!--/tab-pane-->

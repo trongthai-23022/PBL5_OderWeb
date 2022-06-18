@@ -4,7 +4,6 @@
 @endsection
 
 @section('custom_css')
-
 @endsection
 
 @section('custom_js')
@@ -168,4 +167,5 @@
 
     </div><!--end main content area-->
     @endif
+
 @endsection

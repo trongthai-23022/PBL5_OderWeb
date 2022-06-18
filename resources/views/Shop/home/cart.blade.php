@@ -102,7 +102,6 @@
                     @endforeach
                 </ul>
             </div>
-
             <div class="summary">
                 <div class="order-summary">
                     <h4 class="title-box">Order Summary</h4>

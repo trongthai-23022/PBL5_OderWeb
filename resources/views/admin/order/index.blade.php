@@ -6,7 +6,6 @@
 @section('custom_css')
     <link rel="stylesheet" href="{{asset('admins/product/index/index.css')}}">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/fc-4.1.0/fh-3.2.3/r-2.3.0/rg-1.2.0/sc-2.0.6/sb-1.3.3/sl-1.4.0/datatables.min.css"/>
-
     <style>
         tfoot input {
             width: 80%;
@@ -20,7 +19,6 @@
 
         }
     </style>
-
 
 @endsection
 
@@ -128,7 +126,6 @@
                     },
                     'colvis'
                 ],
-
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('api.orders.index') !!}',
@@ -146,7 +143,6 @@
                         targets: 8,
                         orderable: false,
                         searchable: false,
-
                         columnDefs: [
                             {className: "not-export", "targets": [8]}
                         ],
@@ -178,7 +174,6 @@
             // $('#qty').keyup(function () {
             //     table.draw();
             // });
-
         });
     </script>
 @endsection

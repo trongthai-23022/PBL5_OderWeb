@@ -88,6 +88,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->can('order-edit')->name('orders.edit');
         Route::post('/update', [OrderController::class, 'update_status'])->name('orders.update');
 
+
     });
 
     // order
@@ -118,6 +119,7 @@ Route::prefix('cart')->middleware('auth')->group(function (){
     Route::post('/order', [CartController::class,'postOrder'])
         ->middleware('verified')
         ->name('cart.order');
+
 });
 
 Route::prefix('account')->middleware(['auth','verified'])->group(function (){

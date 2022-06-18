@@ -64,7 +64,6 @@
                             <a class="nav-link" >Mã Giảm Giá</a>
                         </li>
                     </ul>
-
                 </li>
 
                 <li class="nav-item">
@@ -82,20 +81,12 @@
                     </ul>
 
                 </li>
+
                 <li class="nav-item">
                     <a href="{{route('orders.index')}}" class="nav-link">
                         <i class="fas fa-list-alt"></i>
                         <p style="margin-left: 10px">
                             Đơn hàng
-                        </p>
-                    </a>
-                </li>
-                
-                <li class="nav-item">
-                    <a href="{{route('menus.index')}}" class="nav-link">
-                        <i class="fas fa-bars"></i>
-                        <p style="margin-left: 10px">
-                            Menus
                         </p>
                     </a>
                 </li>
