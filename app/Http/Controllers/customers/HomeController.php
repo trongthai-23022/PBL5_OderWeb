@@ -30,9 +30,10 @@ class HomeController extends Controller
         $latestPosts = $this->product->latest()->limit(10)->get();
         //cate products
         $categories = $this->category->inRandomOrder()->limit(5)->get();
+
+        //on sale
         $onSaleTag = null;
         try {
-            //on sale
             $onSaleTag = Tag::where('name', 'sale')->orWhere('name', 'SALE')->first();
         }catch (\Exception $exception){
         }

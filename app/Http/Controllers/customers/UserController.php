@@ -32,15 +32,14 @@ class UserController extends Controller
                 'name' => $request->name,
                 'gender' => $request->gender,
             ];
-            if ($request->hasFile('avt')) {
-                $image_file = $request->avt;
+            if ($request->hasFile('avt_image')) {
+                $image_file = $request->avt_image;
                 $product_image_info = $this->getUploadedImageInfo($image_file, 'avatars');
                 if (!empty($product_image_info)) {
                     $data['image_path'] = $product_image_info['file_path'];
                     $data['image_name'] = $product_image_info['file_name'];
                 }
             }
-
             UserProfile::updateOrCreate(
                 ['user_id'=> auth()->user()->id],
                 $data

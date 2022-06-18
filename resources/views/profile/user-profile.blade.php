@@ -48,12 +48,12 @@
         <div class="col-sm-3"><!--left col-->
             <div class="text-center">
                 @if(!is_null($userInfo) && !is_null($userInfo->image_path))
-                    <img src="{{$userInfo->image_path}}" class="avatar img-circle img-thumbnail" alt="avatar">
+                    <img style="width: 192px; height: 192px;object-fit: cover;" src="{{$userInfo->image_path}}" class="avatar img-circle img-thumbnail" alt="avatar">
                 @else
                     <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
                 @endif
-                <h6>Upload a different photo...</h6>
-                <input form="user-info" name="avt" type="file" class="text-center center-block file-upload">
+                <h6>Upload an avatar</h6>
+                    <input form="user-info" name="avt_image" type="file" class=" form-control-file text-center center-block file-upload">
             </div></hr><br>
 
 
@@ -63,7 +63,7 @@
                 <h3>Tài khoản của tôi</h3>
                 <div>
                     <hr>
-                    <form class="form" action="{{route('account.store')}}" method="post" id="user-info">
+                    <form class="form" action="{{route('account.store')}}" method="post" id="user-info" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <div class="col-xs-6">
@@ -132,7 +132,7 @@
             <h3>Tài khoản của tôi</h3>
             <div>
                 <hr>
-                <form class="form" action="#" method="post" id="user-info">
+                <form class="form" action="#" method="post" id="user-info" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <div class="col-xs-6">

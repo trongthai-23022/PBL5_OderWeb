@@ -6,6 +6,7 @@ use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\Tag;
 use App\Models\UserProfile;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -29,7 +30,19 @@ class CartController extends Controller
     {
 //    Cart::add('293ad', 'Product 1', 1, 9.99, 550);
 //        Cart::destroy();
-        return view('Shop.home.cart');
+        //on sale
+        $onSaleTag = null;
+        try {
+            $onSaleTag = Tag::where('name', 'sale')->orWhere('name', 'SALE')->first();
+        }catch (\Exception $exception){
+        }
+        $onSaleProducts = null;
+        if(!is_null($onSaleTag)){
+            $onSaleProducts = $onSaleTag->products;
+        }
+        return view('Shop.home.cart',[
+            'onSaleProducts' => $onSaleProducts
+        ]);
     }
 
     public function store(Request $request)

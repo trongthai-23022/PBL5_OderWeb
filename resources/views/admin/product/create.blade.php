@@ -83,6 +83,7 @@
                                 >
                                 <div class="row mt-4">
                                     <div id="dvPreview"></div>
+                                </div>
                             </div>
 
                             <div class="form-group">

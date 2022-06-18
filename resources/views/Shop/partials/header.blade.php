@@ -18,11 +18,21 @@
                                 <li class="menu-item" ><a title="Register or Login" href="{{route('register')}}">Register</a></li>
                             @else
                                 <li class="menu-item menu-item-has-children parent" >
-                                    <a title="Profile" href="{{route('account.show')}}">{{auth()->user()->name}}</a>
+                                    <a title="Profile" href="{{route('account.show')}}"><span class="img label-before">
+                                            @if(auth()->check())
+                                                @php
+                                                    $avt = \App\Models\UserProfile::where('user_id',auth()->user()->id)->first();
+                                                    if (!is_null($avt)){
+                                                        echo '<img style="vertical-align: middle;width: 20px;height: 20px;object-fit: cover;border-radius: 50%;" src="'.$avt->image_path .'" alt="avt">';
+                                                    }
+                                                @endphp
+                                            @endif
+
+                                        </span>{{auth()->user()->name}}<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                     <ul class="submenu curency" >
                                         <li class="menu-item" >
-{{--                                            <a title="Profile" href="{{route('profile.show')}}">Tài khoản của tôi</a>--}}
-                                            <a title="Profile" href="{{route('account.show')}}">Tài khoản của tôi</a>
+
+                                            <a title="Profile" href="{{route('account.show')}}">Tài khoản </a>
                                         </li>
                                         <li class="menu-item" >
                                             <a title="Profile" href="{{route('purchase.show',['id' => auth()->user()->id])}}">Đơn mua</a>

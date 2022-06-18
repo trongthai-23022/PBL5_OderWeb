@@ -13,19 +13,12 @@ Route::prefix('permissions')->group(function (){
         'uses' => 'AdminPermissionController@create',
         'middleware' => 'can:permission-add'
     ]);
-    Route::get('/create-manual', [
-        'as' => 'permissions.create-manual',
-        'uses' => 'AdminPermissionController@create_manual',
-        'middleware' => 'can:permission-add'
-    ]);
+
     Route::post('/store', [
         'as' => 'permissions.store',
         'uses' => 'AdminPermissionController@store'
     ]);
-    Route::post('/store-manual', [
-        'as' => 'permissions.store-manual',
-        'uses' => 'AdminPermissionController@store_manual'
-    ]);
+
     //button edit to show update form
     Route::get('/edit/{id}', [
         'as' => 'permissions.edit',
