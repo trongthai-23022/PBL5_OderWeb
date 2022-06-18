@@ -64,6 +64,7 @@
                             <a class="nav-link" >Mã Giảm Giá</a>
                         </li>
                     </ul>
+
                 </li>
 
                 <li class="nav-item">
@@ -79,6 +80,7 @@
                             <a class="nav-link" href="{{route('banners.index')}}">Banners</a>
                         </li>
                     </ul>
+
                 </li>
                 <li class="nav-item">
                     <a href="{{route('orders.index')}}" class="nav-link">
@@ -89,6 +91,15 @@
                     </a>
                 </li>
                 
+                <li class="nav-item">
+                    <a href="{{route('menus.index')}}" class="nav-link">
+                        <i class="fas fa-bars"></i>
+                        <p style="margin-left: 10px">
+                            Menus
+                        </p>
+                    </a>
+                </li>
+
                 <li class="nav-item">
                     <a href="{{route('users.index')}}" class="nav-link">
                         <i class="fas fa-users"></i>

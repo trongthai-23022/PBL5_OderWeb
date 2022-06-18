@@ -14,7 +14,6 @@
 @endsection
 
 @section('content')
-
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="{{route('app.home')}}" class="link">Home</a></li>
@@ -103,6 +102,7 @@
                     @endforeach
                 </ul>
             </div>
+
             <div class="summary">
                 <div class="order-summary">
                     <h4 class="title-box">Order Summary</h4>

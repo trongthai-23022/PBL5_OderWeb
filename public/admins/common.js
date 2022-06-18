@@ -215,7 +215,7 @@ $(document).on('click', '.update-status', function () {
     })
 
 });
-//cancel
+
 $(document).on('click', '.cancel', function () {
     let urlRequest = $(this).data('url');
     let orderId = $('.order-id').val();

@@ -9,11 +9,13 @@
 @endsection
 
 @section('custom_js')
+
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="{{asset('admins/common.js')}}}"></script>
+
 @endsection
 
 
@@ -81,6 +83,7 @@
                             <div class="col-xs-6">
                                 <label for="name"><h4>Họ tên</h4></label>
                                 <input type="text" class="form-control" name="name" id="name" placeholder="full name" title="enter your last name if any.">
+
                             </div>
                         </div>
 
@@ -122,7 +125,6 @@
                             </div>
                         </div>
                     </form>
-
                     <hr>
 
                 </div><!--/tab-pane-->
@@ -199,4 +201,5 @@
         @endif
 
     </div><!--/col-9-->
+
 @endsection

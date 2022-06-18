@@ -16,6 +16,7 @@
             margin-right: 20px;
             border-radius: 10px;
         }
+
     </style>
 @endsection
 
