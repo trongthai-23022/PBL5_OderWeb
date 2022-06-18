@@ -129,7 +129,9 @@
             </div>
         @endif
 
-        @include('Shop.partials.onsale')
+            @if(!is_null($onSaleProducts))
+                @include('Shop.partials.onsale')
+            @endif
 
     </div><!--end main content area-->
 
