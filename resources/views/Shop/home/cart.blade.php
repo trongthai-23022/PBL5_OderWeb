@@ -10,7 +10,7 @@
 
 @section('custom_js')
     <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
-    <script src="{{asset('admins/common.js')}}"></script>
+    <script src="{{asset('customers/cart/cart.js')}}"></script>
 @endsection
 
 @section('content')
@@ -120,7 +120,14 @@
                 </div>
                 <div class="checkout-info">
 
-                    <a class="btn btn-checkout" href="{{route('cart.checkout.info')}}">Check out</a>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a class="btn btn-checkout" href="{{route('cart.removeall')}}">Xóa giỏ hàng</a>
+                        </div>
+                        <div class="col-md-9">
+                            <a class="btn btn-checkout" href="{{route('cart.checkout.info')}}">Thanh toán</a>
+                        </div>
+                    </div>
                     <a class="link-to-shop" href="{{route('shop')}}">Continue Shopping<i
                             class="fa fa-arrow-circle-right"
                             aria-hidden="true"></i></a>

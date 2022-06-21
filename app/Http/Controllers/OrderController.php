@@ -148,12 +148,61 @@ class OrderController extends Controller
         }
 //        dd($orders);
         return view('Shop.home.purchase',[
-            'allOrders' => $orders,
+            'all_orders' => $orders,
             'processing' => $processing,
-            'inTransit' => $inTransit,
+            'in_transit' => $inTransit,
             'completed' => $completed,
             'canceled' => $canceled,
             'status' =>  OrderStatusEnum::getArrayView()
         ]);
+    }
+
+    public function detail_show($id)
+    {
+        $order = Order::where('id', $id)->first();
+        $orderDetail = $order->orderDetail;
+        $products = $order->products;
+        $orderStatus = OrderStatusEnum::getArrayView();
+        $count = sizeof($products);
+        $items = [];
+        if ($count == sizeof($orderDetail)) {
+            for ($i = 0; $i < $count; $i++) {
+                $item = [
+                    'image_path' => $products[$i]->main_image_path,
+                    'image_name' => $products[$i]->main_image_name,
+                    'name' => $products[$i]->name,
+                    'price' => $orderDetail[$i]->product_price,
+                    'qty' => $orderDetail[$i]->product_qty,
+                    'item_total' => $orderDetail[$i]->total,
+                ];
+                $items[$i] = $item;
+            }
+        }
+        return view('Shop.home.order-detail',
+            [
+                'order' => $order,
+                'orderItems' => $items,
+                'orderStatus' => $orderStatus,
+            ]);
+    }
+
+    public function buy_again($id)
+    {
+        $order = Order::where('id', $id)->first();
+        $products = $order->products;
+        $qty = 1;
+        foreach ($products as $product){
+            $cartItem['id'] = $product->id;
+            $cartItem['qty'] = $qty;
+            $cartItem['name'] = $product->name;
+            $cartItem['price'] = $product->price;
+            $cartItem['weight'] = 0;
+            $slug = $product->slug;
+            $cartItem['options']['slug'] = $slug;
+            $cartItem['options']['image_path'] = $product->main_image_path;
+            $cartItem['options']['image_name'] = $product->main_image_name;
+            Cart::add($cartItem);
+        }
+        return redirect()->route('cart.index');
     }
 }

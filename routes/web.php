@@ -84,26 +84,16 @@ Route::prefix('admin')->group(function () {
     // order
     Route::prefix('orders')->group(function () {
         Route::get('/', [OrderController::class, 'index'])->can('order-view')->name('orders.index');
-        Route::get('/orders/api', [OrderController::class, 'api'])->name('api.orders.index');
-        Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->can('order-edit')->name('orders.edit');
+        Route::get('/api', [OrderController::class, 'api'])->name('api.orders.index');
+        Route::get('/edit/{id}', [OrderController::class, 'edit'])->can('order-edit')->name('orders.edit');
         Route::post('/update', [OrderController::class, 'update_status'])->name('orders.update');
+
+        Route::get('/detail/{id}', [OrderController::class, 'detail_show'])->name('orders.detail.show');
+        Route::get('/buy-again/{id}', [OrderController::class, 'buy_again'])->name('orders.buyagain');
 
 
     });
 
-    // order
-    Route::prefix('orders')->group(function () {
-        Route::get('/', [OrderController::class, 'index'])->name('orders.index');
-        Route::get('/orders/api', [OrderController::class, 'api'])->name('api.orders.index');
-        Route::get('/orders/edit/{id}', [OrderController::class, 'edit'])->name('orders.edit');
-
-        Route::post('/update', [OrderController::class, 'update_status'])->name('orders.update');
-
-        Route::get('/delete/{id}', [
-            'as' => 'orders.delete',
-            'uses' => 'AminSliderController@delete'
-        ]);
-    });
 });
 
 Route::prefix('cart')->middleware('auth')->group(function (){
@@ -111,6 +101,7 @@ Route::prefix('cart')->middleware('auth')->group(function (){
     Route::post('/store',[CartController::class,'store'])->name('cart.store');
     Route::get('/update',[CartController::class,'update'])->name('cart.update');
     Route::get('/destroy/{rowId}',[CartController::class,'destroy'])->name('cart.destroy');
+    Route::get('/remove-all',[CartController::class,'remove_all'])->name('cart.removeall');
 
     Route::get('/checkout-info', [CartController::class,'getCheckout'])
         ->middleware('verified')

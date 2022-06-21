@@ -32,10 +32,9 @@
             </div>
         </div><!--end container-->
     @else
-    <div class=" main-content-area">
+    <div class="main-content-area">
         <div class="wrap-iten-in-cart">
             <h3 class="box-title mt-4">Danh sách món ăn</h3>
-
             <ul class="products-cart">
                 <li class="pr-cart-item">
                     <div class="product-image">
@@ -96,7 +95,7 @@
             </ul>
         </div>
         <hr>
-        <div class="wrap-address-billing">
+        <div class="wrap-address-billing" style="width: 100%">
             <h3 class="box-title">Thông tin khách hàng</h3>
             <form action="{{route('cart.order')}}" method="post" name="frm-billing" id="order">
                 <p class="row-in-form">
@@ -119,10 +118,10 @@
                     <input id="add" type="text" name="address" value="{{$userInfo->address}}"
                            placeholder="Street at apartment number">
                 </p>
-                <div class="col-md-6">
+                <div class="row-in-form">
                     <div class="form-group">
                         <label>Lời nhắn</label>
-                        <textarea id="tinymce-editor" name="note" class="form-control"
+                        <textarea  name="note" class="form-control"
                                   rows="3"></textarea>
                     </div>
                 </div>

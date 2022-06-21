@@ -67,11 +67,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a href="#add" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
+                    <a href="#ad" data-toggle="collapse" aria-expanded="false" class="nav-link dropdown-toggle">
                         <i class="fas fa-ad"></i>
                         <p style="margin-left: 10px">Quảng cáo</p></a>
 
-                    <ul class="collapse list-unstyled nav nav-pills nav-sidebar flex-column" id="add">
+                    <ul class="collapse list-unstyled nav nav-pills nav-sidebar flex-column" id="ad">
                         <li class="nav-item " style="margin-left: 20px">
                             <a class="nav-link" href="{{route('sliders.index')}}">Sliders</a>
                         </li>
