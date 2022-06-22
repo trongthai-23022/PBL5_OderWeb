@@ -42,7 +42,7 @@
                                             <a title="Profile" href="{{route('account.show')}}">Tài khoản </a>
                                         </li>
                                         <li class="menu-item" >
-                                            <a title="Profile" href="{{route('purchase.show',['id' => auth()->user()->id])}}">Đơn mua</a>
+                                            <a title="Profile" href="{{route('purchase.show')}}">Đơn mua</a>
                                         </li>
                                         @if(\Illuminate\Support\Facades\Auth::check())
                                             <li class="menu-item" >

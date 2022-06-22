@@ -114,7 +114,7 @@ Route::prefix('cart')->middleware('auth')->group(function (){
 });
 
 Route::prefix('account')->middleware(['auth','verified'])->group(function (){
-    Route::get('/purchases/{id}',[OrderController::class, 'user_purchase_show'])->name('purchase.show');
+    Route::get('/purchases',[OrderController::class, 'user_purchase_show'])->name('purchase.show');
     Route::get('/profile',[UserController::class,'show'])->name('account.show');
     Route::post('/profile',[UserController::class,'store'])->name('account.store');
 });

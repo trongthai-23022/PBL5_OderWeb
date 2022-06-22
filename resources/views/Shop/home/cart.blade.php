@@ -125,10 +125,10 @@
                             <a class="btn btn-checkout" href="{{route('cart.removeall')}}">Xóa giỏ hàng</a>
                         </div>
                         <div class="col-md-9">
-                            <a class="btn btn-checkout" href="{{route('cart.checkout.info')}}">Thanh toán</a>
+                            <a class="btn btn-checkout" href="{{route('cart.checkout.info')}}">Đặt hàng</a>
                         </div>
                     </div>
-                    <a class="link-to-shop" href="{{route('shop')}}">Continue Shopping<i
+                    <a class="link-to-shop" href="{{route('shop')}}">Tiếp tục mua<i
                             class="fa fa-arrow-circle-right"
                             aria-hidden="true"></i></a>
                 </div>

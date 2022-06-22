@@ -4574,7 +4574,7 @@ article.single-post blockquote p:last-child::after{
     font-size: 14px;
     color: #888888;
     line-height: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 #comments .woocommerce-Reviews-title{
     font-size: 15px;
