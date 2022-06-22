@@ -8,6 +8,9 @@ use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
@@ -103,9 +106,9 @@ class OrderController extends Controller
 
     }
 
-    public function user_purchase_show($id){
+    public function user_purchase_show(){
 
-        $userOrders = Order::where('user_id', $id)->latest()->get();
+        $userOrders = Order::where('user_id', auth()->user()->id)->latest()->get();
 
         $orders = [];
         foreach ($userOrders as $userOrder) {
@@ -146,15 +149,26 @@ class OrderController extends Controller
                 $canceled[] = $item;
             }
         }
-//        dd($orders);
         return view('Shop.home.purchase',[
-            'all_orders' => $orders,
-            'processing' => $processing,
-            'in_transit' => $inTransit,
-            'completed' => $completed,
-            'canceled' => $canceled,
+            'all_orders' => $this->paginate($orders),
+            'processing' => $this->paginate($processing),
+            'in_transit' => $this->paginate($inTransit),
+            'completed' => $this->paginate($completed),
+            'canceled' => $this->paginate($canceled),
             'status' =>  OrderStatusEnum::getArrayView()
         ]);
+    }
+
+    function paginate($items, $perPage=5): LengthAwarePaginator
+    {
+        $pageStart           = request('page', 1);
+        $offSet              = ($pageStart * $perPage) - $perPage;
+        $itemsForCurrentPage = array_slice($items, $offSet, $perPage, TRUE);
+        return new LengthAwarePaginator(
+            $itemsForCurrentPage, count($items), $perPage,
+            Paginator::resolveCurrentPage(),
+            ['path' => Paginator::resolveCurrentPath()]
+        );
     }
 
     public function detail_show($id)

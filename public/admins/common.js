@@ -144,6 +144,7 @@ $(document).on('click', '.update-status', function () {
     })
 
 });
+//cancel order
 $(document).on('click', '.cancel', function () {
     let urlRequest = $(this).data('url');
     let orderId = $('.order-id').val();
@@ -196,6 +197,10 @@ $(document).on('click', '.cancel', function () {
     })
 
 });
+
+//order now
+
+
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
