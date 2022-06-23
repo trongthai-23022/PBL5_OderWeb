@@ -57,4 +57,9 @@ class HomeController extends Controller
             'search' => ''
         ]);
     }
+
+    public function about()
+    {
+        return view('Shop.about-us');
+    }
 }
