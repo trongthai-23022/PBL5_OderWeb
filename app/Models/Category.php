@@ -13,7 +13,7 @@ class Category extends Model
     use SoftDeletes;
     protected $fillable = ['name', 'parent_id','slug'];
 
-    public function categories_child(): HasMany
+    public function child_categories(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }
