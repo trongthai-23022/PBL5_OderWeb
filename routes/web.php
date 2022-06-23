@@ -1,14 +1,13 @@
 <?php
 
-use App\Http\Controllers\customers\CartController;
-use App\Http\Controllers\customers\UserController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\User\ProductController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\customers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AminSliderController;
+use App\Http\Controllers\customers\CartController;
+use App\Http\Controllers\customers\HomeController;
+use App\Http\Controllers\customers\ProductController;
+use App\Http\Controllers\customers\UserController;
+use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function(){
 //    return view('Shop.main', [
@@ -20,11 +19,12 @@ use App\Http\Controllers\AminSliderController;
 
 Route::get('/home', [HomeController::class, 'index'])->name('app.home') ;
 Route::get('/', [HomeController::class, 'index'])->name('app.home');
+Route::get('/shop/categories/{id}_{slug}',[ProductController::class,'index'])->name('app.shop');
 
 Route::get('/detail/{id}_{slug}',[ProductController::class,'detail'])->name('detail');
 Route::post('/product-comment',[ProductController::class,'product_comment'])->middleware('auth', 'verified')->name('product.comment');
-Route::get('/shop',[ProductController::class,'shop'])->name('shop');
-Route::get('/shop/{id}-{slug}',[ProductController::class,'category_products'])->name('category');
+
+Route::get('/shop/{slug}_{id}',[ProductController::class,'category_products'])->name('category');
 
 
 Route::prefix('admin')->group(function () {

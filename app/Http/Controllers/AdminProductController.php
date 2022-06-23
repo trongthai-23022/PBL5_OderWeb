@@ -242,4 +242,5 @@ class AdminProductController extends Controller
         $recursion = new Recursive($data);
         return $recursion->selectRecursion($parentId);
     }
+
 }
