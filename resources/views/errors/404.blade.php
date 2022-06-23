@@ -13,6 +13,16 @@
     <div class="content">
         <h1 class="header" data-text="404">404</h1>
         <h2 data-text="PAGE NOT POUND">PAGE NOT POUND</h2>
+<<<<<<< HEAD
+=======
+        <p>
+
+            The page you were looking for doesn't exist, Please go back to the page now!
+        </p>
+        <div class="btns">
+            <a href="{{ url()->previous() }}">Go Back</a>
+        </div>
+>>>>>>> 0ba20bf23c6e9ce8fb660df0afb38af220704726
 
     </div>
 </div>
