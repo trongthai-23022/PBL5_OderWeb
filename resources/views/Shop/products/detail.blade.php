@@ -6,7 +6,6 @@
 
 @section('custom_css')
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/main.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/owl.carousel.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/flexslider.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/style.css')}}">
 @endsection

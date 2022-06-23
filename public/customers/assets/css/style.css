@@ -562,7 +562,7 @@ input,textarea{
 }
 .center-section .wrap-search-form button{
 	width: 56px;
-    height: 35px;
+    height: 36px;
     border: none;
     position: absolute;
     right: 0;
@@ -4224,6 +4224,7 @@ article.single-post blockquote p:last-child::after{
     color: #ffffff;
     text-align: center;
     font-size: 14px;
+    text-transform: uppercase;
     line-height: 20px;
     padding: 10px;
     margin-top: 12px;
@@ -4573,7 +4574,7 @@ article.single-post blockquote p:last-child::after{
     font-size: 14px;
     color: #888888;
     line-height: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 #comments .woocommerce-Reviews-title{
     font-size: 15px;

@@ -8,6 +8,9 @@ use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
@@ -103,9 +106,9 @@ class OrderController extends Controller
 
     }
 
-    public function user_purchase_show($id){
+    public function user_purchase_show(){
 
-        $userOrders = Order::where('user_id', $id)->latest()->get();
+        $userOrders = Order::where('user_id', auth()->user()->id)->latest()->get();
 
         $orders = [];
         foreach ($userOrders as $userOrder) {
@@ -146,14 +149,74 @@ class OrderController extends Controller
                 $canceled[] = $item;
             }
         }
-//        dd($orders);
         return view('Shop.home.purchase',[
-            'allOrders' => $orders,
-            'processing' => $processing,
-            'inTransit' => $inTransit,
-            'completed' => $completed,
-            'canceled' => $canceled,
+            'all_orders' => $this->paginate($orders),
+            'processing' => $this->paginate($processing),
+            'in_transit' => $this->paginate($inTransit),
+            'completed' => $this->paginate($completed),
+            'canceled' => $this->paginate($canceled),
             'status' =>  OrderStatusEnum::getArrayView()
         ]);
+    }
+
+    function paginate($items, $perPage=5): LengthAwarePaginator
+    {
+        $pageStart           = request('page', 1);
+        $offSet              = ($pageStart * $perPage) - $perPage;
+        $itemsForCurrentPage = array_slice($items, $offSet, $perPage, TRUE);
+        return new LengthAwarePaginator(
+            $itemsForCurrentPage, count($items), $perPage,
+            Paginator::resolveCurrentPage(),
+            ['path' => Paginator::resolveCurrentPath()]
+        );
+    }
+
+    public function detail_show($id)
+    {
+        $order = Order::where('id', $id)->first();
+        $orderDetail = $order->orderDetail;
+        $products = $order->products;
+        $orderStatus = OrderStatusEnum::getArrayView();
+        $count = sizeof($products);
+        $items = [];
+        if ($count == sizeof($orderDetail)) {
+            for ($i = 0; $i < $count; $i++) {
+                $item = [
+                    'image_path' => $products[$i]->main_image_path,
+                    'image_name' => $products[$i]->main_image_name,
+                    'name' => $products[$i]->name,
+                    'price' => $orderDetail[$i]->product_price,
+                    'qty' => $orderDetail[$i]->product_qty,
+                    'item_total' => $orderDetail[$i]->total,
+                ];
+                $items[$i] = $item;
+            }
+        }
+        return view('Shop.home.order-detail',
+            [
+                'order' => $order,
+                'orderItems' => $items,
+                'orderStatus' => $orderStatus,
+            ]);
+    }
+
+    public function buy_again($id)
+    {
+        $order = Order::where('id', $id)->first();
+        $products = $order->products;
+        $qty = 1;
+        foreach ($products as $product){
+            $cartItem['id'] = $product->id;
+            $cartItem['qty'] = $qty;
+            $cartItem['name'] = $product->name;
+            $cartItem['price'] = $product->price;
+            $cartItem['weight'] = 0;
+            $slug = $product->slug;
+            $cartItem['options']['slug'] = $slug;
+            $cartItem['options']['image_path'] = $product->main_image_path;
+            $cartItem['options']['image_name'] = $product->main_image_name;
+            Cart::add($cartItem);
+        }
+        return redirect()->route('cart.index');
     }
 }

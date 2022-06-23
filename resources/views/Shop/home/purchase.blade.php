@@ -5,39 +5,30 @@
 @endsection
 
 @section('custom_css')
-    <style>
-        ul {
-            list-style-type: none;
-        }
-        li.order-item{
-            padding: 10px;
-            background-color: #f4f4f4;
-            margin-top: 10px;
-            margin-right: 20px;
-            border-radius: 10px;
-        }
-    </style>
+<link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/main.css')}}">
+<link rel="stylesheet" type="text/css" href="{{asset('customers/assets/css/style.css')}}">
+<style>
+    ul {
+        list-style-type: none;
+    }
+
+    li.order-item {
+        padding: 10px;
+        background-color: #f4f4f4;
+        margin-top: 10px;
+        margin-right: 20px;
+        border-radius: 10px;
+    }
+    .wrap-product-detail .advance-info{
+        margin-top: 5px;
+    }
+</style>
 @endsection
 
 @section('custom_js')
     <!-- all plugins here -->
-    <script src="{{asset('customers/nextpage-lite/assets/js/vendor.js')}}"></script>
+{{--    <script src="{{asset('customers/nextpage-lite/assets/js/vendor.js')}}"></script>--}}
     <script src="{{asset('admins/jquery.min.js')}}"></script>
-    <script>
-        $(function () {
-
-            var url = window.location.pathname,
-                urlRegExp = new RegExp(url.replace(/\/$/, '') + "$"); // create regexp to match current url pathname and remove trailing slash if present as it could collide with the link in navigation in case trailing slash wasn't present there
-            // now grab every link from the navigation
-            $('.multi-tab li').each(function () {
-                // and test its normalized href against the url pathname regexp
-                if (urlRegExp.test(this.href.replace(/\/$/, ''))) {
-                    $(this).addClass('active');
-                }
-            });
-
-        });
-    </script>
     <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
     <script src="{{asset('admins/common.js')}}"></script>
 @endsection
@@ -59,60 +50,42 @@
             @endforeach
         </ul>
     </div>
-    <div class="row d-flex justify-content-center">
-        <!-- Nav tabs -->
-        <ul class="nav nav-tabs multi-tab" role="tablist">
-            <li role="presentation" class=" col-md-2"><a href="#all" aria-controls="all" role="tab"
-                                                         data-toggle="tab"><b>Tất cả</b></a></li>
-            <li role="presentation" class=" col-md-2"><a href="#processing" aria-controls="processing" role="tab"
-                                                         data-toggle="tab"><b>Đang xử lý</b></a></li>
-            <li role="presentation" class=" col-md-2"><a href="#intransit" aria-controls="intransit" role="tab"
-                                                         data-toggle="tab"><b>Đang giao</b></a></li>
-            <li role="presentation" class=" col-md-2"><a href="#completed" aria-controls="completed" role="tab"
-                                                         data-toggle="tab"><b>Đã hoàn thành</b></a></li>
-            <li role="presentation" class=" col-md-2"><a href="#canceled" aria-controls="canceled" role="tab"
-                                                         data-toggle="tab"><b>Đã hủy</b></a></li>
-        </ul>
+    <div class="wrap-product-detail">
+        <div class="advance-info">
+                <div class="tab-control normal">
+                    <a href="#all" class="tab-control-item active">Tất cả</a>
+                    <a href="#processing" class="tab-control-item ">Đang xử lý</a>
+                    <a href="#intransit" class="tab-control-item ">Đang giao</a>
+                    <a href="#completed" class="tab-control-item ">Đã hoàn thành</a>
+                    <a href="#canceled" class="tab-control-item ">Đã hủy</a>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="all">
-                <div>
-                    <ul>
-                        <h3 class="box-title mt-4">Tất cả đơn đã đặt</h3>
-                        @foreach($allOrders as $order)
-                            <li class="order-item">
-                                <div class="row">
-                                    <div class="col-md-12">
+                </div>
+                <div class="tab-contents">
+                    <div class="tab-content-item active " id="all">
+                        <ul>
+                            <h3 class="box-title mt-4">Tất cả đơn đã đặt</h3>
+                            @foreach($all_orders as $order)
+                                <li class="order-item">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <p class="price">Đặt vào lúc: <b>{{$order->created_at}}</b></p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="price float-right"><b>{{$status[$order->status]}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-12">
                                             <p class="price">Lời nhắn: <b>{{$order->note}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-6">
-
                                             <p class="price">Số lượng: <b>{{$order->item_count}}</b></p>
-
                                         </div>
                                         <div class="col-md-6">
-
                                             <p class="price">Tổng tiền:
                                                 <b>{{number_format(intval($order->total),0,',','.')}} đ</b>
                                             </p>
-
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             @for($i=0; $i < count($order['products']); $i++)
                                                 <img style="height: 50px; margin-top: 4px"
@@ -121,60 +94,59 @@
                                             @endfor
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <a class="btn btn-default">Xem chi tiết</a>
-                                        @if($order->status !== \App\Enums\OrderStatusEnum::PROCESSING)
-                                            <a class="btn btn-default">Mua Lai</a>
-                                        @endif
-                                        @if($order->status === \App\Enums\OrderStatusEnum::PROCESSING)
-                                            <a class="btn btn-default">Hủy đơn</a>
-                                        @endif
+                                    <div class="row">
+                                        <div class="col-md-6 " style="padding-top: 10px !important;">
+                                            <a class="btn btn-primary mt-4" href="{{route('orders.detail.show',['id' => $order->id])}}">Xem chi tiết</a>
+                                            @if($order->status !== \App\Enums\OrderStatusEnum::PROCESSING)
+                                                <a class="btn btn-success mt-4" href="{{route('orders.buyagain',['id' => $order->id])}}">Mua Lại</a>
+                                            @endif
+                                        </div>
+                                        <div class="col-md-6 " style="padding-top: 10px !important;">
+                                            @if($order->status === \App\Enums\OrderStatusEnum::PROCESSING)
+                                                <form id="status" method="post" style="display: inline;">
+                                                    @csrf
+                                                    <input type="hidden" value="{{$order->id}}" class="order-id">
+                                                    <input type="hidden" value="{{\App\Enums\OrderStatusEnum::CANCELED}}"
+                                                           class="order-status">
+                                                    <div class="form-group">
+                                                        <input form="status" type="button" class="btn btn-danger cancel"
+                                                               value="Hủy đơn" data-url="{{route('orders.update')}}">
+                                                    </div>
+                                                </form>
+                                            @endif
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="processing">
-                <div>
-                    <ul>
-                        <h3 class="box-title mt-4">Các đơn đang được xử lý</h3>
-                        @foreach($processing as $order)
-                            <li class="order-item">
-                                <div class="row">
-                                    <div class="col-md-12">
+                                </li>
+                            @endforeach
+                            {{ $all_orders->links() }}
+                        </ul>
+
+                    </div>
+                    <div class="tab-content-item " id="processing">
+                        <ul>
+                            <h3 class="box-title mt-4">Tất cả đơn đang xử lý</h3>
+                            @foreach($processing as $order)
+                                <li class="order-item">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <p class="price">Đặt vào lúc: <b>{{$order->created_at}}</b></p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="price float-right"><b>{{$status[$order->status]}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-12">
                                             <p class="price">Lời nhắn: <b>{{$order->note}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-6">
-
                                             <p class="price">Số lượng: <b>{{$order->item_count}}</b></p>
-
                                         </div>
                                         <div class="col-md-6">
-
                                             <p class="price">Tổng tiền:
                                                 <b>{{number_format(intval($order->total),0,',','.')}} đ</b>
                                             </p>
-
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             @for($i=0; $i < count($order['products']); $i++)
                                                 <img style="height: 50px; margin-top: 4px"
@@ -183,66 +155,54 @@
                                             @endfor
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <a class="btn btn-default">Xem chi tiết</a>
-                                        @if($order->status !== \App\Enums\OrderStatusEnum::PROCESSING)
-                                            <a class="btn btn-default">Mua Lai</a>
-                                        @endif
+                                    <div class="row">
+                                        <div class="col-md-6 " style="padding-top: 10px !important;">
+                                            <a class="btn btn-primary" href="{{route('orders.detail.show',['id' => $order->id])}}">Xem chi tiết</a>
+                                        </div>
+                                        <div class="col-md-6 " style="padding-top: 10px !important;">
+                                            <form id="status" method="post" style="display: inline;">
+                                                @csrf
+                                                <input type="hidden" value="{{$order->id}}" class="order-id">
+                                                <input type="hidden" value="{{\App\Enums\OrderStatusEnum::CANCELED}}"
+                                                       class="order-status">
+                                                <div class="form-group">
+                                                    <input form="status" type="button" class="btn btn-danger cancel"
+                                                           value="Hủy đơn" data-url="{{route('orders.update')}}">
+                                                </div>
+                                            </form>
+                                        </div>
 
-                                        <form id="status" method="post">
-                                            @csrf
-                                            <input type="hidden" value="{{$order->id}}" class="order-id">
-                                            <input type="hidden" value="{{\App\Enums\OrderStatusEnum::CANCELED}}" class="order-status">
-                                            <input form="status" type="button" class="btn btn-small cancel" value="Hủy đơn" data-url="{{route('orders.update')}}">
-                                        </form>
                                     </div>
-                                </div>
-                            </li>
-                        @endforeach
-
-
-                    </ul>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="intransit">
-                <div>
-                    <ul>
-                        <h3 class="box-title mt-4">Các đơn đang giao</h3>
-                        @foreach($inTransit as $order)
-                            <li class="order-item">
-                                <div class="row">
-                                    <div class="col-md-12">
+                                </li>
+                            @endforeach
+                            {{ $processing->links() }}
+                        </ul>
+                    </div>
+                    <div class="tab-content-item " id="intransit">
+                        <ul>
+                            <h3 class="box-title mt-4">Tất cả đơn đang giao</h3>
+                            @foreach($in_transit as $order)
+                                <li class="order-item">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <p class="price">Đặt vào lúc: <b>{{$order->created_at}}</b></p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="price float-right"><b>{{$status[$order->status]}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-12">
                                             <p class="price">Lời nhắn: <b>{{$order->note}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-6">
-
                                             <p class="price">Số lượng: <b>{{$order->item_count}}</b></p>
-
                                         </div>
                                         <div class="col-md-6">
-
                                             <p class="price">Tổng tiền:
                                                 <b>{{number_format(intval($order->total),0,',','.')}} đ</b>
                                             </p>
-
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             @for($i=0; $i < count($order['products']); $i++)
                                                 <img style="height: 50px; margin-top: 4px"
@@ -251,57 +211,41 @@
                                             @endfor
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <a class="btn btn-default">Xem chi tiết</a>
-                                        @if($order->status !== \App\Enums\OrderStatusEnum::PROCESSING)
-                                            <a class="btn btn-default">Mua Lai</a>
-                                        @endif
+                                    <div class="row">
+                                        <div class="col-md-6 " style="padding-top: 10px !important;">
+                                            <a class="btn btn-primary" href="{{route('orders.detail.show',['id' => $order->id])}}">Xem chi tiết</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="completed">
-                <div >
-                    <ul>
-                        <h3 class="box-title mt-4">Các đơn đã hoàn thành</h3>
-                        @foreach($completed as $order)
-                            <li class="order-item">
-                                <div class="row">
-                                    <div class="col-md-12">
+                                </li>
+                            @endforeach
+                            {{ $in_transit->links() }}
+                        </ul>
+                    </div>
+                    <div class="tab-content-item " id="completed">
+                        <ul>
+                            <h3 class="box-title mt-4">Tất cả đơn đã hoàn thành</h3>
+                            @foreach($completed as $order)
+                                <li class="order-item">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <p class="price">Đặt vào lúc: <b>{{$order->created_at}}</b></p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="price float-right"><b>{{$status[$order->status]}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-12">
                                             <p class="price">Lời nhắn: <b>{{$order->note}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-6">
-
                                             <p class="price">Số lượng: <b>{{$order->item_count}}</b></p>
-
                                         </div>
                                         <div class="col-md-6">
-
                                             <p class="price">Tổng tiền:
                                                 <b>{{number_format(intval($order->total),0,',','.')}} đ</b>
                                             </p>
-
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             @for($i=0; $i < count($order['products']); $i++)
                                                 <img style="height: 50px; margin-top: 4px"
@@ -310,58 +254,42 @@
                                             @endfor
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <a class="btn btn-default">Xem chi tiết</a>
-                                        @if($order->status !== \App\Enums\OrderStatusEnum::PROCESSING)
-                                            <a class="btn btn-default">Mua Lai</a>
-                                        @endif
+                                    <div class="row">
+                                        <div class="col-md-6 " style="padding-top: 10px !important;">
+                                            <a class="btn btn-primary mt-4" href="{{route('orders.detail.show',['id' => $order->id])}}">Xem chi tiết</a>
+                                            <a class="btn btn-success mt-4" href="{{route('orders.buyagain',['id' => $order->id])}}">Mua Lại</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endforeach
-
-                    </ul>
-                </div>
-            </div>
-            <div role="tabpanel" class="tab-pane" id="canceled">
-                <div >
-                    <ul>
-                        <h3 class="box-title mt-4">Các đơn đã hủy</h3>
-                        @foreach($canceled as $order)
-                            <li class="order-item">
-                                <div class="row">
-                                    <div class="col-md-12">
+                                </li>
+                            @endforeach
+                            {{ $completed->links() }}
+                        </ul>
+                    </div>
+                    <div class="tab-content-item " id="canceled">
+                        <ul>
+                            <h3 class="box-title mt-4">Tất cả đơn đã hủy</h3>
+                            @foreach($canceled as $order)
+                                <li class="order-item">
+                                    <div class="row">
                                         <div class="col-md-6">
                                             <p class="price">Đặt vào lúc: <b>{{$order->created_at}}</b></p>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="price float-right"><b>{{$status[$order->status]}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-12">
                                             <p class="price">Lời nhắn: <b>{{$order->note}}</b></p>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
                                         <div class="col-md-6">
-
                                             <p class="price">Số lượng: <b>{{$order->item_count}}</b></p>
-
                                         </div>
                                         <div class="col-md-6">
-
                                             <p class="price">Tổng tiền:
                                                 <b>{{number_format(intval($order->total),0,',','.')}} đ</b>
                                             </p>
-
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="row">
                                         <div class="col-md-12">
                                             @for($i=0; $i < count($order['products']); $i++)
                                                 <img style="height: 50px; margin-top: 4px"
@@ -370,23 +298,20 @@
                                             @endfor
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col">
-                                    <div class="d-flex justify-content-end">
-                                        <a class="btn btn-default">Xem chi tiết</a>
-                                        @if($order->status !== \App\Enums\OrderStatusEnum::PROCESSING)
-                                            <a class="btn btn-default">Mua Lai</a>
-                                        @endif
+                                    <div class="row">
+                                        <div class="col-md-6 " style="padding-top: 10px !important;">
+                                            <a class="btn btn-primary mt-4" href="{{route('orders.detail.show',['id' => $order->id])}}">Xem chi tiết</a>
+                                            <a class="btn btn-success mt-4" href="{{route('orders.buyagain',['id' => $order->id])}}">Mua Lại</a>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endforeach
-
-
-
-                    </ul>
+                                </li>
+                            @endforeach
+                            {{ $canceled->links() }}
+                        </ul>
+                    </div>
                 </div>
+
             </div>
-        </div>
     </div>
+
 @endsection

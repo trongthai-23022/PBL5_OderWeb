@@ -14,6 +14,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use phpDocumentor\Reflection\DocBlock\Tags\Author;
 use function response;
 
 class CartController extends Controller
@@ -53,18 +54,17 @@ class CartController extends Controller
             if ($data['cart_product_qty'] < 10) {
                 $productId = $data['cart_product_id'];
                 $qty = $data['cart_product_qty'];
-
                 $product = Product::where('id', $productId)->first();
-                $data['id'] = $product->id;
-                $data['qty'] = $qty;
-                $data['name'] = $product->name;
-                $data['price'] = $product->price;
-                $data['weight'] = 0;
+                $cartItem['id'] = $product->id;
+                $cartItem['qty'] = $qty;
+                $cartItem['name'] = $product->name;
+                $cartItem['price'] = $product->price;
+                $cartItem['weight'] = 0;
                 $slug = $product->slug;
-                $data['options']['slug'] = $slug;
-                $data['options']['image_path'] = $product->main_image_path;
-                $data['options']['image_name'] = $product->main_image_name;
-                Cart::add($data);
+                $cartItem['options']['slug'] = $slug;
+                $cartItem['options']['image_path'] = $product->main_image_path;
+                $cartItem['options']['image_name'] = $product->main_image_name;
+                Cart::add($cartItem);
                 return response()->json([
                     'code' => 200,
                     'message' => 'success',
@@ -137,6 +137,11 @@ class CartController extends Controller
 
     }
 
+    public function remove_all()
+    {
+        Cart::destroy();
+        return redirect()->back();
+    }
 
     public function getCheckout()
     {
@@ -159,35 +164,37 @@ class CartController extends Controller
     {
         try {
             DB::beginTransaction();
-            $orderInfo = $request->all();
-            $cart = Cart::content();
+            if(Cart::count() > 0){
+                $orderInfo = $request->all();
+                $cart = Cart::content();
 //            dd(Cart::subtotal(0,',',''));
-            $dataOrderCreate = [
-                'user_id' => auth()->user()->id,
-                'user_name' => $orderInfo['name'],
-                'user_email' => $orderInfo['email'],
-                'user_phone' => $orderInfo['phone'],
-                'user_address' => $orderInfo['address'],
-                'user_note' => $orderInfo['note'],
-                'status' => 0,
-                'item_count' => intval(Cart::count(0,',','')),
-                'sub_total' => intval(Cart::subtotal(0,',','')),
-                'tax' => intval(Cart::tax(0,',','')),
-                'total' => intval(Cart::total(0,',','')),
-            ];
+                $dataOrderCreate = [
+                    'user_id' => auth()->user()->id,
+                    'user_name' => $orderInfo['name'],
+                    'user_email' => $orderInfo['email'],
+                    'user_phone' => $orderInfo['phone'],
+                    'user_address' => $orderInfo['address'],
+                    'user_note' => $orderInfo['note'],
+                    'status' => 0,
+                    'item_count' => intval(Cart::count(0,',','')),
+                    'sub_total' => intval(Cart::subtotal(0,',','')),
+                    'tax' => intval(Cart::tax(0,',','')),
+                    'total' => intval(Cart::total(0,',','')),
+                ];
 //            if(!empty($orderInfo['coupon-code'])){
 //
 //                $orderCreate['discount'] = $orderInfo['coupon-code'];
 //            }
-            $newOrder = $this->order->create($dataOrderCreate);
+                $newOrder = $this->order->create($dataOrderCreate);
 
-            foreach ($cart as $product){
-                $newOrder->orderDetail()->create([
-                    'product_id' => $product->id,
-                    'product_price' => intval($product->price),
-                    'product_qty' => intval($product->qty),
-                    'total' => intval($product->qty) * intval($product->price),
-                ]);
+                foreach ($cart as $product){
+                    $newOrder->orderDetail()->create([
+                        'product_id' => $product->id,
+                        'product_price' => intval($product->price),
+                        'product_qty' => intval($product->qty),
+                        'total' => intval($product->qty) * intval($product->price),
+                    ]);
+                }
             }
             DB::commit();
             Cart::destroy();
