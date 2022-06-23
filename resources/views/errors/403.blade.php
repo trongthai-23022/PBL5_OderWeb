@@ -13,20 +13,7 @@
     <div class="content">
         <h1 class="header" data-text="403">403</h1>
         <h2 data-text="ACCESS FORBIDDEN">ACCESS FORBIDDEN</h2>
-        <p>
-            We are sorry, but you do not have access to this page or resoucre
-        </p>
-<<<<<<< HEAD
-        <div class="btns">
-            <a href="{{ url()->previous() }}">Go Back</a>
-        </div>
-=======
 
-        <div class="btns">
-            <a href="{{ url()->previous() }}">Go Back</a>
-        </div>
-
->>>>>>> ca335882419b400b48c3b39d0752beffc1cb91b9
     </div>
 </div>
 
