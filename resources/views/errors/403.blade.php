@@ -1,29 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>403</title>
-    <link rel="stylesheet" href="{{asset('admins/errors/403.css')}} ">
+
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>403 Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('admins/errors/403.css')}}" rel="stylesheet">
 </head>
+
+
 <body>
-<div id="error-page">
-    <div class="content">
-        <h1 class="header" data-text="403">403</h1>
-        <h2 data-text="ACCESS FORBIDDEN">ACCESS FORBIDDEN</h2>
-        <p>
-            We are sorry, but you do not have access to this page or resoucre
+<div class="d-flex align-items-center justify-content-center vh-100">
+    <div class="text-center">
+        <h1 class="display-1 fw-bold beri-color">403</h1>
+        <p class="fs-3"> <span class="text-danger beri-color">Opps!</span> Access Denied...</p>
+        <p class="lead">
+            You don't have permission to access this page.
         </p>
-
-        <div class="btns">
-            <a href="{{ url()->previous() }}">Go Back</a>
-        </div>
-
+        <a href="{{ url()->previous() }}" class="btn btn-primary beri-bg-color">Go Home</a>
     </div>
 </div>
-
 </body>
-</html>
 
+
+</html>
