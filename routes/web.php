@@ -20,11 +20,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', [HomeController::class, 'index'])->name('app.home') ;
 Route::get('/', [HomeController::class, 'index'])->name('app.home');
 Route::get('/shop/categories/{id}_{slug}',[ProductController::class,'index'])->name('app.shop');
-
 Route::get('/detail/{id}_{slug}',[ProductController::class,'detail'])->name('detail');
 Route::post('/product-comment',[ProductController::class,'product_comment'])->middleware('auth', 'verified')->name('product.comment');
 
-Route::get('/shop/{slug}_{id}',[ProductController::class,'category_products'])->name('category');
+Route::get('/about-us',[HomeController::class, 'about'])->name('app.about-us');
+
 
 
 Route::prefix('admin')->group(function () {

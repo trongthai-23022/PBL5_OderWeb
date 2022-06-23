@@ -125,7 +125,7 @@
                                 <a href="{{route('cart.checkout.info')}}" class="link-term mercado-item-title">Checkout</a>
                             </li>
                             <li class="menu-item">
-                                <a href="about-us.html" class="link-term mercado-item-title">About Us</a>
+                                <a href="{{route('app.about-us')}}" class="link-term mercado-item-title">About Us</a>
                             </li>
                             <li class="menu-item">
                                 <a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>

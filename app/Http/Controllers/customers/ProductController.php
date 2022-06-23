@@ -51,12 +51,12 @@ class ProductController extends Controller
             $cateName = Category::where('id', $id)->pluck('name');
             $cateNameDisplay = 'Các món ' . $cateName[0];
             $cateProducts = DB::table('products')
-                ->rightJoin('categories', function ($join) use ($id) {
+                ->join('categories', function ($join) use ($id) {
                     $join->on('products.category_id', '=', 'categories.id')
                         ->where('categories.id', '=', $id);
                 })
                 ->select('products.*', 'categories.id')
-                ->paginate(5);
+                ->paginate(12);
         }
         $parentCates = $this->category->where('parent_id', 0)->get();
         return view('Shop.shop.index', [
