@@ -16,9 +16,11 @@
         <p>
             We are sorry, but you do not have access to this page or resoucre
         </p>
-{{--        <div class="btns">--}}
-{{--            <a href="https://github.com/hobathanh">return home</a>--}}
-{{--        </div>--}}
+
+        <div class="btns">
+            <a href="{{ url()->previous() }}">Go Back</a>
+        </div>
+
     </div>
 </div>
 
