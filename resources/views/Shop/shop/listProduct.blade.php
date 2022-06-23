@@ -1,4 +1,4 @@
-@extends('Shop.products.shop')
+@extends('Shop.shop.shop')
 
 @section('breadscrum')
     <div class="wrap-breadcrumb">

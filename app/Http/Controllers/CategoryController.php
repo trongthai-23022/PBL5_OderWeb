@@ -31,7 +31,6 @@ class CategoryController extends Controller
 
      public function store(CategoryAddRequest $req): RedirectResponse
      {
-         $responseMessage = '';
          try {
              DB::beginTransaction();
              DB::table('categories')->insert(
@@ -53,7 +52,7 @@ class CategoryController extends Controller
      }
 
     public function create(){
-        $htmlCategoryOptions = $this->getAllCategories($parentId = '');
+        $htmlCategoryOptions = $this->getParentCategories($parentId='');
         return view('admin.category.create', [
             'htmlOption' => $htmlCategoryOptions
         ]);
@@ -98,5 +97,11 @@ class CategoryController extends Controller
         $data = $this->category->all();
         $recursion = new Recursive($data);
         return  $recursion->selectRecursion($parentId);
+    }
+    private function getParentCategories($parentId): string
+    {
+        $data = $this->category->all();
+        $recursion = new Recursive($data);
+        return  $recursion->selectRecursion($parentId,0,'',true);
     }
 }

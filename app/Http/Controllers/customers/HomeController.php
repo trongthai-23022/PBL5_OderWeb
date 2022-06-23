@@ -54,6 +54,7 @@ class HomeController extends Controller
             'categories' =>$categories,
             'bannerCate' => $bannerCate,
             'bannerLatest' => $bannerLatest,
+            'search' => ''
         ]);
     }
 }
