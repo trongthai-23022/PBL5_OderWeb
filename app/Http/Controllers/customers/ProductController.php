@@ -41,10 +41,12 @@ class ProductController extends Controller
     public function index(Request $request, $id)
     {
 //        dd($request->search);
-//        $search = $request->search;
+        $search = $request->search;
 //        dd($id);
         if($id == 0){
-            $cateProducts = DB::table('products')->paginate(12);
+            $cateProducts = DB::table('products')
+                ->where('name','like','%'.$search.'%')
+                ->paginate(12);
             $cateNameDisplay = "Tất cả các món";
         }
         else{
@@ -56,12 +58,15 @@ class ProductController extends Controller
                         ->where('categories.id', '=', $id);
                 })
                 ->select('products.*', 'categories.id')
+                ->where('products.name','like','%'.$search.'%')
                 ->paginate(12);
+
         }
         $parentCates = $this->category->where('parent_id', 0)->get();
+
         return view('Shop.shop.index', [
             'parentCates' => $parentCates,
-//            'search' => $search,
+            'search' => $search,
             'cateProducts' => $cateProducts,
             'cateName' => Str::upper($cateNameDisplay),
         ]);

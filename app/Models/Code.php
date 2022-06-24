@@ -9,5 +9,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Code extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $guarded=[];
+    protected $guarded = [];
 }
