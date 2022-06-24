@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AminSliderController;
+use App\Http\Controllers\CodeController;
 use App\Http\Controllers\customers\CartController;
 use App\Http\Controllers\customers\HomeController;
 use App\Http\Controllers\customers\ProductController;
@@ -36,35 +37,19 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminController::class, 'postLoginAdmin']);
     Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
 
-    //menus
-//    Route::prefix('menus')->group(function () {
-//        Route::get('/', [
-//            'as' => 'menus.index',
-//            'uses' => 'MenuController@index'
-//        ]);
-//        Route::get('/create', [
-//            'as' => 'menus.create',
-//            'uses' => 'MenuController@create'
-//        ]);
-//        Route::post('/store', [
-//            'as' => 'menus.store',
-//            'uses' => 'MenuController@store'
-//        ]);
-//        //button edit to show update form
-//        Route::get('/edit/{id}', [
-//            'as' => 'menus.edit',
-//            'uses' => 'MenuController@edit'
-//        ]);
-//        // submit to update
-//        Route::post('/update/{id}', [
-//            'as' => 'menus.update',
-//            'uses' => 'MenuController@update'
-//        ]);
-//        Route::get('/delete/{id}', [
-//            'as' => 'menus.delete',
-//            'uses' => 'MenuController@delete'
-//        ]);
-//    });
+//    codes
+    Route::prefix('codes')->group(function () {
+        Route::get('/', [CodeController::class, 'index'])->name('codes.index');
+        Route::get('/api', [CodeController::class, 'api'])->name('api.codes.index');
+        Route::get('/create', [CodeController::class, 'create'])->name('codes.create');
+        Route::post('/store', [CodeController::class, 'store'])->name('codes.store');
+        Route::get('/edit/{id}', [CodeController::class, 'edit'])->name('codes.edit');
+        // submit to update
+        Route::post('/update/{id}', [CodeController::class, 'update'])->name('codes.update');
+        Route::get('/delete/{id}', [CodeController::class, 'delete'])->name('codes.delete');
+
+        Route::get('/check-code',[CodeController::class,'check_code'])->name('codes.check');
+    });
 
     //slider
     Route::prefix('sliders')->group(function () {

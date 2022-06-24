@@ -2,71 +2,117 @@
 
 namespace App\Http\Controllers;
 
-use App\Components\MenuRecursive;
-use App\Components\Recursive;
-use App\Models\Category;
-use App\Models\Menu;
+use App\Models\Code;
+use App\Models\Order;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
+use mysql_xdevapi\Exception;
+use Yajra\DataTables\Facades\DataTables;
 
 class CodeController extends Controller
 {
-    private $menu;
-    public function __construct(Menu $menu)
+    private $code;
+    public function __construct(Code $code)
     {
-        $this->menu =$menu;
+        $this->code =$code;
     }
 
     //
     public function  index(){
-        return view('admin.menu.index', [
-            'menus' => $this->menu->paginate(config('constants.pagination_records'))
-        ]);
+        return view('admin.code.index');
+    }
+    public function api()
+    {
+//        return Datatables::of(Code::query())->make(true);
+        return DataTables::of(Code::query())
+            ->addIndexColumn()
+            ->editColumn('created_at', function ($code) {
+                return $code->created_at->format('Y-m-d | H:i');
+            })
+            ->editColumn('updated_at', function ($code) {
+                return $code->updated_at->format('Y-m-d | H:i');
+            })
+            ->editColumn('is_enable', function ($code) {
+                return $code->is_enable==1  ?'Enable':'Disable' ." [".$code->is_enable ."]";
+            })
+            ->addColumn('edit', function ($code) {
+                return route('codes.edit', ['id' => $code->id]);
+            })
+            ->addColumn('delete', function ($code) {
+                return route('codes.delete', ['id' => $code->id]);
+            })
+            ->make(true);
     }
 
-    public function create(){
-        $htmlMenus = $this->getAllMenus($parentId = '');
-        return view('admin.menu.add', [
-            'htmlOption' => $htmlMenus
-        ]);
-    }
-    public function  store(Request $req): \Illuminate\Http\RedirectResponse
+    public function check_code(Request $request): JsonResponse
     {
-        $this->menu->create([
+        try {
+            $data = $request->all();
+            $couponCode = $data['coupon_code'];
+            $coupon = Code::where('code',Str::upper($couponCode))
+                ->first();
+            if($coupon){
+                $discount = $coupon->discount;
+                return response()->json([
+                    'code' => 200,
+                    'message' => 'success',
+                    'discount' => $discount,
+                    'code_id' => $coupon->id,
+                ]);
+            }
+            else{
+                return response()->json([
+                    'code' => 204 ,
+                    'message' => 'success',
+                ]);
+            }
+        } catch (\Exception $exception) {
+            Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'failed',
+            ],500);
+        }
+
+    }
+    public function create(){
+        return view('admin.code.add');
+    }
+    public function  store(Request $req): RedirectResponse
+    {
+        $this->code->create([
             'name' => $req->name,
             'parent_id' => $req->parent_id,
             'slug' => Str::slug($req->name)
         ]);
-        return redirect()->route('menus.create');
+        return redirect()->route('codes.create');
     }
 
     public function edit($id){
-        $menu = $this->menu->find($id);
-        $htmlMenu = $this->getAllMenus($menu->parent_id);
-        return view('admin.menu.update', [
-            'menu' => $menu,
+        $code = $this->code->find($id);
+        $htmlMenu = $this->getAllMenus($code->parent_id);
+        return view('admin.code.update', [
+            'code' => $code,
             'htmlOption' => $htmlMenu
         ]);
     }
     public function update($id, Request $request){
-        $this->menu->find($id)->update([
+        $this->code->find($id)->update([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
             'slug' => Str::slug($request->slug)
         ]);
-        return redirect()->route('menus.index');
+        return redirect()->route('codes.index');
 
     }
     public function delete($id){
-        $this->menu->find($id)->delete();
-        return redirect()->route('menus.index');
+        $this->code->find($id)->delete();
+        return redirect()->route('codes.index');
 
     }
-    //
-    private function getAllMenus($parentId): string
-    {
-        $data = $this->menu->all();
-        $recursion = new Recursive($data);
-        return  $recursion->selectRecursion($parentId);
-    }
+
 }

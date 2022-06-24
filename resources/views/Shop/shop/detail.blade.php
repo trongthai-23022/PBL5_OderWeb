@@ -63,18 +63,15 @@
                                 <a href="#" class="count-review">({{$ratesCount}} reviews)</a>
                             </div>
                             <h2 class="product-name">{{$product->name}}</h2>
-                            {{--                        <div class="wrap-social">--}}
-                            {{--                            <a class="link-socail" href="#"><img src="assets/images/social-list.png" alt=""></a>--}}
-                            {{--                        </div>--}}
                             <div class="wrap-price"><span
                                     class="product-price">{{number_format($product->price)}} VND</span></div>
                             <div class="stock-info in-stock">
-                                <p class="availability">Availability: <b>{{$product->amount}}</b></p>
+                                <p class="availability"><b>Đã bán: </b><b>{{$product->amount}}</b></p>
                             </div>
                             <form method="post">
                                 @csrf
                                 <div class="quantity">
-                                    <span>Quantity:</span>
+                                    <span><b>Số lượng:</b></span>
                                     <div class="quantity-input">
                                         <input type="text" data-max="120" pattern="[0-9]*" value="1"
                                                name="product-quatity"
@@ -96,8 +93,8 @@
                         </div>
                         <div class="advance-info">
                             <div class="tab-control normal">
-                                <a href="#review" class="tab-control-item active">Reviews</a>
-                                <a href="#description" class="tab-control-item ">Dish information</a>
+                                <a href="#review" class="tab-control-item active">ĐÁNH GIÁ</a>
+                                <a href="#description" class="tab-control-item ">CHI TIẾT VỀ MÓN ĂN</a>
 
                             </div>
                             <div class="tab-contents">
@@ -113,12 +110,8 @@
                                                           id="commentform" class="comment-form" novalidate="">
                                                         @csrf
                                                         <input type="hidden" name="product_id" value="{{$product->id}}">
-                                                        <p class="comment-notes">
-                                                            <span id="email-notes">Your email address will not be published.</span>
-                                                            Required fields are marked <span class="required">*</span>
-                                                        </p>
                                                         <div class="comment-form-rating">
-                                                            <span>Your rating</span>
+                                                            <span><b>Đánh giá của bạn: </b></span>
                                                             <p class="stars">
                                                                 <label for="rated-1"></label>
                                                                 <input type="radio" id="rated-1" name="rating"
@@ -138,7 +131,7 @@
                                                             </p>
                                                         </div>
                                                         <p class="comment-form-comment">
-                                                            <label for="comment">Your review <span
+                                                            <label for="comment"><b>Cảm nhận của bạn về món ăn</b><span
                                                                     class="required">*</span>
                                                             </label>
                                                             <textarea id="comment" name="comment" cols="45"
@@ -146,7 +139,7 @@
                                                         </p>
                                                         <p class="form-submit">
                                                             <input name="submit" type="submit" id="submit"
-                                                                   class="submit" value="Submit">
+                                                                   class="submit" value="Đăng">
                                                         </p>
                                                     </form>
 

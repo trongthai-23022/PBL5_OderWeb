@@ -177,7 +177,6 @@ class AdminProductController extends Controller
                 'user_id' => auth()->id(),
                 'description' => $req->description,
                 'category_id' => $req->category_id,
-                'amount' => 69
             ];
             //product main image data
             if ($req->hasFile('product_image')) {

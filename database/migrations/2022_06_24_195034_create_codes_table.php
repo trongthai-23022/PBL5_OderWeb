@@ -15,7 +15,12 @@ class CreateCodesTable extends Migration
     {
         Schema::create('codes', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
+            $table->string('description')->nullable();
+            $table->integer('discount');
+            $table->boolean('is_enable');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
