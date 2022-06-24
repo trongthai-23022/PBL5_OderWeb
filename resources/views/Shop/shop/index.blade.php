@@ -6,6 +6,8 @@
 
 @section('custom_js')
     <script src="{{asset('customers/shop/filter.js')}}"></script>
+    <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
+    <script src="{{asset('admins/common.js')}}"></script>
 @endsection
 
 @section('content')
@@ -83,16 +85,32 @@
                                 <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
                                 <div class="product product-style-3 equal-elem ">
                                     <div class="product-thumnail">
-                                        <a href="detail.html" title="{{$item->name}}">
+                                        <a href="{{route('detail', [ 'slug' => $item->slug,'id' => $item->id])}}"
+                                           title="{{$item->name}}">
                                             <figure><img
                                                     style="width: 100%; height: 250px;object-fit: cover;"
                                                     src="{{$item->main_image_path}}" alt="{{$item->main_image_name . $item->id}}"></figure>
                                         </a>
                                     </div>
                                     <div class="product-info">
-                                        <a href="#" class="product-name"><span>{{$item->name}}</span></a>
-                                        <div class="wrap-price"><span class="product-price">{{$item->price}}</span></div>
-                                        <a href="#" class="btn add-to-cart">Add To Cart</a>
+                                        <a href="{{route('detail', [ 'slug' => $item->slug,'id' => $item->id])}}"
+                                           class="product-name"><span>{{$item->name}}</span></a>
+                                        <div class="wrap-price">
+                                            <span class="product-price">đ {{number_format($item->price)}}</span>
+                                            <span class="product-price" style="font-weight: normal; font-size: 12px;float: right;">Đã bán: {{$item->amount}}</span>
+                                        </div>
+                                        <form method="post">
+                                            @csrf
+                                            <div class="wrap-butons">
+
+                                                <input type="hidden" value="1" name="cart_product_qty"
+                                                       class="cart_product_qty_{{$item->id}}">
+                                                <input type="hidden" value="{{$item->id}}" name="cart_product_id"
+                                                       class="cart_product_id_{{$item->id}}">
+                                                <input type="button" value="Thêm vào giỏ hàng" class="function-link add-to-cart"
+                                                       data-product_item="{{$item->id}}" data-url="{{route('cart.store')}}">
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </li>

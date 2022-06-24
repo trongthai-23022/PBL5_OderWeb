@@ -5,7 +5,7 @@
 @endsection
 @section('custom_css')
     <link rel="stylesheet" href="{{asset('admins/product/index/index.css')}}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/fc-4.1.0/fh-3.2.3/r-2.3.0/rg-1.2.0/sc-2.0.6/sb-1.3.3/sl-1.4.0/datatables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('vendor/datatable/datatables.min.css')}}"/>
     <style>
         tfoot input {
             width: 80%;
@@ -86,9 +86,9 @@
 @section('custom_js')
     <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
     <script src="{{asset('admins/common.js')}}"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.12.1/b-2.2.3/b-colvis-2.2.3/b-html5-2.2.3/b-print-2.2.3/date-1.1.2/fc-4.1.0/fh-3.2.3/r-2.3.0/rg-1.2.0/sc-2.0.6/sb-1.3.3/sl-1.4.0/datatables.min.js"></script>
+    <script type="text/javascript" src="{{asset('vendor/datatable/pdfmake.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('vendor/datatable/vfs_fonts.js')}}"></script>
+    <script type="text/javascript" src="{{asset('vendor/datatable/datatables.min.js')}}"></script>
     <script>
         $(function() {
             $('#table-index tfoot th.search').each(function () {

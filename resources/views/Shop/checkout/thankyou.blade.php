@@ -28,7 +28,7 @@
                         Cảm ơn bạn đã đặt hàng
                         <span><i class="fas fa-heart"></i></span>
                     </h2>
-                    <a href="{{route('shop')}}" class="btn btn-submit btn-submitx">Tiếp tục mua</a>
+                    <a href="{{route('app.shop',['id'=>0, 'slug'=>'all'])}}" class="btn btn-submit btn-submitx">Tiếp tục mua</a>
                 </div>
             </div>
         </div><!--end container-->

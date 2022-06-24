@@ -4,6 +4,7 @@ namespace App\Http\Controllers\customers;
 
 use App\Enums\OrderStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Models\Code;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\Tag;
@@ -167,7 +168,6 @@ class CartController extends Controller
             if(Cart::count() > 0){
                 $orderInfo = $request->all();
                 $cart = Cart::content();
-//            dd(Cart::subtotal(0,',',''));
                 $dataOrderCreate = [
                     'user_id' => auth()->user()->id,
                     'user_name' => $orderInfo['name'],
@@ -181,10 +181,12 @@ class CartController extends Controller
                     'tax' => intval(Cart::tax(0,',','')),
                     'total' => intval(Cart::total(0,',','')),
                 ];
-//            if(!empty($orderInfo['coupon-code'])){
-//
-//                $orderCreate['discount'] = $orderInfo['coupon-code'];
-//            }
+                if(!is_null($orderInfo['coupon-code-hidden'])){
+                    $couponID = $orderInfo['coupon-code-hidden'];
+                    $discount = Code::where('id',$couponID)->pluck('discount')[0];
+                    $dataOrderCreate['discount'] = $discount;
+                    $dataOrderCreate['total'] = ceil((1-$discount*0.01)*intval(Cart::total(0,',','')));
+                 }
                 $newOrder = $this->order->create($dataOrderCreate);
 
                 foreach ($cart as $product){
@@ -194,6 +196,11 @@ class CartController extends Controller
                         'product_qty' => intval($product->qty),
                         'total' => intval($product->qty) * intval($product->price),
                     ]);
+                    DB::table('products')
+                        ->where('id', $product->id)
+                        ->update([
+                            'amount' => DB::raw('amount + '.$product->qty)
+                        ]);
                 }
             }
             DB::commit();

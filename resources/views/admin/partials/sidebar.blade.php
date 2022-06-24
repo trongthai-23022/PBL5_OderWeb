@@ -61,7 +61,7 @@
                             <a class="nav-link" href="{{route('products.index')}}">Danh Sách SP</a>
                         </li>
                         <li class="nav-item" style="margin-left: 20px">
-                            <a class="nav-link" >Mã Giảm Giá</a>
+                            <a class="nav-link" href="{{route('codes.index')}}" >Mã Giảm Giá</a>
                         </li>
                     </ul>
                 </li>

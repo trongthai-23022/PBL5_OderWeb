@@ -128,7 +128,7 @@
                             <a class="btn btn-checkout" href="{{route('cart.checkout.info')}}">Đặt hàng</a>
                         </div>
                     </div>
-                    <a class="link-to-shop" href="{{route('shop')}}">Tiếp tục mua<i
+                    <a class="link-to-shop" href="{{route('app.shop',['id'=>0, 'slug'=>'all'])}}">Tiếp tục mua<i
                             class="fa fa-arrow-circle-right"
                             aria-hidden="true"></i></a>
                 </div>

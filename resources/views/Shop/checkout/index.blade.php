@@ -9,6 +9,34 @@
 @section('custom_js')
     <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
     <script>
+        $(document).on('click','.check_code',function (){
+            let urlRequest = $(this).data('url');
+            let coupon_code = $('#coupon-code').val();
+            let oldTotal = $(this).data('total');
+            $.ajax({
+                url: urlRequest,
+                method: 'get',
+                data: {
+                    coupon_code: coupon_code,
+                },
+                success: function (data) {
+                    if (data.code === 200) {
+                        $( "#response_code" ).empty().append( "<p style='color: #6667AB'>Bạn được giảm giá " +data.discount +"%</p>" );
+                        let finalTotal  = Math.ceil(parseFloat(oldTotal*(1-data.discount*0.01)));
+                        let total = numberWithCommas(finalTotal);
+                        $('#final-total').text(total + ' đ');
+                        $('#coupon-code-hidden').val(data.code_id);
+                    }
+                    if(data.code === 204){
+                        $( "#response_code" ).empty().append( "<p style='color: red'>Mã giảm giá không tồn tại, vui lòng kiểm tra lại!</p>" );
+                        $('#final-total').text(numberWithCommas(oldTotal) + ' đ');
+                    }
+                }
+            })
+        });
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
         $(document).on('click', '.confirm', function () {
             Swal.fire({
                 title: 'Bạn chắc chắn muốn đặt?',
@@ -174,7 +202,7 @@
                             <span class="payment-desc">card if you don't have a paypal account</span>
                         </label>
                     </div>
-                    <p class="summary-info grand-total"><span>Tổng cộng</span> <span class="grand-total-price">{{\Gloudemans\Shoppingcart\Facades\Cart::total(0,',','.')}} đ</span>
+                    <p class="summary-info grand-total"><span>Tổng cộng</span> <span id="final-total" class="grand-total-price">{{\Gloudemans\Shoppingcart\Facades\Cart::total(0,',','.')}} đ</span>
                     </p>
                     <button form="" class="btn btn-medium confirm">ĐẶT NGAY</button>
                 </div>
@@ -182,9 +210,13 @@
                     <h4 class="title-box">Discount Codes</h4>
                     <p class="row-in-form">
                         <label for="coupon-code">Mã giảm giá:</label>
-                        <input form="" id="coupon-code" type="text" name="coupon-code" value="" placeholder="">
+                        <input id="coupon-code" type="text" placeholder="">
+                        <input form="order" id="coupon-code-hidden" type="hidden" value="" name="coupon-code-hidden" placeholder="">
                     </p>
-                    <a href="#" class="btn btn-small">Apply</a>
+                    <div id="response_code">
+                        <p></p>
+                    </div>
+                    <a class="btn btn-small check_code" data-url="{{route('codes.check')}}" data-total="{{\Gloudemans\Shoppingcart\Facades\Cart::total(0,',','')}}">Apply</a>
                 </div>
             </div>
 
