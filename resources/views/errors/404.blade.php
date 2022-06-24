@@ -14,7 +14,7 @@
 
 
 <body>
-<<<<<<< HEAD
+
 <div class="d-flex align-items-center justify-content-center vh-100">
     <div class="text-center">
         <h1 class="display-1 fw-bold beri-color">404</h1>
@@ -23,20 +23,6 @@
             The page you’re looking for doesn’t exist.
         </p>
         <a href="{{ url()->previous() }}" class="btn btn-primary beri-bg-color">Go Home</a>
-=======
-<div id="error-page">
-    <div class="content">
-        <h1 class="header" data-text="404">404</h1>
-        <h2 data-text="PAGE NOT POUND">PAGE NOT POUND</h2>
-        <p>
-
-            The page you were looking for doesn't exist, Please go back to the page now!
-        </p>
-        <div class="btns">
-            <a href="{{ url()->previous() }}">Go Back</a>
-        </div>
-
->>>>>>> 8b15f1342ea07ff8f56820d445dee2967872b45c
     </div>
 </div>
 </body>
