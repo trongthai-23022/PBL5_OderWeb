@@ -81,7 +81,7 @@ Route::prefix('admin')->group(function () {
 
 });
 
-Route::prefix('cart')->middleware('auth')->group(function (){
+Route::prefix('cart')->group(function (){
     Route::get('/',[CartController::class,'index'])->name('cart.index');
     Route::post('/store',[CartController::class,'store'])->name('cart.store');
     Route::get('/update',[CartController::class,'update'])->name('cart.update');
@@ -89,11 +89,11 @@ Route::prefix('cart')->middleware('auth')->group(function (){
     Route::get('/remove-all',[CartController::class,'remove_all'])->name('cart.removeall');
 
     Route::get('/checkout-info', [CartController::class,'getCheckout'])
-        ->middleware('verified')
+        ->middleware('verified','auth')
         ->name('cart.checkout.info');
 
     Route::post('/order', [CartController::class,'postOrder'])
-        ->middleware('verified')
+        ->middleware('verified','auth')
         ->name('cart.order');
 
 });

@@ -42,7 +42,7 @@
             <div class="content">
                 <div class="container-fluid">
                     <div class="row justify-content-center">
-                        <div class="col-md-9 rounded bg-white px-3 mb-3">
+                        <div class="col-md-9 rounded bg-white px-3 p-3">
                             @csrf
 
                             <div class="form-group">
@@ -82,12 +82,6 @@
                                 >
                                 <div class="row mt-4">
                                     <div id="dvPreview"></div>
-<<<<<<< HEAD
-=======
-                                </div>
-                            </div>
->>>>>>> d90344c57a3c99ef4220ffe5f8a613b153f1580b
-
                                 </div>
 
                                 <div class="form-group">
