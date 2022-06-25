@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CodeAddRequest;
+use App\Http\Requests\CodeUpdateRequest;
 use App\Models\Code;
 use App\Models\Order;
+use App\Traits\DeleteModelTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +18,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class CodeController extends Controller
 {
+    use DeleteModelTrait;
     private $code;
     public function __construct(Code $code)
     {
@@ -37,7 +41,10 @@ class CodeController extends Controller
                 return $code->updated_at->format('Y-m-d | H:i');
             })
             ->editColumn('is_enable', function ($code) {
-                return $code->is_enable==1  ?'Enable':'Disable' ." [".$code->is_enable ."]";
+                return $code->is_enable==1  ?'Enable'." [".$code->is_enable ."]":'Disable' ." [".$code->is_enable ."]";
+            })
+            ->editColumn('discount', function ($code) {
+                return $code->discount . " %";
             })
             ->addColumn('edit', function ($code) {
                 return route('codes.edit', ['id' => $code->id]);
@@ -54,6 +61,7 @@ class CodeController extends Controller
             $data = $request->all();
             $couponCode = $data['coupon_code'];
             $coupon = Code::where('code',Str::upper($couponCode))
+                ->where('is_enable',1)
                 ->first();
             if($coupon){
                 $discount = $coupon->discount;
@@ -82,25 +90,39 @@ class CodeController extends Controller
     public function create(){
         return view('admin.code.add');
     }
-    public function  store(Request $req): RedirectResponse
+    public function  store(CodeAddRequest $request): RedirectResponse
     {
-        $this->code->create([
-            'name' => $req->name,
-            'parent_id' => $req->parent_id,
-            'slug' => Str::slug($req->name)
-        ]);
-        return redirect()->route('codes.create');
+        try {
+            DB::beginTransaction();
+            $newCode = [
+                'code' => Str::upper($request->code),
+                'discount' => $request->discount,
+                'is_enable' => $request->is_enable,
+                'description' => $request->description,
+            ];
+            Code::updateOrCreate(
+                ['code' => Str::upper($request->code)],
+                $newCode
+            );
+            DB::commit();
+            $resMessage = 'Thêm thành công!';
+            return redirect()->route('codes.create')->with('success', $resMessage);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            $resMessage = 'Thêm thất bại!';
+            Log::error('Message: ' . $exception->getMessage() . '----Line: ' . $exception->getLine());
+            return redirect()->route('codes.create')->with('failure', $resMessage);
+
+        }
     }
 
     public function edit($id){
         $code = $this->code->find($id);
-        $htmlMenu = $this->getAllMenus($code->parent_id);
-        return view('admin.code.update', [
+        return view('admin.code.edit', [
             'code' => $code,
-            'htmlOption' => $htmlMenu
         ]);
     }
-    public function update($id, Request $request){
+    public function update($id, CodeUpdateRequest $request){
         $this->code->find($id)->update([
             'name' => $request->name,
             'parent_id' => $request->parent_id,
@@ -110,9 +132,7 @@ class CodeController extends Controller
 
     }
     public function delete($id){
-        $this->code->find($id)->delete();
-        return redirect()->route('codes.index');
-
+        return $this->deleteModelTrait($id, $this->code);
     }
 
 }

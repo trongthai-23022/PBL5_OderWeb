@@ -164,7 +164,7 @@
                                                         id="li-comment-20">
                                                         <div id="comment-20" class="comment_container">
                                                             <img alt=""
-                                                                 src="{{asset('customers/assets/images/author-avata.jpg')}}"
+                                                                 src="{{$comment->getUserAvt()}}"
                                                                  height="80" width="80">
                                                             <div class="comment-text">
                                                                 <div class="star-rating">
