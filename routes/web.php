@@ -76,6 +76,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/detail/{id}', [OrderController::class, 'detail_show'])->name('orders.detail.show');
         Route::get('/buy-again/{id}', [OrderController::class, 'buy_again'])->name('orders.buyagain');
 
+        Route::get('/flash', [OrderController::class, 'flash_order_ajax'])->name('orders.flash_order_ajax');
+        Route::get('/flash-order', [OrderController::class, 'flash_order'])->name('orders.flashorder');
+
 
     });
 

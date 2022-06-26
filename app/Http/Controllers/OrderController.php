@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Enums\OrderStatusEnum;
+use App\Models\Category;
 use App\Models\Order;
+use App\Models\Product;
+use App\services\FlashOrderService;
 use Exception;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
@@ -218,5 +220,73 @@ class OrderController extends Controller
             Cart::add($cartItem);
         }
         return redirect()->route('cart.index');
+    }
+
+    public function flash_order(Request $request, FlashOrderService $service){
+
+            $sum = 100000;
+            $perPage =12;
+            $products = Product::select('id','price','amount')
+                    ->limit(20)
+                    ->get()->toArray();
+            $recommendIds = $service->flash_order($sum,$products);
+            $recommendProducts = Product::whereIn('id',$recommendIds)
+                ->get()->toArray();;
+
+        $parentCates = Category::where('parent_id', 0)->get();
+
+        $popular = Product::orderBy('amount', 'desc')
+            ->limit(5)->get();
+        return view('Shop.flash-order.index',[
+            'parentCates' => $parentCates,
+            'recommendProducts' => $this->paginate($recommendProducts,$perPage),
+             'popular'=>$popular
+        ]);
+    }
+    public function flash_order_ajax(Request $request, FlashOrderService $service): JsonResponse
+    {
+        try {
+            $sum = 100000;
+            $orderBy = "amount-desc";
+            $data = $request->all();
+            if (isset($data['sum'])){
+                $sum = $data['sum'];
+            }
+            if (isset($data['orderBy'])){
+                $orderBy = $data['orderBy'];
+            }
+            if (isset($data['cateIds'])){
+                $cateIds = $data['cateIds'];
+                $products = Product::whereIn('category_id', $cateIds)
+                    ->select('id','price','amount')
+                    ->limit(80)
+                    ->get()->toArray();
+            }
+            else{
+                $products = Product::select('id','price','amount')
+                    ->limit(80)
+                    ->get()->toArray();
+            }
+            $recommendIds = $service->flash_order($sum,$products);
+
+            $col = explode('-',$orderBy)[0];
+            $by = explode('-',$orderBy)[1];
+            $recommendProducts = Product::whereIn('id',$recommendIds)
+                ->orderBy($col, $by)
+                ->get()->toArray();;
+
+            return response()->json([
+                'code' => 200,
+                'message' => 'success',
+                'products' => $recommendProducts,
+            ]);
+        }catch (Exception $exception){
+            Log::error("Message: " . $exception->getMessage(). '----Line: ' . $exception->getLine());
+            return response()->json([
+                'code' => 500,
+                'message' => 'failed',
+                'products' => null
+            ],500);
+        }
     }
 }
