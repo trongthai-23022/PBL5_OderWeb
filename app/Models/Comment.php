@@ -23,4 +23,7 @@ class Comment extends Model
     public function getUserName(){
         return User::where('id', $this->attributes['user_id'])->first()->name;
     }
+    public function getUserAvt(){
+        return UserProfile::where('user_id', $this->attributes['user_id'])->first()->image_path;
+    }
 }

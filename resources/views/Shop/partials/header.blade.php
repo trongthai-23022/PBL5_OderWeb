@@ -119,16 +119,13 @@
                                 <a href="{{route('app.shop',['id' => 0,'slug' => 'all'])}}" class="link-term mercado-item-title">Shop</a>
                             </li>
                             <li class="menu-item">
-                                <a href="cart.html" class="link-term mercado-item-title">Flash Order</a>
+                                <a href="{{route('orders.flashorder')}}" class="link-term mercado-item-title">Flash Order</a>
                             </li>
                             <li class="menu-item">
                                 <a href="{{route('cart.checkout.info')}}" class="link-term mercado-item-title">Checkout</a>
                             </li>
                             <li class="menu-item">
                                 <a href="{{route('app.about-us')}}" class="link-term mercado-item-title">About Us</a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="contact-us.html" class="link-term mercado-item-title">Contact Us</a>
                             </li>
                         </ul>
                     </div>

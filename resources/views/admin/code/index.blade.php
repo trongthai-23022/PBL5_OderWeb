@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('vendor/datatable/datatables.min.css')}}"/>
 @endsection
 
+
 @section('content')
 
     <!-- Content Wrapper. Contains page content -->
@@ -28,6 +29,17 @@
 {{--                        @endcan--}}
                     </div>
                     <div class="col-md-12">
+                        <div class="col-md-6">
+                            @if(session('success'))
+                                <div class="alert alert-success response_message ">
+                                    {{session('success')}}
+                                </div>
+                            @elseif(session('failure'))
+                                <div class="alert alert-danger response_message ">
+                                    {{session('failure')}}
+                                </div>
+                            @endif
+                        </div>
                         <table class="table" id="table-coupon">
                             <thead>
                             <tr>
@@ -58,13 +70,15 @@
     <script type="text/javascript" src="{{asset('vendor/datatable/pdfmake.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/datatable/vfs_fonts.js')}}"></script>
     <script type="text/javascript" src="{{asset('vendor/datatable/datatables.min.js')}}"></script>
-
+    <script src="{{asset('vendor/sweetAlert2/sweetalert2@11.js')}}"></script>
+    <script src="{{asset('admins/common.js')}}"></script>
     <script>
         $(function() {
             $('#table-coupon').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{!! route('api.codes.index') !!}',
+                order: [[ 6, "desc" ]],
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
                     { data: 'id', name: 'id' },
@@ -90,8 +104,8 @@
                         searchable: false,
                         data: "delete",
                         render: function ( data, type, row, meta ) {
-                            return `<a href="${data}"
-                                        class="btn btn-danger"><i class="fa fa-trash mr-2"></i>Xóa</a>`;
+                            return `<a
+                                        class="btn btn-danger action_delete" data-url="${data}"><i class="fa fa-trash mr-2"></i>Xóa</a>`;
                         }
                     },
                 ],

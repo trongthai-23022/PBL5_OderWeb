@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    <title>Trang chu</title>
+    <title>Mã giảm giá</title>
 @endsection
 
 @section('custom_css')
@@ -12,24 +12,9 @@
 @endsection
 
 @section('content')
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        @include('admin.partials.content-header', ['name'=>'Coupon-code', 'key'=>'Add'])
-        <div class="row justify-content-center">
-            <div class="col-md-9 rounded">
-                @if(session('success'))
-                    <div class="alert alert-success response_message ">
-                        {{session('success')}}
-                    </div>
-
-                @elseif(session('failure'))
-                    <div class="alert alert-danger response_message ">
-                        {{session('failure')}}
-                    </div>
-                @endif
-            </div>
-        </div>
+        @include('admin.partials.content-header', ['name'=>'Coupon-code', 'key'=>'Update'])
         <!-- Main content -->
         <div class="content">
             <div class="container-fluid">
@@ -43,7 +28,7 @@
                                        class="form-control @error('code') is-invalid @enderror"
                                        placeholder="Nhập mã coupon"
                                        name="code"
-                                       value="{{old('code')}}"
+                                       value="{{$code->code}}"
                                 >
                                 @error('code')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -55,7 +40,7 @@
                                        class="form-control @error('discount') is-invalid @enderror"
                                        placeholder="Nhập phần trăm giảm giá"
                                        name="discount"
-                                       value="{{old('discount')}}"
+                                       value="{{$code->discount}}"
                                 >
                                 @error('discount')
                                 <div class="alert alert-danger">{{ $message }}</div>
@@ -67,14 +52,15 @@
                                        class="form-control"
                                        placeholder="Nhập mô tả"
                                        name="description"
+                                       value="{{$code->description}}"
                                 >
                             </div>
                             <div class="form-group">
                                 <label>Trạng thái</label>
                                 <select class="form-control @error('is_enable') is-invalid @enderror"
                                         name="is_enable">
-                                    <option value="1">Enable</option>
-                                    <option value="0">Disable</option>
+                                    <option value="1" {{$code->is_enable?'selected':''}}>Enable</option>
+                                    <option value="0" {{!$code->is_enable?'selected':''}}>Disable</option>
                                 </select>
                                 @error('is_enable')
                                 <div class="alert alert-danger">{{ $message }}</div>
