@@ -62,6 +62,8 @@ class ProductController extends Controller
                 ->paginate(12);
 
         }
+        $latest = Product::latest()
+            ->limit(5)->get();
         $parentCates = $this->category->where('parent_id', 0)->get();
 
         return view('Shop.shop.index', [
@@ -69,6 +71,7 @@ class ProductController extends Controller
             'search' => $search,
             'cateProducts' => $cateProducts,
             'cateName' => Str::upper($cateNameDisplay),
+            'latest'=> $latest
         ]);
     }
 //    public function index(Request $request)

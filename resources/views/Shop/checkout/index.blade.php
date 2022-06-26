@@ -182,41 +182,22 @@
             <div class="summary summary-checkout">
                 <div class="summary-item payment-method">
                     <h4 class="title-box">Phương thức thanh toán</h4>
-                    <p class="summary-info"><span class="title">Thanh toán khi nhận</span></p>
-                    <div class="choose-payment-methods">
-                        <label class="payment-method">
-                            <input name="payment-method" id="payment-method-bank" value="bank" type="radio">
-                            <span>Direct Bank Transder</span>
-                            <span class="payment-desc">But the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</span>
-                        </label>
-                        <label class="payment-method">
-                            <input name="payment-method" id="payment-method-visa" value="visa" type="radio">
-                            <span>visa</span>
-                            <span
-                                class="payment-desc">There are many variations of passages of Lorem Ipsum available</span>
-                        </label>
-                        <label class="payment-method">
-                            <input name="payment-method" id="payment-method-paypal" value="paypal" type="radio">
-                            <span>Paypal</span>
-                            <span class="payment-desc">You can pay with your credit</span>
-                            <span class="payment-desc">card if you don't have a paypal account</span>
-                        </label>
-                    </div>
+                    <b class="summary-info"><span class="title">Thanh toán khi nhận hàng</span></b>
                     <p class="summary-info grand-total"><span>Tổng cộng</span> <span id="final-total" class="grand-total-price">{{\Gloudemans\Shoppingcart\Facades\Cart::total(0,',','.')}} đ</span>
                     </p>
                     <button form="" class="btn btn-medium confirm">ĐẶT NGAY</button>
                 </div>
                 <div class="summary-item shipping-method">
-                    <h4 class="title-box">Discount Codes</h4>
+                    <h4 class="title-box">Mã giảm giá</h4>
                     <p class="row-in-form">
-                        <label for="coupon-code">Mã giảm giá:</label>
+                        <label for="coupon-code">Nhập mã:</label>
                         <input id="coupon-code" type="text" placeholder="">
                         <input form="order" id="coupon-code-hidden" type="hidden" value="" name="coupon-code-hidden" placeholder="">
                     </p>
                     <div id="response_code">
                         <p></p>
                     </div>
-                    <a class="btn btn-small check_code" data-url="{{route('codes.check')}}" data-total="{{\Gloudemans\Shoppingcart\Facades\Cart::total(0,',','')}}">Apply</a>
+                    <a class="btn btn-small check_code" data-url="{{route('codes.check')}}" data-total="{{\Gloudemans\Shoppingcart\Facades\Cart::total(0,',','')}}">Kiểm tra</a>
                 </div>
             </div>
 
