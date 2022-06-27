@@ -126,8 +126,6 @@
 
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 ">
                     @include('Shop.shop.menu')
-
-
                     <div class="widget mercado-widget widget-product">
                         <h2 class="widget-title">Popular Products</h2>
                         <div class="widget-content">
