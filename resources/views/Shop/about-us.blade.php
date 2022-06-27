@@ -111,8 +111,8 @@
                     </div>
                     <div class="info">
                         <b class="name">hồ bá thanh</b>
-                        <span class="title">Member</span>
-                        <p class="desc">Là thành viên của nhóm dự án</p>
+                        <span class="title">Leader</span>
+                        <p class="desc">Là trưởng nhóm của nhóm dự án</p>
                     </div>
                 </div>
 
